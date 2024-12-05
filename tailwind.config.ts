@@ -8,9 +8,14 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        adventPro: ["Advent Pro", "serif"],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        mobilePrimary: "#0099FF",
+        mobilePrimaryDark: "#0083DB",
+        mobileDarkGray: "#4A4A4A",
+        mobileVIP: "#FF9807",
       },
     },
   },

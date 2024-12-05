@@ -30,3 +30,41 @@ export const headerLinks = [
     url: "/my-listings",
   },
 ];
+
+export const searchIcons = [
+  {
+    id: 1,
+    name: "kola",
+    link: "/searchIcons/kola.svg",
+  },
+  {
+    id: 2,
+    name: "bus",
+    link: "/searchIcons/bus.svg",
+  },
+  {
+    id: 3,
+    name: "motor",
+    link: "/searchIcons/motor.svg",
+  },
+  {
+    id: 4,
+    name: "kamion",
+    link: "/searchIcons/kamion.svg",
+  },
+  {
+    id: 5,
+    name: "kolelo",
+    link: "/searchIcons/kolelo.svg",
+  },
+  {
+    id: 6,
+    name: "lodka",
+    link: "/searchIcons/lodka.svg",
+  },
+  {
+    id: 7,
+    name: "industrialni",
+    link: "/searchIcons/industrialni.svg",
+  },
+];

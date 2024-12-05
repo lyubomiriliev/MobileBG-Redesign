@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import Button from "./Button";
 
 const HeroSection = () => {
   return (
@@ -10,16 +11,20 @@ const HeroSection = () => {
         width={1200}
         height={600}
         unoptimized
-        className="w-full h-[80vh] object-cover"
+        className="w-full h-[60vh] object-cover"
       />
       <div className="flex flex-col items-center justify-center absolute">
-        <h1>БЪДЕТЕ МОБИЛНИ</h1>
-        <h3>
-          Намерете това, което ви подхожда в №1 сайт за автомобили в България!
-        </h3>
-        <div className="flex items-center gap-10 mt-10">
-          <button>ТОП ОБЯВИ</button>
-          <button>ТЪРСЕНЕ</button>
+        <div className="flex flex-col text-center">
+          <h1 className="text-7xl lg:text-[96px] font-bold uppercase">
+            БЪДЕТЕ <span className="text-mobilePrimary">МОБИЛНИ</span>
+          </h1>
+          <h3 className="text-2xl w-full px-10 md:px-0">
+            Намерете това, което ви подхожда в №1 сайт за автомобили в България!
+          </h3>
+        </div>
+        <div className="flex items-center gap-4 mt-10">
+          <Button text="ТОП ОБЯВИ" variant="default" />
+          <Button text="ТЪРСЕНЕ" variant="outline" />
         </div>
       </div>
     </div>
