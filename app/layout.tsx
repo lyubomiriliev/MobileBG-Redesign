@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="overflow-x-hidden font-adventPro">
+    <html lang="en" className="overflow-x-clip font-adventPro">
       <body>
         <Header />
         <main>{children}</main>

@@ -25,6 +25,7 @@ const HeroSection = () => {
         <div className="flex items-center gap-4 mt-10">
           <Button text="ТОП ОБЯВИ" variant="default" />
           <Button text="ТЪРСЕНЕ" variant="outline" />
+          <Button text="ТЪРСЕНЕ" variant="outlineWhite" />
         </div>
       </div>
     </div>

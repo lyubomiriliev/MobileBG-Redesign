@@ -68,3 +68,36 @@ export const searchIcons = [
     link: "/searchIcons/industrialni.svg",
   },
 ];
+
+export const featuredCategories = [
+  {
+    id: 1,
+    url: "/vehicles/newCars.png",
+    name: "Нови Автомобили",
+    offers: 11300,
+  },
+  {
+    id: 2,
+    url: "/vehicles/electricCars.png",
+    name: "Нови Автомобили",
+    offers: 68300,
+  },
+  {
+    id: 3,
+    url: "/vehicles/eBikes.png",
+    name: "Нови Автомобили",
+    offers: 44300,
+  },
+  {
+    id: 4,
+    url: "/vehicles/leasing.png",
+    name: "Нови Автомобили",
+    offers: 13300,
+  },
+  {
+    id: 5,
+    url: "/vehicles/usedCars.png",
+    name: "Нови Автомобили",
+    offers: 23300,
+  },
+];

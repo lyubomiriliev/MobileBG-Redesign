@@ -4,7 +4,7 @@ import Image from "next/image";
 
 interface ButtonProps {
   text: string;
-  variant?: "default" | "outline";
+  variant?: "default" | "outline" | "outlineWhite";
   type?: "button" | "submit";
   icon?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -26,7 +26,9 @@ const Button: React.FC<ButtonProps> = ({
     default:
       "bg-mobilePrimary text-white uppercase hover:bg-mobilePrimaryDark duration-300 transition-all ease-in-out cursor-pointer",
     outline:
-      "border border-black text-black bg-transparent hover:border-mobilePrimary hover:text-mobilePrimary uppercase cursor-pointer",
+      "border border-black text-black hidden lg:flex bg-transparent hover:border-mobilePrimary hover:text-mobilePrimary uppercase cursor-pointer",
+    outlineWhite:
+      "border border-white lg:hidden text-white bg-transparent hover:bg-black/70 uppercase cursor-pointer",
   };
 
   return (

@@ -1,11 +1,15 @@
+import CarSection from "@/components/CarSection";
+import Categories from "@/components/Categories";
 import HeroSection from "@/components/HeroSection";
-import SearchForm from "@/components/SearchForm";
+import SearchSection from "@/components/SearchSection";
 
 export default function Home() {
   return (
     <main className="flex flex-col">
       <HeroSection />
-      <SearchForm />
+      <SearchSection />
+      <CarSection />
+      <Categories />
     </main>
   );
 }
