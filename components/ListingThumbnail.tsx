@@ -55,13 +55,13 @@ const ListingThumbnail: React.FC<ListingThumbnailProps> = ({
       </div>
 
       <div className="flex flex-col items-start justify-start">
-        <h3>{title}</h3>
+        <h3 className="text-lg max-w-48 font-medium">{title}</h3>
         <div className="flex items-center gap-2">
-          <h4>{price}</h4>
-          <h4>{kilometers}</h4>
+          <h4 className="text-mobilePrimary font-bold">{price}</h4>
+          <h4>({kilometers})</h4>
         </div>
         <h4>{region}</h4>
-        <h4>{datePosted}</h4>
+        <h4 className="text-mobileDarkGray">{datePosted}</h4>
       </div>
     </section>
   );

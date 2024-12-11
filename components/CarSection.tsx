@@ -5,9 +5,10 @@ const CarSection = () => {
   return (
     <section className="w-full h-[25vh] lg:h-[80vh] flex flex-col justify-start items-center mx-auto relative">
       <Image
-        src="/images/mobileCar.png"
+        src="/images/mobileCar2.png"
         width={1920}
         height={1000}
+        unoptimized
         alt="/"
         className="w-[80%] lg:w-[55%] -top-[40px] lg:-top-18 absolute -z-10"
       />
