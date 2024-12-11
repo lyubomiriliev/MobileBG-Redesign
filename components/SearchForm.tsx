@@ -1,10 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const SearchForm = () => {
+const SearchForm = ({
+  category,
+  setCategory,
+}: {
+  category: string;
+  setCategory: (value: string) => void;
+}) => {
+  useEffect(() => {
+    setFormData((prev) => ({ ...prev, category }));
+  }, [category]);
+
   const [formData, setFormData] = useState({
-    category: "Автомобили и Джипове",
+    category: category || "Автомобили и Джипове",
     brand: "Всички",
     model: "Всички",
     region: "Всички",
@@ -17,6 +27,10 @@ const SearchForm = () => {
 
   const handleChange = (field: string, value: string) => {
     setFormData({ ...formData, [field]: value });
+
+    if (field === "category") {
+      setCategory(value);
+    }
   };
 
   const handleSubmit = () => {
@@ -49,8 +63,8 @@ const SearchForm = () => {
               "Лодки",
               "Индустриални",
             ]}
-            value={formData.brand}
-            onChange={(value) => handleChange("brand", value)}
+            value={formData.category}
+            onChange={(value) => handleChange("category", value)}
           />
         </div>
       </div>

@@ -1,9 +1,17 @@
+"use client";
+
 import { searchIcons } from "@/utils/constants";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import SearchForm from "./SearchForm";
 
 const SearchSection = () => {
+  const [category, setCategory] = useState("Автомобили и Джипове");
+
+  const handleSetCategory = (cat: string) => {
+    setCategory(cat);
+  };
+
   return (
     <nav className="w-full max-w-screen-xl flex flex-col items-center justify-center mx-auto py-10">
       <h1 className="text-3xl lg:text-4xl font-light">
@@ -14,14 +22,24 @@ const SearchSection = () => {
           {searchIcons.map((icon, index) => (
             <div
               key={index}
-              className="bg-slate-100 w-24 h-16 rounded-md flex justify-center items-center flex-shrink-0"
+              onClick={() => handleSetCategory(icon.category)}
+              className={`${
+                icon.category === category
+                  ? "bg-mobilePrimary w-24 h-16 rounded-md flex justify-center items-center flex-shrink-0"
+                  : "bg-slate-100 w-24 h-16 rounded-md flex justify-center items-center flex-shrink-0"
+              } duration-300 transition-all ease-out`}
             >
-              <Image src={icon.link} width={60} height={60} alt={icon.name} />
+              <Image
+                src={icon.category === category ? icon.link : icon.linkActive}
+                width={60}
+                height={60}
+                alt={icon.name}
+              />
             </div>
           ))}
         </div>
         <div className="w-full">
-          <SearchForm />
+          <SearchForm category={category} setCategory={handleSetCategory} />
         </div>
       </div>
     </nav>
