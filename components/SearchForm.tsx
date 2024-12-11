@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Button from "./Button";
 
 const SearchForm = ({
   category,
@@ -59,7 +60,7 @@ const SearchForm = ({
               "Бусове",
               "Мотори",
               "Камиони",
-              "Мотоциклети",
+              "Велосипеди",
               "Лодки",
               "Индустриални",
             ]}
@@ -132,12 +133,12 @@ const SearchForm = ({
 
       {/* Submit Button */}
       <div className="flex flex-col justify-center items-center gap-1">
-        <button
-          className="mt-6 w-full bg-mobilePrimary text-white py-2 rounded-lg hover:bg-mobilePrimaryDark"
+        <Button
+          variant="longSearch"
           onClick={handleSubmit}
-        >
-          ТЪРСЕНЕ НА ОБЯВИ
-        </button>
+          icon="/searchIconWhite.svg"
+          text="ТЪРСЕНЕ НА ОБЯВИ"
+        ></Button>
         <span>ОЩЕ КРИТЕРИИ ЗА ТЪРСЕНЕ</span>
       </div>
     </div>

@@ -24,8 +24,16 @@ const HeroSection = () => {
         </div>
         <div className="flex items-center gap-4 mt-10">
           <Button text="ТОП ОБЯВИ" variant="default" />
-          <Button text="ТЪРСЕНЕ" variant="outline" />
-          <Button text="ТЪРСЕНЕ" variant="outlineWhite" />
+          <Button
+            text="ТЪРСЕНЕ"
+            icon="/searchIconBlack.svg"
+            variant="outline"
+          />
+          <Button
+            text="ТЪРСЕНЕ"
+            icon="/searchIconWhite.svg"
+            variant="outlineWhite"
+          />
         </div>
       </div>
     </div>

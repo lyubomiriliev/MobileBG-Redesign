@@ -27,7 +27,7 @@ const Header: React.FC = () => {
               ))}
             </ul>
             <div className="hidden lg:flex">
-              <Button text="ДОБАВИ ОБЯВА" />
+              <Button icon="/addIcon.svg" text="ДОБАВИ ОБЯВА" />
             </div>
           </div>
         </div>

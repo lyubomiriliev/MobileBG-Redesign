@@ -17,7 +17,7 @@ const SearchSection = () => {
       <h1 className="text-3xl lg:text-4xl font-light">
         Търсене на превозни средства
       </h1>
-      <div className="w-full max-w-screen-lg flex-col lg:flex justify-center items-center px-4 md:px-0 py-6">
+      <div className="w-full flex-col lg:flex justify-center items-center px-4 md:px-0 py-6">
         <div className="flex gap-4 items-center overflow-x-auto lg:overflow-x-visible scrollbar-hide">
           {searchIcons.map((icon, index) => (
             <div
@@ -30,7 +30,7 @@ const SearchSection = () => {
               } duration-300 transition-all ease-out`}
             >
               <Image
-                src={icon.category === category ? icon.link : icon.linkActive}
+                src={icon.category === category ? icon.linkActive : icon.link}
                 width={60}
                 height={60}
                 alt={icon.name}

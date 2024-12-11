@@ -4,7 +4,7 @@ import Image from "next/image";
 
 interface ButtonProps {
   text: string;
-  variant?: "default" | "outline" | "outlineWhite";
+  variant?: "default" | "outline" | "outlineWhite" | "longSearch";
   type?: "button" | "submit";
   icon?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -20,7 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
 }) => {
   const baseStyles =
-    "px-4 py-2 font-bold rounded-md transition-all flex items-center justify-center gap-2 whitespace-nowrap";
+    "px-6 py-2 font-bold rounded-md transition-all flex items-center justify-center gap-2 whitespace-nowrap";
 
   const variantStyles = {
     default:
@@ -29,6 +29,8 @@ const Button: React.FC<ButtonProps> = ({
       "border border-black text-black hidden lg:flex bg-transparent hover:border-mobilePrimary hover:text-mobilePrimary uppercase cursor-pointer",
     outlineWhite:
       "border border-white lg:hidden text-white bg-transparent hover:bg-black/70 uppercase cursor-pointer",
+    longSearch:
+      "mt-6 w-full bg-mobilePrimary text-white py-2 rounded-lg hover:bg-mobilePrimaryDark",
   };
 
   return (
@@ -42,7 +44,7 @@ const Button: React.FC<ButtonProps> = ({
         disabled && "cursor-not-allowed opacity-50"
       )}
     >
-      {icon && <Image width={40} height={40} alt={text} src={icon} />}
+      {icon && <Image width={20} height={20} alt={text} src={icon} />}
       {text}
     </button>
   );

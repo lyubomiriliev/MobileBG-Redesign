@@ -3,7 +3,7 @@ import React from "react";
 
 const CarSection = () => {
   return (
-    <section className="w-full h-[25vh] lg:h-[100vh] flex flex-col justify-start items-center mx-auto relative">
+    <section className="w-full h-[25vh] lg:h-[80vh] flex flex-col justify-start items-center mx-auto relative">
       <Image
         src="/images/mobileCar.png"
         width={1920}
@@ -12,7 +12,7 @@ const CarSection = () => {
         className="w-[80%] lg:w-[55%] -top-[40px] lg:-top-18 absolute -z-10"
       />
       <div>
-        <h1 className="text-3xl lg:text-6xl text-white font-medium absolute bottom-10 left-[23%] lg:bottom-80 lg:left-[38%] z-20">
+        <h1 className="text-4xl lg:text-6xl text-white font-medium absolute bottom-10 left-[16%] lg:bottom-24 lg:left-[38%] z-20">
           Подбрани категории
         </h1>
       </div>
