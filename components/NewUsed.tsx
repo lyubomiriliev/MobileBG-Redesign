@@ -14,7 +14,7 @@ const NewUsed = () => {
           <Image
             src="/newUsedPNG2.png"
             alt="NewUsedCoverImg"
-            width={1200}
+            width={1600}
             height={400}
             className="w-full lg:rounded-lg"
           />

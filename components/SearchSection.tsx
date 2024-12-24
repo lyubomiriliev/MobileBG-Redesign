@@ -5,7 +5,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import SearchForm from "./SearchForm";
 
-const SearchSection = () => {
+const SearchSection: React.FC = () => {
   const [category, setCategory] = useState("Автомобили и Джипове");
 
   const handleSetCategory = (cat: string) => {
