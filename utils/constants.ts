@@ -6,26 +6,21 @@ export const headerLinks = [
   },
   {
     id: 2,
-    name: "Публикуване",
-    url: "/post",
-  },
-  {
-    id: 3,
     name: "Търсене",
     url: "/search",
   },
   {
-    id: 4,
+    id: 3,
     name: "Средна цена",
     url: "/average-price",
   },
   {
-    id: 5,
+    id: 4,
     name: "Дилъри",
     url: "/dealers",
   },
   {
-    id: 6,
+    id: 5,
     name: "Моите Обяви",
     url: "/my-listings",
   },

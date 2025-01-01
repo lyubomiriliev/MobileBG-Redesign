@@ -13,7 +13,7 @@ const CarSection = () => {
         className="w-[80%] lg:w-[55%] -top-[40px] lg:-top-24 absolute -z-10"
       />
       <div>
-        <h1 className="text-4xl lg:text-6xl text-white lg:text-black font-medium absolute bottom-6 left-[16%] lg:bottom-52 lg:left-[35%] z-20">
+        <h1 className="text-4xl lg:text-6xl text-white lg:text-black font-medium absolute bottom-6 left-[16%] lg:bottom-80 lg:left-[35%] z-20">
           Подбрани категории
         </h1>
       </div>
