@@ -34,9 +34,11 @@ const Header: React.FC = () => {
                 </Link>
               ))}
             </ul>
-            <div className="hidden lg:flex">
-              <Button icon="/addIcon.svg" text="ДОБАВИ ОБЯВА" />
-            </div>
+            <Link href="/listings/publish">
+              <div className="hidden lg:flex">
+                <Button icon="/addIcon.svg" text="ДОБАВИ ОБЯВА" />
+              </div>
+            </Link>
           </div>
         </div>
       </nav>

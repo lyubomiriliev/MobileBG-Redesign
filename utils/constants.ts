@@ -22,7 +22,7 @@ export const headerLinks = [
   {
     id: 5,
     name: "Моите Обяви",
-    url: "/my-listings",
+    url: "/listings",
   },
 ];
 

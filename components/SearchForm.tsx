@@ -49,10 +49,13 @@ const SearchForm = ({
   return (
     <div className="w-full max-w-3xl mx-auto bg-white p-6 rounded-lg">
       <div className="flex flex-col">
-        <h2 className="text-mobilePrimary font-medium text-xl mb-4">
-          Търсене в категория:
-        </h2>
-        <div className="mb-5">
+        <div className="w-full flex justify-between items-center mb-2">
+          <h2 className="text-mobilePrimary font-medium text-xl">
+            Търсене в категория:
+          </h2>
+          <h2>Вашите последни търсения(12)</h2>
+        </div>
+        <div className="mb-2">
           <Dropdown
             label=""
             options={[
