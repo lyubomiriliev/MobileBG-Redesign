@@ -291,7 +291,7 @@ export const perks = [
     id: 3,
     title:
       "Проверка на актуална цена: Ние предлагаме информация за актуалност на цената на Вашия автомобил",
-    icon: "/perk3.png",
+    icon: "/perk3x.png",
   },
   {
     id: 4,
@@ -316,5 +316,107 @@ export const sellCarSteps = [
     id: 3,
     title: "Активиране на обявата",
     subTitle: "Вашата обява ще бъде видяна от хиляди посетители всеки ден.",
+  },
+];
+
+export const footerLinks = [
+  {
+    id: 1,
+    title: "Информация",
+    sublinks: [
+      {
+        id: 1,
+        title: "За нас",
+        link: "/about-us",
+      },
+      {
+        id: 2,
+        title: "Кариери",
+        link: "/careers",
+      },
+      {
+        id: 3,
+        title: "Дилъри",
+        link: "/dealers",
+      },
+      {
+        id: 4,
+        title: "Контакт",
+        link: "/contact",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Легални",
+    sublinks: [
+      {
+        id: 1,
+        title: "GDPR",
+        link: "/gdpr",
+      },
+      {
+        id: 2,
+        title: "Общи условия",
+        link: "/general-conditions",
+      },
+      {
+        id: 3,
+        title: "Бисквитки",
+        link: "/cookies",
+      },
+      {
+        id: 4,
+        title: "Помощ",
+        link: "/help",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Бързи страници",
+    sublinks: [
+      {
+        id: 1,
+        title: "Автомобили и джипове",
+        link: "/cars",
+      },
+      {
+        id: 2,
+        title: "Търсене",
+        link: "/search",
+      },
+      {
+        id: 3,
+        title: "Моите обяви",
+        link: "/listings",
+      },
+      {
+        id: 4,
+        title: "Добави обява",
+        link: "/listings/publish",
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "Дилъри",
+    sublinks: [
+      {
+        id: 1,
+        title: "Всички дилъри",
+        link: "/dealers",
+      },
+      {
+        id: 2,
+        title: "Стани дилър",
+        link: "/apply",
+      },
+      {
+        id: 3,
+        title: "ЧЗВ",
+        link: "/faq",
+      },
+    ],
   },
 ];
