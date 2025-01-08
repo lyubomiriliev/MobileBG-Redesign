@@ -149,7 +149,7 @@ const SearchForm = ({
 };
 
 // Dropdown Component
-const Dropdown = ({
+export const Dropdown = ({
   label,
   options,
   value,

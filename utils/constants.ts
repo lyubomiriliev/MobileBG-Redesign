@@ -420,3 +420,36 @@ export const footerLinks = [
     ],
   },
 ];
+
+export const popularBrands = [
+  {
+    id: 1,
+    title: "Wolkswagen",
+    logo: "/vw.webp",
+  },
+  {
+    id: 2,
+    title: "Mercedes-Benz",
+    logo: "/mb.webp",
+  },
+  {
+    id: 3,
+    title: "BMW",
+    logo: "/bmw.webp",
+  },
+  {
+    id: 4,
+    title: "Audi",
+    logo: "/audi.webp",
+  },
+  {
+    id: 5,
+    title: "Ford",
+    logo: "/ford.webp",
+  },
+  {
+    id: 6,
+    title: "Opel",
+    logo: "/opel.webp",
+  },
+];

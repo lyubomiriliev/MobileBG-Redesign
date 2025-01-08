@@ -58,7 +58,7 @@ const PublishCarPage = () => {
       </h2>
       {/* Publish Form content */}
       <div className="bg-slate-100 shadow-md rounded-lg p-6">
-        {innerStep === 1 && <StepOne nextStep={nextStep} />}
+        {innerStep === 1 && <StepOne />}
         {innerStep === 2 && <StepTwo nextStep={nextStep} prevStep={prevStep} />}
         {innerStep === 3 && (
           <StepThree nextStep={nextStep} prevStep={prevStep} />
