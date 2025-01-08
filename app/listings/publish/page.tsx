@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import StepFive from "@/components/PublishAd/StepFive";
 import StepFour from "@/components/PublishAd/StepFour";
 import StepOne from "@/components/PublishAd/StepOne";
+import StepSix from "@/components/PublishAd/StepSix";
 import StepThree from "@/components/PublishAd/StepThree";
 import StepTwo from "@/components/PublishAd/StepTwo";
 import React, { useState } from "react";
@@ -12,7 +13,7 @@ const PublishCarPage = () => {
   const [innerStep, setInnerStep] = useState(1);
 
   const nextStep = () => {
-    if (currentStep < 5) {
+    if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -24,7 +25,7 @@ const PublishCarPage = () => {
   };
 
   const handleNextInnerStep = () => {
-    if (innerStep < 5) {
+    if (innerStep < 6) {
       setInnerStep(innerStep + 1);
     }
   };
@@ -63,11 +64,11 @@ const PublishCarPage = () => {
         Добавяне на обява
       </h2>
       {/* Publish Form content */}
-      <div className="bg-white shadow-lg border-[1px] border-slate-200 mb-20 min-h-screen rounded-lg p-6 flex flex-col justify-center items-center relative overflow-hidden">
+      <div className="bg-white shadow-lg border-[1px] border-slate-200 mb-20 min-h-screen rounded-lg p-6 pt-10 flex flex-col justify-center items-center relative overflow-hidden">
         {innerStep >= 2 && (
           <div
             onClick={handlePreviousInnerStep}
-            className="flex items-center gap-2 cursor-pointer absolute left-6 top-6"
+            className="flex items-center gap-2 cursor-pointer absolute left-2 top-2 lg:left-6 lg:top-6"
           >
             <img src="/images/backArrow.svg" className="w-6" alt="" />
             <p>Назад</p>
@@ -81,14 +82,11 @@ const PublishCarPage = () => {
           />
         )}
         {innerStep === 1 && <StepOne />}
-        {innerStep === 2 && <StepTwo nextStep={nextStep} prevStep={prevStep} />}
-        {innerStep === 3 && (
-          <StepThree nextStep={nextStep} prevStep={prevStep} />
-        )}
-        {innerStep === 4 && (
-          <StepFour nextStep={nextStep} prevStep={prevStep} />
-        )}
-        {innerStep === 5 && <StepFive prevStep={prevStep} />}
+        {innerStep === 2 && <StepTwo />}
+        {innerStep === 3 && <StepThree />}
+        {innerStep === 4 && <StepFour />}
+        {innerStep === 5 && <StepFive />}
+        {innerStep === 6 && <StepSix />}
         <div className="z-50">
           <Button onClick={handleNextInnerStep} text="ПРОДЪЛЖИ" />
         </div>

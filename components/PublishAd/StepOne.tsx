@@ -38,10 +38,10 @@ const StepOne = () => {
     <section className="w-full min-h-screen flex flex-col justify-start items-center max-w-screen-xl mx-auto px- pb-8 lg:px-0">
       <div className="w-full flex flex-col items-center justify-center">
         <div className="w-full flex flex-col justify-center items-center">
-          <h1 className="text-xl lg:text-2xl">
+          <h1 className="text-xl lg:text-2xl text-center">
             Основни характеристики и данни на автомобила
           </h1>
-          <div className="w-2/3 h-[2px] bg-gray-300 my-3"></div>
+          <div className="w-full lg:w-2/3 h-[2px] bg-gradient-to-r from-slate-50 via-slate-200 to-slate-50 my-3"></div>
         </div>
 
         <div className="w-full flex flex-col">
