@@ -11,7 +11,11 @@ const WhyChooseUs = () => {
         </div>
         {perks.map((perk, index) => (
           <div key={index}>
-            <Perk title={perk.title} icon={perk.icon} />
+            <Perk
+              title={perk.title}
+              icon={perk.icon}
+              reverse={index % 2 !== 0}
+            />
           </div>
         ))}
       </div>
