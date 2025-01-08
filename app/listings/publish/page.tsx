@@ -23,9 +23,15 @@ const PublishCarPage = () => {
     }
   };
 
-  const handleInnerStep = () => {
+  const handleNextInnerStep = () => {
     if (innerStep < 5) {
       setInnerStep(innerStep + 1);
+    }
+  };
+
+  const handlePreviousInnerStep = () => {
+    if (innerStep >= 2) {
+      setInnerStep(innerStep - 1);
     }
   };
 
@@ -36,7 +42,7 @@ const PublishCarPage = () => {
   ];
 
   return (
-    <section className="max-w-5xl mx-auto mt-32">
+    <section className="max-w-5xl mx-auto px-4 lg:px-0 mt-32">
       {/* Progress Bar */}
       <div className="flex items-center justify-between mb-8">
         {steps.map((step, index) => (
@@ -57,7 +63,23 @@ const PublishCarPage = () => {
         Добавяне на обява
       </h2>
       {/* Publish Form content */}
-      <div className="bg-slate-100 shadow-md rounded-lg p-6">
+      <div className="bg-white shadow-lg border-[1px] border-slate-200 mb-20 min-h-screen rounded-lg p-6 flex flex-col justify-center items-center relative overflow-hidden">
+        {innerStep >= 2 && (
+          <div
+            onClick={handlePreviousInnerStep}
+            className="flex items-center gap-2 cursor-pointer absolute left-6 top-6"
+          >
+            <img src="/images/backArrow.svg" className="w-6" alt="" />
+            <p>Назад</p>
+          </div>
+        )}
+        {innerStep === 1 && (
+          <img
+            src="/images/mbCar.webp"
+            alt="CarBG"
+            className="w-2/3 object-cover absolute -right-24 top-24 opacity-50 hidden lg:flex"
+          />
+        )}
         {innerStep === 1 && <StepOne />}
         {innerStep === 2 && <StepTwo nextStep={nextStep} prevStep={prevStep} />}
         {innerStep === 3 && (
@@ -67,7 +89,9 @@ const PublishCarPage = () => {
           <StepFour nextStep={nextStep} prevStep={prevStep} />
         )}
         {innerStep === 5 && <StepFive prevStep={prevStep} />}
-        <Button onClick={handleInnerStep} text="ПРОДЪЛЖИ" />
+        <div className="z-50">
+          <Button onClick={handleNextInnerStep} text="ПРОДЪЛЖИ" />
+        </div>
       </div>
     </section>
   );

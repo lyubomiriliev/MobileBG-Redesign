@@ -453,3 +453,157 @@ export const popularBrands = [
     logo: "/opel.webp",
   },
 ];
+
+export const brandsModelMapping: Record<string, string[]> = {
+  Mercedes: [
+    "A-Class",
+    "B-Class",
+    "C-Class",
+    "E-class",
+    "S-Class",
+    "CLS-Class",
+    "ML-Class",
+    "GLE-Class",
+  ],
+  BMW: [
+    "1 Series",
+    "2 Series",
+    "3 Series",
+    "4 Series",
+    "5 Series",
+    "6 Series",
+    "7 Series",
+    "X1",
+    "X2",
+    "X3",
+    "X4",
+    "X5",
+    "X6",
+    "X7",
+  ],
+  Toyota: ["Corolla", "Camry", "RAV4", "Hilux"],
+};
+
+export const exteriorColors = [
+  {
+    id: 1,
+    name: "Бял",
+    color: "#FFFFFF",
+    title: "whiteCar",
+  },
+  {
+    id: 2,
+    name: "Черен",
+    color: "#202020",
+    title: "blackCar",
+  },
+  {
+    id: 3,
+    name: "Жълт",
+    color: "#ECD20E",
+    title: "yellowCar",
+  },
+  {
+    id: 4,
+    name: "Сив",
+    color: "#DFDFDF",
+    title: "grayCar",
+  },
+  {
+    id: 5,
+    name: "Червен",
+    color: "#FC0707",
+    title: "redCar",
+  },
+  {
+    id: 6,
+    name: "Оранжев",
+    color: "#E78F03",
+    title: "orangeCar",
+  },
+  {
+    id: 7,
+    name: "Тъмно сив",
+    color: "#999999",
+    title: "darkGrayCar",
+  },
+  {
+    id: 8,
+    name: "Зелен",
+    color: "#50A856",
+    title: "greenCar",
+  },
+  {
+    id: 9,
+    name: "Лилав",
+    color: "#730ACF",
+    title: "purpleCar",
+  },
+  {
+    id: 10,
+    name: "Бежов",
+    color: "#DAC792",
+    title: "beigeCar",
+  },
+  {
+    id: 11,
+    name: "Син",
+    color: "#0655FF",
+    title: "blueCar",
+  },
+  {
+    id: 12,
+    name: "Розов",
+    color: "#D81FBF",
+    title: "pinkCar",
+  },
+  {
+    id: 13,
+    name: "Златен",
+    color: "#E1A910",
+    title: "goldCar",
+  },
+];
+
+export const interiorColors = [
+  {
+    name: "Черен",
+    color: "#202020",
+    title: "black",
+  },
+  {
+    name: "Бежов",
+    color: "#DAC792",
+    title: "beige",
+  },
+  {
+    name: "Сив",
+    color: "#DFDFDF",
+    title: "gray",
+  },
+  {
+    name: "Червен",
+    color: "#FC0707",
+    title: "red",
+  },
+  {
+    name: "Друг",
+    color: "#FFFFFF",
+    title: "other",
+  },
+  {
+    name: "Син",
+    color: "#0655FF",
+    title: "blue",
+  },
+];
+
+export const interiorMaterial = [
+  "Алкантара",
+  "Текстил",
+  "Изкуствена Кожа",
+  "Велур",
+  "Полу-кожа",
+  "Естествена кожа",
+  "Друг",
+];

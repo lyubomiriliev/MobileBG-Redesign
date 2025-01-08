@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Button from "./Button";
+import { Dropdown } from "./UI/Dropdown";
 
 const SearchForm = ({
   category,
@@ -144,36 +145,6 @@ const SearchForm = ({
         ></Button>
         <span>ОЩЕ КРИТЕРИИ ЗА ТЪРСЕНЕ</span>
       </div>
-    </div>
-  );
-};
-
-// Dropdown Component
-export const Dropdown = ({
-  label,
-  options,
-  value,
-  onChange,
-}: {
-  label: string;
-  options: string[];
-  value: string;
-  onChange: (value: string) => void;
-}) => {
-  return (
-    <div>
-      <label className="block font-medium text-gray-700 mb-1">{label}</label>
-      <select
-        className="w-full border border-gray-300 rounded-md p-2"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      >
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
     </div>
   );
 };
