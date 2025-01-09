@@ -14,24 +14,24 @@ const StepThree = () => {
           <h3 className="text-xl lg:text-2xl">Безопасност (2/5)</h3>
         </div>
         <img
-          src="/safety.png"
+          src="/safety2.png"
           alt="SafetyBackground"
-          className="w-2/3 opacity-75 lg:opacity-100 lg:w-2/4 absolute -bottom-8 -right-32 lg:top-40 z-0"
+          className="w-2/3 opacity-75 lg:opacity-50 lg:w-full absolute -bottom-8 -right-60 lg:-top-40 z-0"
         />
         <div className="flex flex-col justify-center gap-4 z-10">
           {safetyExtras.map((item, index) => (
-            <>
+            <div key={index}>
               <h1 className="text-xl lg:text-2xl font-bold text-mobilePrimary">
                 {item.name}
               </h1>
-              <div key={index}>
+              <div>
                 {item.extras.map((extra, index) => (
-                  <div key={index}>
+                  <div key={`${extra}-${index}`}>
                     <Checkbox label={extra} />
                   </div>
                 ))}
               </div>
-            </>
+            </div>
           ))}
         </div>
       </div>

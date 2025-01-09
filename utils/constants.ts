@@ -610,6 +610,7 @@ export const interiorMaterial = [
 
 export const safetyExtras = [
   {
+    id: 1,
     name: "Пътни асистенти",
     extras: [
       "Система за динамична устойчивост",
@@ -624,6 +625,7 @@ export const safetyExtras = [
     ],
   },
   {
+    id: 2,
     name: "Предпазни функции",
     extras: [
       "Система ISOFIX",
@@ -634,6 +636,7 @@ export const safetyExtras = [
     ],
   },
   {
+    id: 3,
     name: "Светлини и видимост",
     extras: [
       "LED фарове",
@@ -643,6 +646,7 @@ export const safetyExtras = [
     ],
   },
   {
+    id: 4,
     name: "Защита против кражби",
     extras: [
       "Аларма",
@@ -651,5 +655,96 @@ export const safetyExtras = [
       "Централно заключване",
       "GPS система за проследяване",
     ],
+  },
+];
+
+export const comfortExtras = [
+  {
+    id: 1,
+    name: "Климатична система",
+    extras: [
+      "Печка",
+      "Климатик",
+      "Климатроник",
+      "Отопление на волана",
+      "Подгряване на предното стъкло",
+      "Подгряване на предното стъкло",
+    ],
+  },
+  {
+    id: 2,
+    name: "Паркинг асистенти",
+    extras: [
+      "Парктроник",
+      "Дистроник",
+      "Камера за задно виждане",
+      "Система за самопаркиране",
+      "Радар сензори",
+    ],
+  },
+  {
+    id: 3,
+    name: "Седалки",
+    extras: [
+      "Подгряване на седалките",
+      "Обдухване на седалките",
+      "Ел. регулиране на седалките",
+      "Масаж и/или лумбална опора",
+    ],
+  },
+  {
+    id: 4,
+    name: "Допълнителни екстри",
+    extras: [
+      "Auto Start Stop function",
+      "Bluetooth  handsfree система",
+      "DVD, TV",
+      "Steptronic, Tiptronic",
+      "USB, AUX audio video изводи",
+      "Безключово палене",
+      "Ел. регулиране на окачването",
+      "Сензор за дъжд",
+    ],
+  },
+];
+
+export const multimediaExtras = [
+  {
+    id: 1,
+    name: "Мултимедия",
+    extras: [
+      "Навигация",
+      "Стерео уредба",
+      "Тъчскрийн дисплей",
+      "Harman Kardon",
+      "Bang&Olufsen",
+      "BOSE",
+    ],
+  },
+  {
+    id: 2,
+    name: "Контролиране",
+    extras: [
+      "Парктроник",
+      "Дистроник",
+      "Камера за задно виждане",
+      "Система за самопаркиране",
+      "Радар сензори",
+    ],
+  },
+  {
+    id: 3,
+    name: "Свързаност и интерфейси",
+    extras: [
+      "Bluetooth",
+      "MP3 Audio/DVD TV",
+      "Carplay/Android auto",
+      "Wi-Fi/3G/4G",
+    ],
+  },
+  {
+    id: 4,
+    name: "Функции на дисплея",
+    extras: ["3D дисплей", "Head-up Display - HUD", "Virtual Cockpit"],
   },
 ];
