@@ -5,7 +5,7 @@ import { brandsModelMapping, popularBrands } from "@/utils/constants";
 import { Dropdown } from "../UI/Dropdown";
 import { Input } from "../UI/Input";
 
-const StepOne = () => {
+const GeneralData = () => {
   const [formData, setFormData] = useState({
     category: "Автомобили и Джипове",
     brand: "",
@@ -210,4 +210,4 @@ const StepOne = () => {
   );
 };
 
-export default StepOne;
+export default GeneralData;

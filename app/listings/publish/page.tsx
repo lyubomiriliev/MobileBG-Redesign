@@ -1,31 +1,38 @@
 "use client";
 import Button from "@/components/Button";
-import StepFive from "@/components/PublishAd/StepFive";
-import StepFour from "@/components/PublishAd/StepFour";
-import StepOne from "@/components/PublishAd/StepOne";
-import StepSix from "@/components/PublishAd/StepSix";
-import StepThree from "@/components/PublishAd/StepThree";
-import StepTwo from "@/components/PublishAd/StepTwo";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import GeneralData from "@/components/PublishAd/GeneralData";
+import InteriorExterior from "@/components/PublishAd/InteriorExterior";
+import Safety from "@/components/PublishAd/Safety";
+import Comfort from "@/components/PublishAd/Comfort";
+import MultimediaDevices from "@/components/PublishAd/MultimediaDevices";
+import AdditionalExtra from "@/components/PublishAd/AdditionalExtra";
+import ImageVideoUpload from "@/components/PublishAd/ImageVideoUpload";
 
 const PublishCarPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [innerStep, setInnerStep] = useState(1);
 
-  const nextStep = () => {
-    if (currentStep < 3) {
-      setCurrentStep(currentStep + 1);
+  useEffect(() => {
+    if (innerStep <= 6) {
+      setCurrentStep(1);
     }
-  };
 
-  const prevStep = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
+    if (innerStep >= 7) {
+      setCurrentStep(2);
     }
+
+    if (innerStep >= 10) {
+      setCurrentStep(3);
+    }
+  }, [innerStep]);
+
+  const handleChangeStep = (index: number) => {
+    setCurrentStep(index + 1);
   };
 
   const handleNextInnerStep = () => {
-    if (innerStep < 6) {
+    if (innerStep <= 9) {
       setInnerStep(innerStep + 1);
     }
   };
@@ -52,6 +59,7 @@ const PublishCarPage = () => {
             className={`flex-1 text-center py-2 px-4 rounded-md ${
               currentStep === index + 1 ? "text-mobilePrimary" : "text-gray-600"
             }`}
+            onClick={() => handleChangeStep(index)}
           >
             <span className="font-bold text-xl uppercase">{`Стъпка ${
               index + 1
@@ -81,12 +89,13 @@ const PublishCarPage = () => {
             className="w-2/3 object-cover absolute -right-24 top-24 opacity-50 hidden lg:flex"
           />
         )}
-        {innerStep === 1 && <StepOne />}
-        {innerStep === 2 && <StepTwo />}
-        {innerStep === 3 && <StepThree />}
-        {innerStep === 4 && <StepFour />}
-        {innerStep === 5 && <StepFive />}
-        {innerStep === 6 && <StepSix />}
+        {innerStep === 1 && <GeneralData />}
+        {innerStep === 2 && <InteriorExterior />}
+        {innerStep === 3 && <Safety />}
+        {innerStep === 4 && <Comfort />}
+        {innerStep === 5 && <MultimediaDevices />}
+        {innerStep === 6 && <AdditionalExtra />}
+        {innerStep === 7 && <ImageVideoUpload />}
         <div className="z-50">
           <Button onClick={handleNextInnerStep} text="ПРОДЪЛЖИ" />
         </div>

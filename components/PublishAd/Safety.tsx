@@ -1,8 +1,8 @@
-import { comfortExtras } from "@/utils/constants";
+import { safetyExtras } from "@/utils/constants";
 import React from "react";
 import Checkbox from "../UI/Checkbox";
 
-const StepFour = () => {
+const Safety = () => {
   return (
     <section className="w-full min-h-screen flex flex-col justify-start items-start max-w-screen-xl mx-auto px- pb-8 lg:px-0">
       <div className="w-full flex flex-col justify-center items-start relative">
@@ -11,15 +11,15 @@ const StepFour = () => {
             Оборудване, сигурност, екстри и функции
           </h1>
           <div className="w-full lg:w-2/3 h-[2px] bg-gradient-to-r from-slate-50 via-slate-200 to-slate-50 my-3"></div>
-          <h3 className="text-xl lg:text-2xl">Екстри за комфорт (3/5)</h3>
+          <h3 className="text-xl lg:text-2xl">Безопасност (2/5)</h3>
         </div>
         <img
-          src="/images/mobileCar3.png"
+          src="/safety2.png"
           alt="SafetyBackground"
-          className="w-full opacity-75 lg:opacity-50 lg:w-full absolute -bottom-8 -right-20 lg:top-40 z-0"
+          className="w-2/3 opacity-75 lg:opacity-50 lg:w-full absolute -bottom-8 -right-60 lg:-top-36 z-0"
         />
         <div className="flex flex-col justify-center gap-4 z-10">
-          {comfortExtras.map((item, index) => (
+          {safetyExtras.map((item, index) => (
             <div key={index}>
               <h1 className="text-xl lg:text-2xl font-bold text-mobilePrimary">
                 {item.name}
@@ -39,4 +39,4 @@ const StepFour = () => {
   );
 };
 
-export default StepFour;
+export default Safety;

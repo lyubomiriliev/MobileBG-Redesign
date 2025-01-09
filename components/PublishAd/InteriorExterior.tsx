@@ -7,7 +7,7 @@ import {
 import React, { useState } from "react";
 import Checkbox from "../UI/Checkbox";
 
-const StepTwo = () => {
+const InteriorExterior = () => {
   const [exteriorColor, setExteriorColor] = useState("whiteCar");
   const [interiorColor, setInteriorColor] = useState("black");
 
@@ -18,7 +18,7 @@ const StepTwo = () => {
           <h1 className="text-xl lg:text-2xl">
             Оборудване, сигурност, екстри и функции
           </h1>
-          <div className="w-full lg:w-2/3 h-[2px] bg-gradient-to-r from-slate-50 via-slate-200 to-slate-50 my-3"></div>
+          <div className="w-2/3 h-[2px] bg-gray-300 my-3"></div>
           <h3 className="text-xl lg:text-2xl">Интериор и екстериор (1/5)</h3>
         </div>
       </div>
@@ -74,4 +74,4 @@ const StepTwo = () => {
   );
 };
 
-export default StepTwo;
+export default InteriorExterior;
