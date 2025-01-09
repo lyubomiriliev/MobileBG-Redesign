@@ -1,4 +1,5 @@
 "use client";
+
 import {
   exteriorColors,
   interiorColors,
@@ -6,10 +7,37 @@ import {
 } from "@/utils/constants";
 import React, { useState } from "react";
 import Checkbox from "../UI/Checkbox";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  AppDispatch,
+  RootState,
+  updateInteriorExterior,
+} from "@/app/store/redux";
 
 const InteriorExterior = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const listingData = useSelector((state: RootState) => state.listing);
+  console.log("Current Redux State:", listingData);
+
   const [exteriorColor, setExteriorColor] = useState("whiteCar");
   const [interiorColor, setInteriorColor] = useState("black");
+  const [selectedMaterial, setSelectedMaterial] = useState("");
+
+  const handleColorUpdate = (field: string, value: string) => {
+    if (field === "exteriorColor") {
+      setExteriorColor(value);
+      dispatch(updateInteriorExterior({ exteriorColor: value }));
+    } else if (field === "interiorColor") {
+      setInteriorColor(value);
+      dispatch(updateInteriorExterior({ interiorColor: value }));
+    }
+  };
+
+  const handleMaterialUpdate = (material: string) => {
+    setSelectedMaterial(material);
+    dispatch(updateInteriorExterior({ interiorMaterial: material }));
+  };
 
   return (
     <section className="w-full min-h-screen flex flex-col justify-start items-start max-w-screen-xl mx-auto px- pb-8 lg:px-0">
@@ -36,10 +64,17 @@ const InteriorExterior = () => {
         <h1 className="text-xl lg-text-3xl">Цвят на екстериор</h1>
         <div className="grid grid-cols-3 gap-3 py-2">
           {exteriorColors.map((color, index) => (
-            <div className="flex items-center gap-2" key={index}>
+            <div
+              key={index}
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={() => handleColorUpdate("exteriorColor", color.title)}
+            >
               <div
-                onClick={() => setExteriorColor(color.title)}
-                className="w-10 h-10 border-[1px] hover:border-[1px] select-none hover:border-black border-mobileDarkGray/35 rounded-tl-2xl rounded-br-2xl"
+                className={`w-10 h-10 border-[1px] ${
+                  exteriorColor === color.title
+                    ? "border-black"
+                    : "border-mobileDarkGray/35"
+                } hover:border-black rounded-tl-2xl rounded-br-2xl`}
                 style={{ backgroundColor: color.color }}
               ></div>
               <h3>{color.name}</h3>
@@ -51,18 +86,29 @@ const InteriorExterior = () => {
         <h1 className="text-xl lg-text-3xl">Материал и цвят на интериор</h1>
         <div className="grid grid-cols-2 gap-4 py-4">
           {interiorMaterial.map((mat, index) => (
-            <div key={index}>
-              <Checkbox label={mat} />
-            </div>
+            <Checkbox
+              name="interiorMaterial"
+              key={index}
+              checked={selectedMaterial === mat}
+              label={mat}
+              onChange={() => handleMaterialUpdate(mat)}
+            />
           ))}
         </div>
         <h1 className="text-xl lg-text-3xl">Цвят на интериор:</h1>
         <div className="grid grid-cols-2 gap-3 py-2">
           {interiorColors.map((color, index) => (
-            <div className="flex items-center gap-2" key={index}>
+            <div
+              key={index}
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={() => handleColorUpdate("interiorColor", color.title)}
+            >
               <div
-                onClick={() => setInteriorColor(color.title)}
-                className="w-10 h-10 border-[1px] hover:border-[1px] select-none hover:border-black border-mobileDarkGray/35 rounded-tl-2xl rounded-br-2xl"
+                className={`w-10 h-10 border-[1px] ${
+                  interiorColor === color.title
+                    ? "border-black"
+                    : "border-mobileDarkGray/35"
+                } hover:border-black rounded-tl-2xl rounded-br-2xl`}
                 style={{ backgroundColor: color.color }}
               ></div>
               <h3>{color.name}</h3>

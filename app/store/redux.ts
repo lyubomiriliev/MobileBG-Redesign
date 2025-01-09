@@ -1,3 +1,4 @@
+import InteriorExterior from "@/components/PublishAd/InteriorExterior";
 import { createSlice, PayloadAction, configureStore } from "@reduxjs/toolkit";
 
 type GeneralDataState = {
@@ -18,22 +19,40 @@ type GeneralDataState = {
   location: string;
 };
 
-const initialState: GeneralDataState = {
-  category: "",
-  brand: "",
-  model: "",
-  modification: "",
-  tuning: "",
-  engine: "",
-  gearbox: "",
-  dateYear: "",
-  dateMonth: "",
-  coupe: "",
-  vin: "",
-  mileage: "",
-  price: "",
-  currency: "",
-  location: "",
+type InteriorExteriorState = {
+  exteriorColor: string;
+  interiorMaterial: string;
+  interiorColor: string;
+};
+
+type ListingState = {
+  generalData: GeneralDataState;
+  interiorExterior: InteriorExteriorState;
+};
+
+const initialState: ListingState = {
+  generalData: {
+    category: "",
+    brand: "",
+    model: "",
+    modification: "",
+    tuning: "",
+    engine: "",
+    gearbox: "",
+    dateYear: "",
+    dateMonth: "",
+    coupe: "",
+    vin: "",
+    mileage: "",
+    price: "",
+    currency: "",
+    location: "",
+  },
+  interiorExterior: {
+    exteriorColor: "",
+    interiorMaterial: "",
+    interiorColor: "",
+  },
 };
 
 const listingSlice = createSlice({
@@ -43,16 +62,17 @@ const listingSlice = createSlice({
     updateGeneralData: (state, action: PayloadAction<any>) => {
       return { ...state, ...action.payload };
     },
-    // addImage: (state, action: PayloadAction<File>) => {
-    //   state.images.push(action.payload);
-    // },
-    // updateAdditionalExtras: (state, action: PayloadAction<any>) => {
-    //   state.additionalExtras = action.payload;
-    // },
+    updateInteriorExterior: (
+      state,
+      action: PayloadAction<Partial<InteriorExteriorState>>
+    ) => {
+      state.interiorExterior = { ...state.interiorExterior, ...action.payload };
+    },
   },
 });
 
-export const { updateGeneralData } = listingSlice.actions;
+export const { updateGeneralData, updateInteriorExterior } =
+  listingSlice.actions;
 
 const store = configureStore({
   reducer: {
