@@ -15,22 +15,22 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="w-full bg-white flex flex-col gap-1 items-center justify-between fixed top-0 py-2 h-16 md:h-24 z-50">
+    <header className="w-full bg-white/75 backdrop-blur-md flex flex-col gap-1 items-center justify-between fixed top-0 py-2 h-16 md:h-20 z-50">
       <nav className="flex justify-center items-center">
-        <div className="flex flex-col py-2 items-center justify-between w-full top-0 fixed px-4">
-          <Link href={"/"}>
-            <Image
-              src="/mobileLogo.svg"
-              alt="MobileBG"
-              width={120}
-              height={60}
-            />
-          </Link>
+        <div className="flex flex-col h-20 items-center justify-center w-full top-0 fixed px-4">
           <div className="w-full max-w-screen-lg mx-auto justify-center items-center flex">
             <ul className="hidden w-full justify-around lg:flex">
               {headerLinks.map((link, index) => (
                 <Link key={index} href={link.url}>
                   <li className="text-lg cursor-pointer">{link.name}</li>
+                  {link.src && (
+                    <Image
+                      src="/mobileLogo.svg"
+                      alt="MobileBG"
+                      width={120}
+                      height={60}
+                    />
+                  )}
                 </Link>
               ))}
             </ul>

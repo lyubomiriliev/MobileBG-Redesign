@@ -16,11 +16,17 @@ export const headerLinks = [
   },
   {
     id: 4,
+    name: "",
+    url: "/",
+    src: "/mobileLogo.svg",
+  },
+  {
+    id: 5,
     name: "Дилъри",
     url: "/dealers",
   },
   {
-    id: 5,
+    id: 6,
     name: "Моите Обяви",
     url: "/listings",
   },

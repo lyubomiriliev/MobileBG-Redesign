@@ -1,4 +1,5 @@
 "use client";
+
 import Button from "@/components/Button";
 import React, { useEffect, useState } from "react";
 import GeneralData from "@/components/PublishAd/GeneralData";
@@ -8,6 +9,7 @@ import Comfort from "@/components/PublishAd/Comfort";
 import MultimediaDevices from "@/components/PublishAd/MultimediaDevices";
 import AdditionalExtra from "@/components/PublishAd/AdditionalExtra";
 import ImageVideoUpload from "@/components/PublishAd/ImageVideoUpload";
+import Link from "next/link";
 
 const PublishCarPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -54,18 +56,26 @@ const PublishCarPage = () => {
       {/* Progress Bar */}
       <div className="flex items-center justify-between mb-8">
         {steps.map((step, index) => (
-          <div
+          <Link
             key={index}
-            className={`flex-1 text-center py-2 px-4 rounded-md ${
-              currentStep === index + 1 ? "text-mobilePrimary" : "text-gray-600"
+            href={`${
+              index == 0 ? "publish" : 1 ? "publish/upload" : "publish/finish"
             }`}
-            onClick={() => handleChangeStep(index)}
           >
-            <span className="font-bold text-xl uppercase">{`Стъпка ${
-              index + 1
-            }`}</span>
-            <p className="text-base mt-1">{step}</p>
-          </div>
+            <div
+              className={`flex-1 text-center py-2 px-4 rounded-md ${
+                currentStep === index + 1
+                  ? "text-mobilePrimary"
+                  : "text-gray-600"
+              }`}
+              onClick={() => handleChangeStep(index)}
+            >
+              <span className="font-bold text-xl uppercase">{`Стъпка ${
+                index + 1
+              }`}</span>
+              <p className="text-base mt-1">{step}</p>
+            </div>
+          </Link>
         ))}
       </div>
       <h2 className="text-3xl uppercase text-mobilePrimary font-bold mb-4 text-center">

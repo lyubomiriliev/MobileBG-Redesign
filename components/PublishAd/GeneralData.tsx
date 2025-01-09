@@ -4,10 +4,14 @@ import React, { useState } from "react";
 import { brandsModelMapping, popularBrands } from "@/utils/constants";
 import { Dropdown } from "../UI/Dropdown";
 import { Input } from "../UI/Input";
+import { useDispatch } from "react-redux";
+import { updateGeneralData } from "@/app/store/redux";
 
 const GeneralData = () => {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
-    category: "Автомобили и Джипове",
+    category: "",
     brand: "",
     model: "",
     modification: "",
@@ -30,6 +34,8 @@ const GeneralData = () => {
     } else {
       setFormData({ ...formData, [field]: value });
     }
+
+    dispatch(updateGeneralData({ [field]: value }));
   };
 
   const modelOptions = formData.brand ? brandsModelMapping[formData.brand] : [];
