@@ -3,6 +3,7 @@
 import React from "react";
 import { steps } from "@/utils/constants";
 import Link from "next/link";
+import Image from "next/image";
 
 const PublishLayout = ({
   currentStep,
@@ -54,7 +55,13 @@ const PublishLayout = ({
             onClick={onBackClick}
             className="flex items-center gap-2 cursor-pointer absolute left-2 top-2 lg:left-6 lg:top-6"
           >
-            <img src="/images/backArrow.svg" className="w-6" alt="Back" />
+            <Image
+              width={20}
+              height={20}
+              src="/images/backArrow.svg"
+              className="w-6"
+              alt="Back"
+            />
             <p>Назад</p>
           </div>
         )}

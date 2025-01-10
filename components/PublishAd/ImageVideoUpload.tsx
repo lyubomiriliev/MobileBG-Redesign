@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState } from "react";
 
 const ImageVideoUpload = () => {
@@ -66,7 +67,9 @@ const ImageVideoUpload = () => {
           >
             {image ? (
               <div className="w-full h-full object-cover">
-                <img
+                <Image
+                  width={10}
+                  height={10}
                   src={URL.createObjectURL(image)}
                   alt={`Uploaded ${index}`}
                   className="w-full h-full object-cover rounded-md"

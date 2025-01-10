@@ -13,6 +13,7 @@ import {
   RootState,
   updateInteriorExterior,
 } from "@/app/store/redux";
+import Image from "next/image";
 
 const InteriorExterior = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -50,12 +51,18 @@ const InteriorExterior = () => {
           <h3 className="text-xl lg:text-2xl">Интериор и екстериор (1/5)</h3>
         </div>
       </div>
-      <img
+      <Image
+        width={400}
+        height={400}
+        unoptimized
         src={`/exterior/${exteriorColor}.png`}
         alt="ExteriorColor"
         className="w-2/3 object-cover absolute -right-24 top-24"
       />
-      <img
+      <Image
+        width={400}
+        height={400}
+        unoptimized
         src={`/interior/${interiorColor}.png`}
         alt="InteriorColor"
         className="w-2/4 object-cover absolute -right-0 bottom-0"

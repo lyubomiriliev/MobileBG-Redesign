@@ -1,6 +1,7 @@
 import { multimediaExtras } from "@/utils/constants";
 import React from "react";
 import Checkbox from "../UI/Checkbox";
+import Image from "next/image";
 
 const MultimediaDevices = () => {
   return (
@@ -13,7 +14,10 @@ const MultimediaDevices = () => {
           <div className="w-full lg:w-2/3 h-[2px] bg-gradient-to-r from-slate-50 via-slate-200 to-slate-50 my-3"></div>
           <h3 className="text-xl lg:text-2xl">Мултимедиа и устройства (4/5)</h3>
         </div>
-        <img
+        <Image
+          width={600}
+          height={800}
+          unoptimized
           src="/carMultimedia.png"
           alt="SafetyBackground"
           className="w-full opacity-75 lg:opacity-50 lg:w-full absolute -bottom-20 -right-24 lg:top-60 2xl:top-96 z-0"

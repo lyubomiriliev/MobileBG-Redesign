@@ -84,7 +84,9 @@ const GeneralData = () => {
                     key={index}
                     className="bg-gray-50 hover:bg-gray-300 duration-300 ease-in-out w-28 h-16 border-slate-300 border-[1px] rounded-xl flex justify-center items-center"
                   >
-                    <img
+                    <Image
+                      width={200}
+                      height={200}
                       src={brand.logo}
                       alt={brand.title}
                       className="w-10 object-cover"
