@@ -1,7 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { brandsModelMapping, popularBrands } from "@/utils/constants";
+import {
+  brandsModelMapping,
+  months,
+  popularBrands,
+  years,
+} from "@/utils/constants";
 import { Dropdown } from "../UI/Dropdown";
 import { Input } from "../UI/Input";
 import { useDispatch } from "react-redux";
@@ -149,36 +154,13 @@ const GeneralData = () => {
               {/* DATE DROPDOWN */}
               <Dropdown
                 label="Година"
-                options={[
-                  "2025",
-                  "2024",
-                  "2023",
-                  "2022",
-                  "2021",
-                  "2020",
-                  "2019",
-                  "2018",
-                  "2017",
-                ]}
+                options={years}
                 value={formData.dateYear}
                 onChange={(value) => handleChange("dateYear", value)}
               />
               <Dropdown
                 label="Месец"
-                options={[
-                  "Януари",
-                  "Февруари",
-                  "Март",
-                  "Април",
-                  "Май",
-                  "Юни",
-                  "Юли",
-                  "Август",
-                  "Септември",
-                  "Октомври",
-                  "Ноември",
-                  "Декември",
-                ]}
+                options={months}
                 value={formData.dateMonth}
                 onChange={(value) => handleChange("dateMonth", value)}
               />
