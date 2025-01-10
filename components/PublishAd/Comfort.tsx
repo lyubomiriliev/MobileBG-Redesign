@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Comfort = () => {
   return (
-    <section className="w-full min-h-screen flex flex-col justify-start items-start max-w-screen-xl mx-auto px- pb-8 lg:px-0">
+    <section className="mainSection">
       <div className="w-full flex flex-col justify-center items-start relative">
         <div className="w-full flex flex-col justify-center items-center">
           <h1 className="text-xl lg:text-2xl">

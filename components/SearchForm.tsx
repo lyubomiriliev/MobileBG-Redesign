@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
 import { Dropdown } from "./UI/Dropdown";
+import { brandsModelMapping, categoriesModelMapping } from "@/utils/constants";
 
 const SearchForm = ({
   category,
@@ -17,21 +18,24 @@ const SearchForm = ({
 
   const [formData, setFormData] = useState({
     category: category || "Автомобили и Джипове",
-    brand: "Всички",
-    model: "Всички",
-    region: "Всички",
+    brand: "",
+    model: "",
+    region: "",
     maxPrice: "",
-    year: "Всички",
-    engine: "Всички",
-    gearbox: "Всички",
+    year: "",
+    engine: "",
+    gearbox: "",
     sortBy: "Марка/Модел/Цена",
   });
 
   const handleChange = (field: string, value: string) => {
-    setFormData({ ...formData, [field]: value });
-
-    if (field === "category") {
+    if (field === "brand") {
+      setFormData({ ...formData, brand: value, model: "" });
+    } else if (field === "category") {
       setCategory(value);
+      setFormData({ ...formData, category: value, brand: "", model: "" });
+    } else {
+      setFormData({ ...formData, [field]: value });
     }
   };
 
@@ -46,6 +50,11 @@ const SearchForm = ({
     // Redirect to search results page
     window.location.href = `/search?${query}`;
   };
+
+  const brandOptions = formData.category
+    ? categoriesModelMapping[formData.category] || []
+    : [];
+  const modelOptions = formData.brand ? brandsModelMapping[formData.brand] : [];
 
   return (
     <div className="w-full max-w-3xl mx-auto bg-white p-6 rounded-lg">
@@ -77,13 +86,13 @@ const SearchForm = ({
         {/* Dropdown Inputs */}
         <Dropdown
           label="Марка"
-          options={["Всички", "Toyota", "BMW", "Mercedes"]}
+          options={brandOptions}
           value={formData.brand}
           onChange={(value) => handleChange("brand", value)}
         />
         <Dropdown
           label="Модел"
-          options={["Всички", "Corolla", "X5", "C-Class"]}
+          options={modelOptions}
           value={formData.model}
           onChange={(value) => handleChange("model", value)}
         />
@@ -122,7 +131,7 @@ const SearchForm = ({
             className="w-full border border-gray-300 rounded-md p-2"
             value={formData.maxPrice}
             onChange={(e) => handleChange("maxPrice", e.target.value)}
-            placeholder="Всички"
+            placeholder=""
           />
         </div>
 

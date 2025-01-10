@@ -47,7 +47,7 @@ const ImageVideoUpload = () => {
   };
 
   return (
-    <section className="w-full min-h-screen flex flex-col justify-start items-center max-w-screen-xl mx-auto px- pb-8 lg:px-0">
+    <section className="imagesSection">
       <div className="w-full flex flex-col justify-centeri items-center py-8">
         <h1 className="text-xl lg:text-2xl">Прикачване на снимки</h1>
         <div className="w-2/4 flex">

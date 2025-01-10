@@ -494,6 +494,21 @@ export const brandsModelMapping: Record<string, string[]> = {
   Opel: ["Astra", "Omega", "Insignia", "Corsa", "Meriva", "Zafira"],
 };
 
+export const categoriesModelMapping: Record<string, string[]> = {
+  "Автомобили и Джипове": [
+    "Mercedes",
+    "BMW",
+    "Toyota",
+    "Wolkswagen",
+    "Audi",
+    "Ford",
+    "Opel",
+  ],
+  Бусове: ["Mercedes", "Peugeot", "Iveco", "Fiat", "Citroen"],
+  Мотори: ["Honda", "Yamaha", "Suzuki", "Kawasaki", "BMW", "Ktm"],
+  Камиони: ["Mercedes", "MAN", "Scania", "Volvo", "Daf", "Iveco"],
+};
+
 export const exteriorColors = [
   {
     id: 1,
