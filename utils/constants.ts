@@ -891,3 +891,48 @@ export const months = [
   "Ноември",
   "Декември",
 ];
+
+export const authorizedDealers = [
+  {
+    id: 1,
+    name: "WINCARS ОФИС ЮГ",
+    dateJoined: "09.11.2020",
+    location: "гр. София, бул. България 101",
+    phone: "0877222333",
+  },
+  {
+    id: 2,
+    name: "WINCARS ОФИС ЮГ",
+    dateJoined: "09.11.2020",
+    location: "гр. София, бул. България 101",
+    phone: "0877222333",
+  },
+  {
+    id: 3,
+    name: "WINCARS ОФИС ЮГ",
+    dateJoined: "09.11.2020",
+    location: "гр. София, бул. България 101",
+    phone: "0877222333",
+  },
+  {
+    id: 4,
+    name: "WINCARS ОФИС ЮГ",
+    dateJoined: "09.11.2020",
+    location: "гр. София, бул. България 101",
+    phone: "0877222333",
+  },
+  {
+    id: 5,
+    name: "WINCARS ОФИС ЮГ",
+    dateJoined: "09.11.2020",
+    location: "гр. София, бул. България 101",
+    phone: "0877222333",
+  },
+  {
+    id: 6,
+    name: "WINCARS ОФИС ЮГ",
+    dateJoined: "09.11.2020",
+    location: "гр. София, бул. България 101",
+    phone: "0877222333",
+  },
+];
