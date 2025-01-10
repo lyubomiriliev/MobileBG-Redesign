@@ -1,14 +1,16 @@
-import SearchForm from "@/components/SearchForm";
-import { Dropdown } from "@/components/UI/Dropdown";
+import DetailedSearchForm from "@/components/DetailedSearchForm";
 import React from "react";
 
 const SearchPage = () => {
   return (
-    <section className="basicSection bg-slate-200">
+    <section className="basicSection">
       <div className="w-full flex flex-col items-center">
         <h1 className="text-xl lg:text-3xl text-mobilePrimary">
           Детайлно търсене
         </h1>
+      </div>
+      <div>
+        <DetailedSearchForm />
       </div>
     </section>
   );

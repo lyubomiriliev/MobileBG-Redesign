@@ -693,7 +693,6 @@ export const comfortExtras = [
       "Климатроник",
       "Отопление на волана",
       "Подгряване на предното стъкло",
-      "Подгряване на предното стъкло",
     ],
   },
   {
@@ -787,7 +786,7 @@ export const additionalExtras = [
     ],
   },
   {
-    id: 1,
+    id: 2,
     name: "Специално оборудване",
     extras: [
       "TAXI",
@@ -800,7 +799,7 @@ export const additionalExtras = [
     ],
   },
   {
-    id: 1,
+    id: 3,
     name: "Други",
     extras: ["Термопомпа", "Лебедка", "Брониран", "OFFROAD пакет"],
   },
@@ -934,5 +933,112 @@ export const authorizedDealers = [
     dateJoined: "09.11.2020",
     location: "гр. София, бул. България 101",
     phone: "0877222333",
+  },
+];
+
+// DETAILED SEARCH FORM FIELDS:
+
+type FieldConfig = {
+  type: "dropdown" | "input" | "checkbox";
+  label: string;
+  key: keyof FormData;
+  options?: string[];
+};
+
+type FormData = {
+  category: string;
+  brand: string;
+  model: string;
+  priceMin: string;
+  priceMax: string;
+  region: string;
+  yearMin: string;
+  yearMax: string;
+  hpMin: string;
+  hpMax: string;
+  location: string;
+  coupe: string;
+  euro: string;
+  engine: string;
+  gearbox: string;
+  color: string;
+  maxMileage: string;
+  safety: string[];
+  comfort: string[];
+  exterior: string[];
+  interior: string[];
+  security: string[];
+  others: string[];
+  sort: string;
+  filter: string;
+};
+
+export const formFields: FieldConfig[] = [
+  {
+    type: "dropdown",
+    label: "Категория",
+    key: "category",
+    options: ["Автомобили и Джипове", "Бусове", "Мотори", "Камиони"],
+  },
+  {
+    type: "dropdown",
+    label: "Марка",
+    key: "brand",
+    options: ["Mercedes", "BMW", "Toyota"],
+  },
+  {
+    type: "dropdown",
+    label: "Модел",
+    key: "model",
+    options: ["A-Class", "C-Class", "E-Class"],
+  },
+  {
+    type: "dropdown",
+    label: "Регион",
+    key: "region",
+    options: ["София", "Пловдив", "Варна"],
+  },
+  { type: "input", label: "Цена от", key: "priceMin" },
+  { type: "input", label: "Цена до", key: "priceMax" },
+  { type: "dropdown", label: "Година от", key: "yearMin" },
+  { type: "dropdown", label: "Година до", key: "yearMax" },
+  { type: "input", label: "Мощност (к.с.) от", key: "hpMin" },
+  { type: "input", label: "Мощност (к.с.) до", key: "hpMax" },
+  {
+    type: "dropdown",
+    label: "Евростандарт",
+    key: "euro",
+    options: ["Евро 1", "Евро 2", "Евро 3", "Евро 4", "Евро 5", "Евро 6"],
+  },
+  {
+    type: "dropdown",
+    label: "Двигател",
+    key: "engine",
+    options: ["Бензинов", "Дизелов", "Електрически"],
+  },
+  {
+    type: "dropdown",
+    label: "Скоростна кутия",
+    key: "gearbox",
+    options: ["Ръчна", "Автоматична"],
+  },
+  {
+    type: "dropdown",
+    label: "Цвят",
+    key: "color",
+    options: ["Черен", "Бял", "Червен", "Син"],
+  },
+  { type: "input", label: "Макс пробег (км)", key: "maxMileage" },
+  {
+    type: "dropdown",
+    label: "Сортиране",
+    key: "sort",
+    options: [
+      "Марка/Модел/Цена",
+      "Цена",
+      "Най-нови",
+      "Най-скъпи",
+      "Най-евтини",
+    ],
   },
 ];
