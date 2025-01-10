@@ -6,6 +6,7 @@ import { Dropdown } from "../UI/Dropdown";
 import { Input } from "../UI/Input";
 import { useDispatch } from "react-redux";
 import { updateGeneralData } from "@/app/store/redux";
+import Image from "next/image";
 
 const GeneralData = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,14 @@ const GeneralData = () => {
           </h1>
           <div className="w-full lg:w-2/3 h-[2px] bg-gradient-to-r from-slate-50 via-slate-200 to-slate-50 my-3"></div>
         </div>
-
+        <Image
+          alt="BGImage"
+          width={400}
+          height={200}
+          unoptimized
+          src="/images/mbCar.webp"
+          className="w-full lg:w-2/4 2xl:w-2/3 opacity-75 absolute -right-24 top-24 select-none"
+        />
         <div className="w-full flex flex-col">
           <form className="flex flex-col">
             <div className="flex flex-col w-60">
