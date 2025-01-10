@@ -12,32 +12,15 @@ import { useRouter } from "next/navigation";
 import PublishLayout from "@/components/PublishAd/PublishLayout";
 
 const PublishCarPage = () => {
-  const [currentStep, setCurrentStep] = useState(1);
   const [innerStep, setInnerStep] = useState(1);
 
   const router = useRouter();
-
-  // useEffect(() => {
-  //   if (innerStep <= 6) {
-  //     setCurrentStep(1);
-  //   } else if (innerStep >= 7 && innerStep <= 9) {
-  //     setCurrentStep(2);
-  //   } else if (innerStep >= 10) {
-  //     setCurrentStep(3);
-  //   }
-  // }, [innerStep]);
-
-  const handleChangeStep = (index: number) => {
-    setCurrentStep(index + 1);
-  };
 
   const handleNextInnerStep = () => {
     if (innerStep === 6) {
       router.push("/listings/publish/upload");
     } else if (innerStep < 7) {
       setInnerStep(innerStep + 1);
-    } else if (innerStep === 7) {
-      router.push("/listings/publish/review");
     }
   };
 

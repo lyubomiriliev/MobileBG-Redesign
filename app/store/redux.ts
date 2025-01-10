@@ -1,4 +1,3 @@
-import InteriorExterior from "@/components/PublishAd/InteriorExterior";
 import { createSlice, PayloadAction, configureStore } from "@reduxjs/toolkit";
 
 type GeneralDataState = {
@@ -25,9 +24,14 @@ type InteriorExteriorState = {
   interiorColor: string;
 };
 
+type safetyExtrasState = {
+  ext: string[];
+};
+
 type ListingState = {
   generalData: GeneralDataState;
   interiorExterior: InteriorExteriorState;
+  safetyExtras: safetyExtrasState;
 };
 
 const initialState: ListingState = {
@@ -53,14 +57,20 @@ const initialState: ListingState = {
     interiorMaterial: "",
     interiorColor: "",
   },
+  safetyExtras: {
+    ext: [],
+  },
 };
 
 const listingSlice = createSlice({
   name: "listing",
   initialState,
   reducers: {
-    updateGeneralData: (state, action: PayloadAction<any>) => {
-      return { ...state, ...action.payload };
+    updateGeneralData: (
+      state,
+      action: PayloadAction<Partial<GeneralDataState>>
+    ) => {
+      state.generalData = { ...state.generalData, ...action.payload };
     },
     updateInteriorExterior: (
       state,
@@ -68,10 +78,13 @@ const listingSlice = createSlice({
     ) => {
       state.interiorExterior = { ...state.interiorExterior, ...action.payload };
     },
+    updateSafetyExtras: (state, action: PayloadAction<string[]>) => {
+      state.safetyExtras.ext = action.payload;
+    },
   },
 });
 
-export const { updateGeneralData, updateInteriorExterior } =
+export const { updateGeneralData, updateInteriorExterior, updateSafetyExtras } =
   listingSlice.actions;
 
 const store = configureStore({

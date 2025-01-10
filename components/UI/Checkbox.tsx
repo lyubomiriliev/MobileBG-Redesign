@@ -5,17 +5,19 @@ const Checkbox = ({
   checked,
   onChange,
   name,
+  type = "checkbox",
 }: {
   label: string;
   name?: string;
   checked?: boolean;
   onChange?: () => void;
+  type?: "checkbox" | "radio";
 }) => {
   return (
     <div className="flex items-center gap-2 cursor-pointer">
       <input
         className="w-5 h-5"
-        type="radio"
+        type={type}
         name={name}
         checked={checked}
         onChange={onChange}

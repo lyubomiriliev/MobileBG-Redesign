@@ -1,8 +1,26 @@
+"use client";
+
 import { safetyExtras } from "@/utils/constants";
-import React from "react";
+import React, { useState } from "react";
 import Checkbox from "../UI/Checkbox";
+import { useDispatch } from "react-redux";
+import { AppDispatch, updateSafetyExtras } from "@/app/store/redux";
 
 const Safety = () => {
+  const [extras, setExtras] = useState<string[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleCarExtras = (ext: string) => {
+    let updatedExtras = [...extras];
+    if (updatedExtras.includes(ext)) {
+      updatedExtras = updatedExtras.filter((item) => item !== ext);
+    } else {
+      updatedExtras.push(ext);
+    }
+    setExtras(updatedExtras);
+    dispatch(updateSafetyExtras(updatedExtras));
+  };
+
   return (
     <section className="w-full min-h-screen flex flex-col justify-start items-start max-w-screen-xl mx-auto px- pb-8 lg:px-0">
       <div className="w-full flex flex-col justify-center items-start relative">
@@ -27,7 +45,12 @@ const Safety = () => {
               <div>
                 {item.extras.map((extra, index) => (
                   <div key={`${extra}-${index}`}>
-                    <Checkbox label={extra} />
+                    <Checkbox
+                      type="checkbox"
+                      label={extra}
+                      name="safetyExtras"
+                      onChange={() => handleCarExtras(extra)}
+                    />
                   </div>
                 ))}
               </div>

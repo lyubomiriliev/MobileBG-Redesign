@@ -11,6 +11,7 @@ import Image from "next/image";
 const GeneralData = () => {
   const dispatch = useDispatch();
 
+  const [activePopularBrand, setActivePopularBrand] = useState("");
   const [formData, setFormData] = useState({
     category: "",
     brand: "",
@@ -37,6 +38,14 @@ const GeneralData = () => {
     }
 
     dispatch(updateGeneralData({ [field]: value }));
+  };
+
+  const handlePopularBrandsChange = (field: string, value: string) => {
+    if (field === "brand") {
+      setFormData({ ...formData, brand: value, model: "" });
+    }
+    dispatch(updateGeneralData({ ...formData, brand: value }));
+    setActivePopularBrand(value);
   };
 
   const modelOptions = formData.brand ? brandsModelMapping[formData.brand] : [];
@@ -81,8 +90,15 @@ const GeneralData = () => {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 w-[36%]">
                 {popularBrands.map((brand, index) => (
                   <div
+                    onClick={() =>
+                      handlePopularBrandsChange("brand", brand.title)
+                    }
                     key={index}
-                    className="bg-gray-50 hover:bg-gray-300 duration-300 ease-in-out w-28 h-16 border-slate-300 border-[1px] rounded-xl flex justify-center items-center"
+                    className={`${
+                      brand.title === activePopularBrand
+                        ? "bg-slate-300"
+                        : "bg-slate-50"
+                    } hover:bg-slate-400 duration-300 ease-in-out w-28 h-16 border-slate-300 border-[1px] rounded-xl flex justify-center items-center`}
                   >
                     <Image
                       width={200}

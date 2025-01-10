@@ -435,7 +435,7 @@ export const popularBrands = [
   },
   {
     id: 2,
-    title: "Mercedes-Benz",
+    title: "Mercedes",
     logo: "/mb.webp",
   },
   {
@@ -488,6 +488,10 @@ export const brandsModelMapping: Record<string, string[]> = {
     "X7",
   ],
   Toyota: ["Corolla", "Camry", "RAV4", "Hilux"],
+  Wolkswagen: ["Golf", "Polo", "Touareg", "Arteon"],
+  Audi: ["A3", "A4", "A5", "A6", "A7", "Q3", "Q5", "Q7", "Q8"],
+  Ford: ["Mondeo", "Focus", "Puma", "Kuga", "Fiesta"],
+  Opel: ["Astra", "Omega", "Insignia", "Corsa", "Meriva", "Zafira"],
 };
 
 export const exteriorColors = [
