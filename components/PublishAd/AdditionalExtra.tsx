@@ -1,8 +1,26 @@
+"use client";
+
 import { additionalExtras } from "@/utils/constants";
-import React from "react";
+import React, { useState } from "react";
 import Checkbox from "../UI/Checkbox";
+import { useDispatch } from "react-redux";
+import { AppDispatch, updateAdditionalExtras } from "@/app/store/redux";
 
 const AdditionalExtra = () => {
+  const [extras, setExtras] = useState<string[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleCarExtras = (ext: string) => {
+    let updatedExtras = [...extras];
+    if (updatedExtras.includes(ext)) {
+      updatedExtras = updatedExtras.filter((item) => item !== ext);
+    } else {
+      updatedExtras.push(ext);
+    }
+    setExtras(updatedExtras);
+    dispatch(updateAdditionalExtras(updatedExtras));
+  };
+
   return (
     <section className="mainSection">
       <div className="w-full flex flex-col justify-center items-start">
@@ -22,7 +40,10 @@ const AdditionalExtra = () => {
               <div>
                 {item.extras.map((extra, index) => (
                   <div key={`${extra}-${index}`}>
-                    <Checkbox label={extra} />
+                    <Checkbox
+                      onChange={() => handleCarExtras(extra)}
+                      label={extra}
+                    />
                   </div>
                 ))}
               </div>

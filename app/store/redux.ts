@@ -28,10 +28,30 @@ type safetyExtrasState = {
   ext: string[];
 };
 
+type comfortExtrasState = {
+  safe: string[];
+};
+
+type multimediaExtrasState = {
+  media: string[];
+};
+
+type additionalExtras = {
+  add: string[];
+};
+
+type uploadedImages = {
+  image: string[];
+};
+
 type ListingState = {
   generalData: GeneralDataState;
   interiorExterior: InteriorExteriorState;
   safetyExtras: safetyExtrasState;
+  comfortExtras: comfortExtrasState;
+  multimediaExtras: multimediaExtrasState;
+  additionalExtras: additionalExtras;
+  uploadedImages: uploadedImages;
 };
 
 const initialState: ListingState = {
@@ -60,6 +80,18 @@ const initialState: ListingState = {
   safetyExtras: {
     ext: [],
   },
+  comfortExtras: {
+    safe: [],
+  },
+  multimediaExtras: {
+    media: [],
+  },
+  additionalExtras: {
+    add: [],
+  },
+  uploadedImages: {
+    image: [],
+  },
 };
 
 const listingSlice = createSlice({
@@ -81,11 +113,30 @@ const listingSlice = createSlice({
     updateSafetyExtras: (state, action: PayloadAction<string[]>) => {
       state.safetyExtras.ext = action.payload;
     },
+    updateComfortExtras: (state, action: PayloadAction<string[]>) => {
+      state.comfortExtras.safe = action.payload;
+    },
+    updateMediaExtras: (state, action: PayloadAction<string[]>) => {
+      state.multimediaExtras.media = action.payload;
+    },
+    updateAdditionalExtras: (state, action: PayloadAction<string[]>) => {
+      state.additionalExtras.add = action.payload;
+    },
+    updateUploadedImages: (state, action: PayloadAction<string[]>) => {
+      state.uploadedImages.image = action.payload;
+    },
   },
 });
 
-export const { updateGeneralData, updateInteriorExterior, updateSafetyExtras } =
-  listingSlice.actions;
+export const {
+  updateGeneralData,
+  updateInteriorExterior,
+  updateSafetyExtras,
+  updateComfortExtras,
+  updateMediaExtras,
+  updateAdditionalExtras,
+  updateUploadedImages,
+} = listingSlice.actions;
 
 const store = configureStore({
   reducer: {

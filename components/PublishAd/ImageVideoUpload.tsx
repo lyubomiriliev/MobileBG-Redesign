@@ -2,9 +2,19 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
+import Button from "../Button";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { AppDispatch, updateUploadedImages } from "@/app/store/redux";
 
 const ImageVideoUpload = () => {
+  const handleNext = () => {
+    router.push(`/listings/publish/review`);
+  };
+
+  const router = useRouter();
   const [images, setImages] = useState<(File | null)[]>(Array(15).fill(null));
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleFileUpload = (files: FileList) => {
     const updatedImages = [...images];
@@ -17,6 +27,11 @@ const ImageVideoUpload = () => {
       }
     }
     setImages(updatedImages);
+
+    const imageUrls = updatedImages
+      .filter((file) => file !== null)
+      .map((file) => (file as File).name); // Store only file names or serialized data
+    dispatch(updateUploadedImages(imageUrls)); // Dispatch serialized data
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -101,6 +116,9 @@ const ImageVideoUpload = () => {
             )}
           </div>
         ))}
+      </div>
+      <div onClick={handleNext} className="z-50">
+        <Button text="ПРОДЪЛЖИ" />
       </div>
     </section>
   );

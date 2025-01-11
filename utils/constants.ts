@@ -1042,3 +1042,26 @@ export const formFields: FieldConfig[] = [
     ],
   },
 ];
+
+export const successLinks = [
+  {
+    id: 1,
+    name: "Преглед на обявата",
+    url: `/list/listingId`,
+  },
+  {
+    id: 2,
+    name: "Нова обява",
+    url: "/listings/publish",
+  },
+  {
+    id: 3,
+    name: "Моите обяви",
+    url: "/listings",
+  },
+  {
+    id: 4,
+    name: "Начална страница",
+    url: "/",
+  },
+];

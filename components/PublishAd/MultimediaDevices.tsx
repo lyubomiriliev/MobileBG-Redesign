@@ -1,9 +1,27 @@
+"use client";
+
 import { multimediaExtras } from "@/utils/constants";
-import React from "react";
+import React, { useState } from "react";
 import Checkbox from "../UI/Checkbox";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { AppDispatch, updateMediaExtras } from "@/app/store/redux";
 
 const MultimediaDevices = () => {
+  const [extras, setExtras] = useState<string[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleCarExtras = (ext: string) => {
+    let updatedExtras = [...extras];
+    if (updatedExtras.includes(ext)) {
+      updatedExtras = updatedExtras.filter((item) => item !== ext);
+    } else {
+      updatedExtras.push(ext);
+    }
+    setExtras(updatedExtras);
+    dispatch(updateMediaExtras(updatedExtras));
+  };
+
   return (
     <section className="mainSection">
       <div className="w-full flex flex-col justify-center items-start relative">
@@ -31,7 +49,10 @@ const MultimediaDevices = () => {
               <div>
                 {item.extras.map((extra, index) => (
                   <div key={`${extra}-${index}`}>
-                    <Checkbox label={extra} />
+                    <Checkbox
+                      onChange={() => handleCarExtras(extra)}
+                      label={extra}
+                    />
                   </div>
                 ))}
               </div>
