@@ -26,8 +26,6 @@ const Comfort = () => {
     (state: RootState) => state.listing.comfortExtras.safe
   );
 
-  console.log(comfortData);
-
   return (
     <section className="mainSection">
       <div className="w-full flex flex-col justify-center items-start relative">

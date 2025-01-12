@@ -4,10 +4,12 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Button from "../Button";
 import { useRouter } from "next/navigation";
+import { useListingContext } from "@/context/ListingContext";
 
 const ImageVideoUpload = () => {
   const router = useRouter();
-  const [images, setImages] = useState<(File | null)[]>(Array(15).fill(null));
+
+  const { images, setImages } = useListingContext();
   const [previewUrls, setPreviewUrls] = useState<(string | null)[]>(
     Array(15).fill(null)
   ); // Track preview URLs locally

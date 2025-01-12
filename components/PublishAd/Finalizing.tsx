@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { supabase } from "@/app/lib/supabase";
 import { useRouter } from "next/navigation";
 import ListingReview from "./ListingReview";
@@ -10,12 +10,15 @@ import Button from "../Button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/redux";
 import { useAuth } from "@/context/AuthContext";
+import { useListingContext } from "@/context/ListingContext";
 
 const Finalizing = () => {
   const listingData = useSelector((state: RootState) => state.listing);
-  const listingImages = useSelector(
-    (state: RootState) => state.listing.uploadedImages.images
-  );
+
+  const { images } = useListingContext();
+
+  console.log(images[0]);
+
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
   const { user } = useAuth();
@@ -44,14 +47,17 @@ const Finalizing = () => {
       // Step 2: Upload Images and Associate with Listing
       const uploadedUrls = [];
 
-      for (const image of listingImages) {
+      for (const image of images) {
         if (image) {
           const fileName = `listings/${listingId}/${Date.now()}_${image.name}`;
 
+          console.log(image);
           const { data: uploadData, error: uploadError } =
             await supabase.storage.from("media").upload(fileName, image);
 
           if (uploadError) throw uploadError;
+
+          console.log("Upload Success:", uploadData);
 
           const { data: publicUrlData } = supabase.storage
             .from("media")

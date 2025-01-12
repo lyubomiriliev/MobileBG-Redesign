@@ -2,11 +2,12 @@
 
 import { headerLinks } from "@/utils/constants";
 import Image from "next/image";
-import React, { ReactEventHandler, useState } from "react";
+import React, { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import Button from "./Button";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { useListingContext } from "@/context/ListingContext";
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,9 +18,12 @@ const Header: React.FC = () => {
 
   const { session, signOut } = useAuth();
 
+  const { clearImages } = useListingContext();
+
   const handleSignOut = async () => {
     try {
       await signOut();
+      clearImages();
       alert("Logged out successfully");
     } catch (error) {
       console.error(error);

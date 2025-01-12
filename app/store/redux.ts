@@ -40,15 +40,6 @@ type additionalExtras = {
   add: string[];
 };
 
-type UploadedImage = {
-  name: string;
-  type: string;
-};
-
-type UploadedImagesState = {
-  images: File[]; // Array of uploaded image metadata
-};
-
 type ListingState = {
   generalData: GeneralDataState;
   interiorExterior: InteriorExteriorState;
@@ -56,7 +47,6 @@ type ListingState = {
   comfortExtras: comfortExtrasState;
   multimediaExtras: multimediaExtrasState;
   additionalExtras: additionalExtras;
-  uploadedImages: UploadedImagesState;
 };
 
 const initialState: ListingState = {
@@ -94,9 +84,6 @@ const initialState: ListingState = {
   additionalExtras: {
     add: [],
   },
-  uploadedImages: {
-    images: [], // Start with an empty array for uploaded images
-  },
 };
 
 const listingSlice = createSlice({
@@ -127,9 +114,6 @@ const listingSlice = createSlice({
     updateAdditionalExtras: (state, action: PayloadAction<string[]>) => {
       state.additionalExtras.add = action.payload;
     },
-    updateUploadedImages: (state, action: PayloadAction<File[]>) => {
-      state.uploadedImages.images = action.payload; // Update images array
-    },
   },
 });
 
@@ -140,7 +124,6 @@ export const {
   updateComfortExtras,
   updateMediaExtras,
   updateAdditionalExtras,
-  updateUploadedImages,
 } = listingSlice.actions;
 
 const store = configureStore({
