@@ -1,31 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { ReactEventHandler, useState } from "react";
 import { supabase } from "@/app/lib/supabase";
 import { Input } from "@/components/UI/Input";
 import Button from "@/components/Button";
 import Link from "next/link";
 import AuthLayout from "@/components/AuthLayout";
+import { useAuth } from "@/context/AuthContext";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSignIn = async () => {
-    console.log("Starting sign-in process for email:", email);
+  const { session, signInUser } = useAuth();
+
+  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
 
     try {
-      const { data } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      console.log(data);
-      alert("Sign-in successful!");
-      window.location.href = "/"; // Redirect to home or dashboard
-    } catch (err) {
-      console.error("Unexpected error during sign-in:", err);
-      alert("An unexpected error occurred. Please try again later.");
+      const result = await signInUser(email, password);
+      if (result.success) {
+        window.location.href = "/";
+      }
+    } catch (error) {
+      setError("Error logging in");
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -36,7 +40,10 @@ const SignIn = () => {
         subTitle="Влезте във вашия акаунт"
         imageSrc="/perk1.svg"
       >
-        <form className="w-1/3 flex flex-col items-start justify-center">
+        <form
+          onSubmit={handleSignIn}
+          className="w-1/3 flex flex-col items-start justify-center"
+        >
           <Input
             label="E-mail"
             value={email}
@@ -56,7 +63,7 @@ const SignIn = () => {
             </Link>
           </div>
           <div className="w-full flex justify-start items-center py-4">
-            <Button onClick={handleSignIn} text="Влизане" />
+            <Button type="submit" text="Влизане" />
           </div>
           <div className="flex items-center gap-1">
             <p>Все още нямате акаунт?</p>

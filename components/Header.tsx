@@ -2,16 +2,28 @@
 
 import { headerLinks } from "@/utils/constants";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { ReactEventHandler, useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import Button from "./Button";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const { session, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      alert("Logged out successfully");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -39,6 +51,13 @@ const Header: React.FC = () => {
                 <Button icon="/addIcon.svg" text="ДОБАВИ ОБЯВА" />
               </div>
             </Link>
+            <Link href="/register">
+              <Button text="Регистрация" variant="outline" />
+            </Link>
+            <p>Добре дошъл, {session?.user.email}</p>
+            <p className="cursor-pointer font-bold" onClick={handleSignOut}>
+              Изход
+            </p>
           </div>
         </div>
       </nav>
