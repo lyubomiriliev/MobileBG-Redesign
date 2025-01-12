@@ -2,10 +2,11 @@
 
 import { RootState } from "@/app/store/redux";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const ListingReview = () => {
+  const [firstImage, setFirstImage] = useState<string | null>(null);
   const safetyExtras = useSelector(
     (state: RootState) => state.listing.safetyExtras.ext
   );
@@ -13,16 +14,31 @@ const ListingReview = () => {
     (state: RootState) => state.listing.generalData
   );
 
+  useEffect(() => {
+    // Get and parse the previewUrls array from localStorage
+    const storedUrls = localStorage.getItem("previewUrls");
+    if (storedUrls) {
+      const urls = JSON.parse(storedUrls);
+      if (Array.isArray(urls) && urls[0]) {
+        setFirstImage(urls[0]); // Set the first image URL
+      }
+    }
+  }, []);
+
   return (
     <div className="w-full flex justify-start items-start bg-slate-100 rounded-lg p-4">
       <div>
-        <Image
-          alt="CarImg"
-          width={400}
-          height={400}
-          src="/car1.png"
-          className="w-60 h-60 object-cover rounded-lg"
-        />
+        {firstImage ? (
+          <Image
+            alt="CarImg"
+            width={400}
+            height={400}
+            src={firstImage}
+            className="w-60 h-60 object-cover rounded-lg"
+          />
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
       <div>
         <div className="flex flex-col items-start px-4">

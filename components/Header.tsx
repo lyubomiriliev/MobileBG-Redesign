@@ -31,7 +31,7 @@ const Header: React.FC = () => {
       <nav className="flex justify-center items-center">
         <div className="flex flex-col h-20 items-center justify-center w-full top-0 fixed px-4">
           <div className="w-full max-w-screen-lg mx-auto justify-center items-center flex">
-            <ul className="hidden w-full justify-around lg:flex">
+            <ul className="hidden w-full justify-around lg:flex items-center">
               {headerLinks.map((link, index) => (
                 <Link key={index} href={link.url}>
                   <li className="text-lg cursor-pointer">{link.name}</li>
@@ -51,13 +51,32 @@ const Header: React.FC = () => {
                 <Button icon="/addIcon.svg" text="ДОБАВИ ОБЯВА" />
               </div>
             </Link>
-            <Link href="/register">
-              <Button text="Регистрация" variant="outline" />
-            </Link>
-            <p>Добре дошъл, {session?.user.email}</p>
-            <p className="cursor-pointer font-bold" onClick={handleSignOut}>
-              Изход
-            </p>
+            {session?.user ? (
+              <div className="px-4 flex items-center gap-4">
+                <p>
+                  Добре дошъл,{" "}
+                  <span className="text-mobilePrimary font-bold">
+                    {session?.user.email}
+                  </span>
+                </p>
+                <p
+                  onClick={handleSignOut}
+                  className="font-bold text-mobileDarkGray cursor-pointer"
+                >
+                  Изход
+                </p>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 px-4">
+                <Link href="/login">
+                  <p className="font-bold cursor-pointer">Вход</p>
+                </Link>
+                <div className="w-[1px] h-6 bg-mobileDarkGray"></div>
+                <Link href="/register">
+                  <p className="font-bold cursor-pointer">Регистрация</p>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </nav>

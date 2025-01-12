@@ -1,36 +1,27 @@
 "use client";
 
-import { listings } from "@/utils/constants";
-import React, { useState } from "react";
-import ListingCard from "../UI/ListingCard";
-import ListingReview from "./ListingReview";
+import React, { useEffect, useState } from "react";
+import { supabase } from "@/app/lib/supabase";
 import { useRouter } from "next/navigation";
+import ListingReview from "./ListingReview";
+import { listings } from "@/utils/constants";
+import ListingCard from "../UI/ListingCard";
 import Button from "../Button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/redux";
-import { supabase } from "@/app/lib/supabase";
+import { useAuth } from "@/context/AuthContext";
 
 const Finalizing = () => {
   const listingData = useSelector((state: RootState) => state.listing);
-  const images = useSelector(
-    (state: RootState) => state.listing.uploadedImages.image
+  const listingImages = useSelector(
+    (state: RootState) => state.listing.uploadedImages.images
   );
-
-  console.log(images);
-
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
+  const { user } = useAuth();
 
-  const prices = ["(0.00лв)", "(4.99лв)", "(9.99лв)"];
-
-  const handleNext = async () => {
+  const handlePublishListing = async () => {
     setUploading(true);
-
-    if (!images.length) {
-      alert("Please upload at least one image.");
-      setUploading(false);
-      return;
-    }
 
     try {
       // Step 1: Create Listing
@@ -39,7 +30,7 @@ const Finalizing = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(listingData),
+        body: JSON.stringify({ ...listingData, userId: user?.id }),
       });
 
       const result = await response.json();
@@ -53,13 +44,12 @@ const Finalizing = () => {
       // Step 2: Upload Images and Associate with Listing
       const uploadedUrls = [];
 
-      for (const image of images) {
+      for (const image of listingImages) {
         if (image) {
-          console.log("Uploading file:", image);
+          const fileName = `listings/${listingId}/${Date.now()}_${image.name}`;
+
           const { data: uploadData, error: uploadError } =
-            await supabase.storage
-              .from("media")
-              .upload(`listings/${listingId}/${Date.now()}`, image);
+            await supabase.storage.from("media").upload(fileName, image);
 
           if (uploadError) throw uploadError;
 
@@ -67,13 +57,11 @@ const Finalizing = () => {
             .from("media")
             .getPublicUrl(uploadData.path);
 
-          const publicUrl = publicUrlData.publicUrl;
-
-          if (!publicUrl) {
+          if (!publicUrlData.publicUrl) {
             throw new Error("Failed to generate public URL for image.");
           }
 
-          uploadedUrls.push(publicUrl);
+          uploadedUrls.push(publicUrlData.publicUrl);
         }
       }
 
@@ -87,6 +75,8 @@ const Finalizing = () => {
       );
 
       if (dbError) throw dbError;
+
+      localStorage.removeItem("previewUrls");
 
       alert("Listing created and images uploaded successfully!");
     } catch (error: any) {
@@ -123,8 +113,8 @@ const Finalizing = () => {
           ))}
         </div>
       </div>
-      <div onClick={handleNext} className="z-50">
-        <Button text={`ПУБЛИКУВАЙ ${prices[1]}`} />
+      <div onClick={handlePublishListing} className="z-50">
+        <Button text={`ПУБЛИКУВАЙ`} />
       </div>
     </section>
   );

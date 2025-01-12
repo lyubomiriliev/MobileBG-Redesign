@@ -1,8 +1,9 @@
 export const headerLinks = [
   {
     id: 1,
-    name: "Начало",
+    name: "",
     url: "/",
+    src: "/mobileLogo.svg",
   },
   {
     id: 2,
@@ -16,17 +17,11 @@ export const headerLinks = [
   },
   {
     id: 4,
-    name: "",
-    url: "/",
-    src: "/mobileLogo.svg",
-  },
-  {
-    id: 5,
     name: "Дилъри",
     url: "/dealers",
   },
   {
-    id: 6,
+    id: 5,
     name: "Моите Обяви",
     url: "/listings",
   },

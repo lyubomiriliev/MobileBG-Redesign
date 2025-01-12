@@ -14,6 +14,7 @@ export default async function createListing(
 
   try {
     const {
+      userId,
       generalData,
       interiorExterior,
       multimediaExtras,
@@ -25,6 +26,7 @@ export default async function createListing(
     const { data, error } = await supabase
       .from("listings")
       .insert({
+        userId,
         category: generalData.category,
         brand: generalData.brand,
         model: generalData.model,

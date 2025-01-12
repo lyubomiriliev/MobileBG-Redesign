@@ -1,37 +1,59 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Button";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { AppDispatch, updateUploadedImages } from "@/app/store/redux";
 
 const ImageVideoUpload = () => {
+  const router = useRouter();
+  const [images, setImages] = useState<(File | null)[]>(Array(15).fill(null));
+  const [previewUrls, setPreviewUrls] = useState<(string | null)[]>(
+    Array(15).fill(null)
+  ); // Track preview URLs locally
+
+  useEffect(() => {
+    // Load from localStorage on mount
+    const savedPreviews = JSON.parse(
+      localStorage.getItem("previewUrls") || "[]"
+    );
+    if (savedPreviews.length) {
+      setPreviewUrls(savedPreviews);
+    }
+  }, []);
+
   const handleNext = () => {
+    const uploadedImagesCount = images.filter((image) => image !== null);
+
+    if (uploadedImagesCount.length < 3) {
+      alert("Трябва да качите минимум 3 снимки");
+      return;
+    }
+
     router.push(`/listings/publish/review`);
   };
 
-  const router = useRouter();
-  const [images, setImages] = useState<(File | null)[]>(Array(15).fill(null));
-  const dispatch = useDispatch<AppDispatch>();
+  const saveToLocalStorage = (urls: (string | null)[]) => {
+    localStorage.setItem("previewUrls", JSON.stringify(urls));
+  };
 
   const handleFileUpload = (files: FileList) => {
     const updatedImages = [...images];
+    const updatedPreviews = [...previewUrls];
     let fileIndex = 0;
 
     for (let i = 0; i < updatedImages.length; i++) {
       if (!updatedImages[i] && fileIndex < files.length) {
-        updatedImages[i] = files[fileIndex];
+        const file = files[fileIndex];
+        updatedImages[i] = file;
+        updatedPreviews[i] = URL.createObjectURL(file); // Generate preview URL
         fileIndex++;
       }
     }
-    setImages(updatedImages);
 
-    const imageUrls = updatedImages
-      .filter((file) => file !== null)
-      .map((file) => (file as File).name); // Store only file names or serialized data
-    dispatch(updateUploadedImages(imageUrls)); // Dispatch serialized data
+    setImages(updatedImages);
+    setPreviewUrls(updatedPreviews);
+    saveToLocalStorage(updatedPreviews);
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -57,8 +79,22 @@ const ImageVideoUpload = () => {
 
   const deleteImage = (index: number) => {
     const updatedImages = [...images];
+    const updatedPreviews = [...previewUrls];
+
     updatedImages[index] = null;
+    updatedPreviews[index] = null;
+
     setImages(updatedImages);
+    setPreviewUrls(updatedPreviews);
+    localStorage.setItem("previewUrls", JSON.stringify(updatedPreviews));
+
+    // Update Redux after removing the image
+    const serializedImages = updatedImages
+      .filter((file) => file !== null)
+      .map((file, i) => ({
+        name: (file as File).name,
+        type: (file as File).type,
+      }));
   };
 
   return (
@@ -80,12 +116,16 @@ const ImageVideoUpload = () => {
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, index)}
           >
-            {image ? (
+            {image || previewUrls[index] ? (
               <div className="w-full h-full object-cover">
                 <Image
                   width={10}
                   height={10}
-                  src={URL.createObjectURL(image)}
+                  src={
+                    image
+                      ? URL.createObjectURL(image)
+                      : previewUrls[index] || ""
+                  }
                   alt={`Uploaded ${index}`}
                   className="w-full h-full object-cover rounded-md"
                 />
