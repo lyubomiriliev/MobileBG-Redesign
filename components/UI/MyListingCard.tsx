@@ -23,6 +23,8 @@ type Listing = {
   multimedia_extras: [];
   safety_extras: [];
   comfort_extras: [];
+  additionalExtras: [];
+  description: string;
   created_at: Date;
   updated_at: Date;
   userId: string;
@@ -37,7 +39,7 @@ const MyListingCard = ({ listing }: { listing: Listing }) => {
 
   return (
     <section className="max-w-5xl w-full flex items-start bg-gradient-to-r from-slate-100 via-white to-slate-100 border-slate-200 shadow-md border-[1px] p-4 rounded-xl relative">
-      <div className="w-2/4 flex flex-col">
+      <div className="w-2/5 flex flex-col">
         <Image
           width={100}
           height={100}
@@ -60,16 +62,31 @@ const MyListingCard = ({ listing }: { listing: Listing }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-start items-start gap-4">
-        <h1 className="text-mobilePrimary font-bold">Цена: 58 000лв</h1>
+      <div className="w-full flex flex-col justify-start items-start gap-1">
+        <h1 className="text-mobilePrimary text-xl 2xl:text-2xl uppercase font-bold">
+          Цена: {listing.price} {listing.currency}
+        </h1>
         <div className="flex flex-col">
-          <h1>BMW X3 30d xDrive M-Sport Facelift (нова обява)</h1>
-          <h1>обл. София, гр. София</h1>
+          <ul className="flex items-center gap-1">
+            <li>{listing.brand}</li>
+            <li>{listing.model}</li>
+            <li>{listing.modification}</li>
+            <li>{listing.tuning}</li>
+          </ul>
+          <h1>{listing.location}</h1>
         </div>
-        <div className="w-2/3 text-mobileDarkGray text-sm">
-          дата на произв. - май 2012 г., пробег - 153000 км, цвят - Тъмно сив, А
-          класа 180 бензин автоматик в много добро състоян... Особености - 4(5)
-          Врати, Bluetooth \ handsfree система, St...
+        <div className="w-2/3 flex flex-col text-mobileDarkGray text-sm">
+          <div className="w-full flex items-center gap-1">
+            <h1>
+              дата на произв. - {listing.date_year}г., пробег -{" "}
+              {listing.mileage} км,
+            </h1>
+          </div>
+          <div className="w-full flex items-center gap-1">
+            цвят - {listing.exterior_color}, {listing.description.slice(0, 120)}
+            ...
+            <h1></h1>
+          </div>
         </div>
         <p>Редактирай обявата</p>
       </div>

@@ -1,14 +1,31 @@
 "use client";
 
 import { additionalExtras } from "@/utils/constants";
-import React, { useState } from "react";
+import React, { ReactEventHandler, useState } from "react";
 import Checkbox from "../UI/Checkbox";
-import { useDispatch } from "react-redux";
-import { AppDispatch, updateAdditionalExtras } from "@/app/store/redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  AppDispatch,
+  RootState,
+  updateAdditionalExtras,
+  updateDescription,
+} from "@/app/store/redux";
 
 const AdditionalExtra = () => {
   const [extras, setExtras] = useState<string[]>([]);
+  const [description, setDescription] = useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
+
+  const listingData = useSelector((state: RootState) => state.listing);
+  console.log("Current Redux State:", listingData);
+
+  const handleDescriptionChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const newDescription = event.target.value;
+    setDescription(newDescription);
+    dispatch(updateDescription(newDescription));
+  };
 
   const handleCarExtras = (ext: string) => {
     let updatedExtras = [...extras];
@@ -53,6 +70,7 @@ const AdditionalExtra = () => {
         <div className="w-full flex flex-col justify-center items-start py-8">
           <h1 className="text-xl lg:text-2xl">Допълнителна информация</h1>
           <textarea
+            onChange={handleDescriptionChange}
             className="border-[1px] border-gray-300 resize-none rounded-lg w-full h-80 p-2"
             placeholder="Попълнете информацията за автомобила ви. Максимален размер до 1000 символа."
             name="description"

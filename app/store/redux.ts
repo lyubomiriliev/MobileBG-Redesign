@@ -40,6 +40,10 @@ type additionalExtras = {
   add: string[];
 };
 
+type description = {
+  desc: string;
+};
+
 type ListingState = {
   generalData: GeneralDataState;
   interiorExterior: InteriorExteriorState;
@@ -47,6 +51,7 @@ type ListingState = {
   comfortExtras: comfortExtrasState;
   multimediaExtras: multimediaExtrasState;
   additionalExtras: additionalExtras;
+  description: description;
 };
 
 const initialState: ListingState = {
@@ -84,6 +89,9 @@ const initialState: ListingState = {
   additionalExtras: {
     add: [],
   },
+  description: {
+    desc: "",
+  },
 };
 
 const listingSlice = createSlice({
@@ -114,6 +122,9 @@ const listingSlice = createSlice({
     updateAdditionalExtras: (state, action: PayloadAction<string[]>) => {
       state.additionalExtras.add = action.payload;
     },
+    updateDescription: (state, action: PayloadAction<string>) => {
+      state.description.desc = action.payload;
+    },
   },
 });
 
@@ -124,6 +135,7 @@ export const {
   updateComfortExtras,
   updateMediaExtras,
   updateAdditionalExtras,
+  updateDescription,
 } = listingSlice.actions;
 
 const store = configureStore({

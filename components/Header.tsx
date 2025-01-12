@@ -25,6 +25,7 @@ const Header: React.FC = () => {
       await signOut();
       clearImages();
       localStorage.removeItem("previewUrls");
+      window.location.href = "/";
       alert("Logged out successfully");
     } catch (error) {
       console.error(error);

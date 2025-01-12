@@ -25,6 +25,8 @@ type Listing = {
   multimedia_extras: [];
   safety_extras: [];
   comfort_extras: [];
+  additionalExtras: [];
+  description: string;
   created_at: Date;
   updated_at: Date;
   userId: string;

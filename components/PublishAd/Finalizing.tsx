@@ -14,11 +14,10 @@ import { useListingContext } from "@/context/ListingContext";
 
 const Finalizing = () => {
   const listingData = useSelector((state: RootState) => state.listing);
-
+  const listingDesc = useSelector(
+    (state: RootState) => state.listing.description.desc
+  );
   const { images } = useListingContext();
-
-  console.log(images);
-
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
   const { user } = useAuth();
@@ -59,6 +58,7 @@ const Finalizing = () => {
         },
         body: JSON.stringify({
           ...listingData,
+          description: listingDesc,
           userId: user?.id,
           imageUrls: uploadedUrls, // Pass the URLs of the uploaded images
         }),

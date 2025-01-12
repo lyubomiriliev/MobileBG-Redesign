@@ -21,6 +21,7 @@ export default async function createListing(
       safetyExtras,
       comfortExtras,
       additionalExtras,
+      description,
       imageUrls,
     } = req.body;
 
@@ -46,10 +47,11 @@ export default async function createListing(
         exterior_color: interiorExterior.exteriorColor,
         interior_material: interiorExterior.interiorMaterial,
         interior_color: interiorExterior.interiorColor,
-        multimedia_extras: multimediaExtras,
         safety_extras: safetyExtras,
         comfort_extras: comfortExtras,
+        multimedia_extras: multimediaExtras,
         additional_extras: additionalExtras,
+        description,
         imageUrls,
       })
       .select("*")

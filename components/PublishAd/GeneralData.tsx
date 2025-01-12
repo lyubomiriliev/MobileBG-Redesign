@@ -28,10 +28,10 @@ const GeneralData = () => {
     dateYear: "",
     dateMonth: "",
     coupe: "",
-    vin: "",
     mileage: "",
     price: "",
     currency: "",
+    vin: "",
     location: "",
   });
 

@@ -21,16 +21,20 @@ const InteriorExterior = () => {
   const listingData = useSelector((state: RootState) => state.listing);
   console.log("Current Redux State:", listingData);
 
-  const [exteriorColor, setExteriorColor] = useState("whiteCar");
-  const [interiorColor, setInteriorColor] = useState("black");
+  const [exteriorColor, setExteriorColor] = useState("");
+  const [exteriorColorCar, setExteriorColorCar] = useState("whiteCar");
+  const [interiorColor, setInteriorColor] = useState("");
+  const [interiorColorSeat, setInteriorColorSeat] = useState("black");
   const [selectedMaterial, setSelectedMaterial] = useState("");
 
-  const handleColorUpdate = (field: string, value: string) => {
+  const handleColorUpdate = (field: string, value: string, title: string) => {
     if (field === "exteriorColor") {
       setExteriorColor(value);
+      setExteriorColorCar(title);
       dispatch(updateInteriorExterior({ exteriorColor: value }));
     } else if (field === "interiorColor") {
       setInteriorColor(value);
+      setInteriorColorSeat(title);
       dispatch(updateInteriorExterior({ interiorColor: value }));
     }
   };
@@ -55,7 +59,7 @@ const InteriorExterior = () => {
         width={400}
         height={400}
         unoptimized
-        src={`/exterior/${exteriorColor}.png`}
+        src={`/exterior/${exteriorColorCar}.png`}
         alt="ExteriorColor"
         className="w-2/3 object-cover absolute -right-24 top-24"
       />
@@ -63,7 +67,7 @@ const InteriorExterior = () => {
         width={400}
         height={400}
         unoptimized
-        src={`/interior/${interiorColor}.png`}
+        src={`/interior/${interiorColorSeat}.png`}
         alt="InteriorColor"
         className="w-2/4 object-cover absolute -right-0 bottom-0"
       />
@@ -74,7 +78,9 @@ const InteriorExterior = () => {
             <div
               key={index}
               className="flex items-center gap-2 cursor-pointer"
-              onClick={() => handleColorUpdate("exteriorColor", color.title)}
+              onClick={() =>
+                handleColorUpdate("exteriorColor", color.name, color.title)
+              }
             >
               <div
                 className={`w-10 h-10 border-[1px] ${
@@ -108,7 +114,9 @@ const InteriorExterior = () => {
             <div
               key={index}
               className="flex items-center gap-2 cursor-pointer"
-              onClick={() => handleColorUpdate("interiorColor", color.title)}
+              onClick={() =>
+                handleColorUpdate("interiorColor", color.name, color.title)
+              }
             >
               <div
                 className={`w-10 h-10 border-[1px] ${
