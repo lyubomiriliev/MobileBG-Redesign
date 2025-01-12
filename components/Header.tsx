@@ -24,6 +24,7 @@ const Header: React.FC = () => {
     try {
       await signOut();
       clearImages();
+      localStorage.removeItem("previewUrls");
       alert("Logged out successfully");
     } catch (error) {
       console.error(error);

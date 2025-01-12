@@ -1,7 +1,40 @@
 import Image from "next/image";
 import React from "react";
 
-const MyListingCard = () => {
+type Listing = {
+  id: string | number;
+  category: string;
+  brand: string;
+  model: string;
+  modification: string;
+  tuning: string;
+  engine: string;
+  gearbox: string;
+  vin: string;
+  price: number;
+  currency: string;
+  mileage: number;
+  location: string;
+  date_year: number;
+  date_month: string;
+  exterior_color: string;
+  interior_material: string;
+  interior_color: string;
+  multimedia_extras: [];
+  safety_extras: [];
+  comfort_extras: [];
+  created_at: Date;
+  updated_at: Date;
+  userId: string;
+  imageUrls: string;
+};
+
+const MyListingCard = ({ listing }: { listing: Listing }) => {
+  console.log("Listing object:", listing);
+
+  const parsedImageUrls = JSON.parse(listing.imageUrls || "[]");
+  const previewImage = parsedImageUrls[0] || "/perk1.svg";
+
   return (
     <section className="max-w-5xl w-full flex items-start bg-gradient-to-r from-slate-100 via-white to-slate-100 border-slate-200 shadow-md border-[1px] p-4 rounded-xl relative">
       <div className="w-2/4 flex flex-col">
@@ -9,8 +42,8 @@ const MyListingCard = () => {
           width={100}
           height={100}
           className="w-56 h-56 object-cover rounded-lg"
-          alt="CarImg"
-          src="/car1.png"
+          alt={listing.brand}
+          src={previewImage}
         />
         <div className="flex flex-col gap-1 mt-4">
           <div className="flex flex-col">
@@ -40,9 +73,9 @@ const MyListingCard = () => {
         </div>
         <p>Редактирай обявата</p>
       </div>
-      <div className="absolute bottom-2 right-2">
+      {/* <div className="absolute bottom-2 right-2">
         <p>Обявата ще е активна до 30.01.2025 г. 03:01 ч.</p>
-      </div>
+      </div> */}
       <div className="flex flex-col absolute top-2 right-2 text-right">
         <ul className="flex flex-col">
           <li>Разгледай обявата</li>

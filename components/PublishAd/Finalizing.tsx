@@ -17,7 +17,7 @@ const Finalizing = () => {
 
   const { images } = useListingContext();
 
-  console.log(images[0]);
+  console.log(images);
 
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
@@ -27,37 +27,17 @@ const Finalizing = () => {
     setUploading(true);
 
     try {
-      // Step 1: Create Listing
-      const response = await fetch("/api/listings/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...listingData, userId: user?.id }),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to create listing.");
-      }
-
-      const listingId = result.id;
-
-      // Step 2: Upload Images and Associate with Listing
       const uploadedUrls = [];
 
+      // Step 1: Upload Images to Supabase Storage and Collect URLs
       for (const image of images) {
         if (image) {
-          const fileName = `listings/${listingId}/${Date.now()}_${image.name}`;
+          const fileName = `listings/${user?.id}/${Date.now()}_${image.name}`;
 
-          console.log(image);
           const { data: uploadData, error: uploadError } =
             await supabase.storage.from("media").upload(fileName, image);
 
           if (uploadError) throw uploadError;
-
-          console.log("Upload Success:", uploadData);
 
           const { data: publicUrlData } = supabase.storage
             .from("media")
@@ -71,7 +51,28 @@ const Finalizing = () => {
         }
       }
 
+      // Step 2: Create Listing with Image URLs
+      const response = await fetch("/api/listings/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...listingData,
+          userId: user?.id,
+          imageUrls: uploadedUrls, // Pass the URLs of the uploaded images
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to create listing.");
+      }
+
       // Step 3: Save Media URLs in Database
+      const listingId = result.id;
+
       const { error: dbError } = await supabase.from("media").insert(
         uploadedUrls.map((url) => ({
           listing_id: listingId,

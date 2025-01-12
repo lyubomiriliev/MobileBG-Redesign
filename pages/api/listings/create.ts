@@ -21,6 +21,7 @@ export default async function createListing(
       safetyExtras,
       comfortExtras,
       additionalExtras,
+      imageUrls,
     } = req.body;
 
     const { data, error } = await supabase
@@ -49,6 +50,7 @@ export default async function createListing(
         safety_extras: safetyExtras,
         comfort_extras: comfortExtras,
         additional_extras: additionalExtras,
+        imageUrls,
       })
       .select("*")
       .single();
