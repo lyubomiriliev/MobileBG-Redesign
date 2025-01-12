@@ -7,10 +7,10 @@ export const Input = ({
   label: string;
   value: string;
   onChange: (value: string) => void;
-  type?: "text" | "radio" | "checkbox";
+  type?: "text" | "radio" | "checkbox" | "password";
 }) => {
   return (
-    <div>
+    <div className="w-full">
       <label className="block font-medium text-gray-700 mb-1">{label}</label>
       <input
         type={type}
