@@ -628,6 +628,30 @@ export const interiorMaterial = [
   "Друг",
 ];
 
+export const interiorMaterials = [
+  {
+    id: 1,
+    name: "Материал",
+    materials: [
+      "Алкантара",
+      "Текстил",
+      "Изкуствена Кожа",
+      "Велур",
+      "Полу-кожа",
+      "Естествена кожа",
+      "Друг",
+    ],
+  },
+];
+
+export const interiorColorsArr = [
+  {
+    id: 1,
+    name: "Цвят на интериор",
+    colors: ["Черен", "Бежов", "Сив", "Червен", "Син", "Друг"],
+  },
+];
+
 export const safetyExtras = [
   {
     id: 1,
@@ -1060,3 +1084,37 @@ export const successLinks = [
     url: "/",
   },
 ];
+
+export type Listing = {
+  id: string | number;
+  category: string;
+  brand: string;
+  model: string;
+  modification: string;
+  tuning: string;
+  engine: string;
+  gearbox: string;
+  vin: string;
+  price: number;
+  currency: string;
+  mileage: number;
+  location: string;
+  date_year: number;
+  date_month: string;
+  litres: string;
+  euro: string;
+  horsePower: string;
+  phoneNumber: string;
+  exterior_color: string;
+  interior_material: string;
+  interior_color: string;
+  multimedia_extras: [];
+  safety_extras: [];
+  comfort_extras: [];
+  additionalExtras: [];
+  description: string;
+  created_at: Date;
+  updated_at: Date;
+  userId: string;
+  imageUrls: string;
+};

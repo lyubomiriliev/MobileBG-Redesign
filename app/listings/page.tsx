@@ -1,38 +1,9 @@
 "use client";
+
 import MyListingCard from "@/components/UI/MyListingCard";
 import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
+import { Listing } from "@/utils/constants";
 import React, { useEffect, useState } from "react";
-
-type Listing = {
-  id: string | number;
-  category: string;
-  brand: string;
-  model: string;
-  modification: string;
-  tuning: string;
-  engine: string;
-  gearbox: string;
-  vin: string;
-  price: number;
-  currency: string;
-  mileage: number;
-  location: string;
-  date_year: number;
-  date_month: string;
-  exterior_color: string;
-  interior_material: string;
-  interior_color: string;
-  multimedia_extras: [];
-  safety_extras: [];
-  comfort_extras: [];
-  additionalExtras: [];
-  description: string;
-  created_at: Date;
-  updated_at: Date;
-  userId: string;
-  imageUrls: string;
-};
 
 const MyListingsPage = () => {
   const [listings, setListings] = useState<Listing[]>([]);

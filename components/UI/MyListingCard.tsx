@@ -16,6 +16,10 @@ type Listing = {
   currency: string;
   mileage: number;
   location: string;
+  litres: string;
+  euro: string;
+  horsePower: string;
+  phoneNumber: string;
   date_year: number;
   date_month: string;
   exterior_color: string;
@@ -38,7 +42,7 @@ const MyListingCard = ({ listing }: { listing: Listing }) => {
 
   return (
     <Link href={`/listing/${listing.id}`} passHref>
-      <section className="max-w-5xl w-full flex items-start bg-gradient-to-r from-slate-100 via-white to-slate-100 border-slate-200 shadow-md border-[1px] p-4 rounded-xl relative">
+      <section className="max-w-5xl w-full flex justify-center items-start bg-gradient-to-r from-slate-100 via-white to-slate-100 border-slate-200 shadow-md border-[1px] p-4 rounded-xl relative">
         <div className="w-2/5 flex flex-col">
           <Image
             width={100}

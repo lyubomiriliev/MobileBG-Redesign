@@ -8,9 +8,13 @@ import {
   additionalExtras,
   comfortExtras,
   formFields,
+  interiorColors,
+  interiorColorsArr,
+  interiorMaterials,
   multimediaExtras,
   safetyExtras,
 } from "@/utils/constants";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   category: string;
@@ -23,14 +27,17 @@ type FormData = {
   yearMax: string;
   hpMin: string;
   hpMax: string;
-  location: string;
   coupe: string;
   euro: string;
   engine: string;
   gearbox: string;
   color: string;
   maxMileage: string;
+  materials: string[];
+  colors: string[];
+  sort: string;
   safety: string[];
+  location: string;
   comfort: string[];
   multimedia: string[];
   additional: string[];
@@ -38,7 +45,6 @@ type FormData = {
   interior: string[];
   security: string[];
   others: string[];
-  sort: string;
   filter: string;
 };
 
@@ -47,20 +53,23 @@ const DetailedSearchForm = () => {
     category: "Автомобили и Джипове",
     brand: "",
     model: "",
+    region: "",
     priceMin: "",
     priceMax: "",
-    region: "",
     yearMin: "",
     yearMax: "",
     hpMin: "",
     hpMax: "",
-    location: "",
-    coupe: "",
     euro: "",
     engine: "",
     gearbox: "",
+    location: "",
     color: "",
     maxMileage: "",
+    sort: "",
+    coupe: "",
+    materials: [],
+    colors: [],
     safety: [],
     comfort: [],
     multimedia: [],
@@ -69,7 +78,6 @@ const DetailedSearchForm = () => {
     interior: [],
     security: [],
     others: [],
-    sort: "",
     filter: "",
   });
 
@@ -95,9 +103,25 @@ const DetailedSearchForm = () => {
       return { ...prev, [field]: [...updatedField, value] };
     });
   };
+  const router = useRouter();
 
   const handleSubmit = () => {
-    console.log("Search Submitted", formData);
+    const filteredFormData = Object.entries(formData).reduce(
+      (acc, [key, value]) => {
+        if (Array.isArray(value)) {
+          if (value.length > 0) acc[key] = value.join(","); // Include non-empty arrays as comma-separated values
+        } else if (value) {
+          acc[key] = value; // Include non-empty strings
+        }
+        return acc;
+      },
+      {} as Record<string, string>
+    );
+
+    // Convert to query string
+    const query = new URLSearchParams(filteredFormData).toString();
+
+    router.push(`/browse/listings?${query}`);
   };
 
   return (
@@ -130,6 +154,48 @@ const DetailedSearchForm = () => {
           return null;
         })}
       </div>
+      <div className="w-full flex flex-col py-10">
+        <h1 className="text-xl text-mobilePrimary font-bold pb-4">Интериор</h1>
+        {interiorMaterials.map((int) => (
+          <div key={int.id} className="mb-4">
+            <h3 className="text-lg font-semibold mb-2">{int.name}</h3>
+            <div className="grid grid-cols-3 gap-2">
+              {int.materials.map((mat) => (
+                <label key={mat} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={formData.materials.includes(mat)}
+                    onChange={() => handleArrayChange("materials", mat)}
+                    className="w-5 h-5"
+                  />
+                  <span className="ml-2">{mat}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="w-full flex flex-col">
+        {interiorColorsArr.map((col) => (
+          <div key={col.id} className="mb-4">
+            <h3 className="text-lg font-semibold mb-2">{col.name}</h3>
+            <div className="grid grid-cols-3 gap-2">
+              {col.colors.map((color, index) => (
+                <label key={index} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={formData.colors.includes(color)}
+                    onChange={() => handleArrayChange("colors", color)}
+                    className="w-5 h-5"
+                  />
+                  <span className="ml-2">{color}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
 
       {/* Additional Checkbox Sections */}
       <div className="mt-6 text-sm">
@@ -139,7 +205,7 @@ const DetailedSearchForm = () => {
         {safetyExtras.map((section) => (
           <div key={section.id} className="mb-4">
             <h3 className="text-lg font-semibold mb-2">{section.name}</h3>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               {section.extras.map((extra) => (
                 <label key={extra} className="flex items-center">
                   <input
@@ -224,12 +290,14 @@ const DetailedSearchForm = () => {
         ))}
       </div>
 
-      <Button
-        variant="longSearch"
-        icon="/searchIconWhite.svg"
-        text="ТЪРСЕНЕ НА ОБЯВИ"
-        onClick={handleSubmit}
-      />
+      <div className="w-1/3 flex">
+        <Button
+          variant="longSearch"
+          icon="/searchIconWhite.svg"
+          text="ТЪРСЕНЕ НА ОБЯВИ"
+          onClick={handleSubmit}
+        />
+      </div>
     </div>
   );
 };

@@ -224,8 +224,8 @@ const ListingDetailsPage = () => {
           </div>
         </div>
         <div className="w-full grid grid-cols-4">
-          {parsedImageUrls.slice(5, 15).map((image: string, index: number) => (
-            <div key={index} onClick={() => openModal(index + 5)}>
+          {parsedImageUrls.slice(4, 15).map((image: string, index: number) => (
+            <div key={index} onClick={() => openModal(index + 4)}>
               <Image
                 width={300}
                 height={300}

@@ -1,5 +1,7 @@
 "use client";
 
+import { FiLogOut } from "react-icons/fi";
+
 import { headerLinks } from "@/utils/constants";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -67,9 +69,9 @@ const Header: React.FC = () => {
                 </p>
                 <p
                   onClick={handleSignOut}
-                  className="font-bold text-mobileDarkGray cursor-pointer"
+                  className="font-bold text-mobileDarkGray hover:text-mobilePrimary duration-300 transition-all ease-in cursor-pointer"
                 >
-                  Изход
+                  <FiLogOut size={24} />
                 </p>
               </div>
             ) : (

@@ -28,11 +28,13 @@ const HeroSection = () => {
             text="ТЪРСЕНЕ"
             icon="/searchIconBlack.svg"
             variant="outline"
+            heroSection={true}
           />
           <Button
             text="ТЪРСЕНЕ"
             icon="/searchIconWhite.svg"
             variant="outlineWhite"
+            heroSection={true}
           />
         </div>
       </div>

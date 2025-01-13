@@ -5,7 +5,7 @@ export const Input = ({
   type,
   placeholder,
 }: {
-  label: string;
+  label?: string;
   value: string;
   onChange: (value: string) => void;
   type?: "text" | "radio" | "checkbox" | "password";
