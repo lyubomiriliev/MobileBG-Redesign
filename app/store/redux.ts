@@ -16,6 +16,9 @@ type GeneralDataState = {
   price: string;
   currency: string;
   location: string;
+  litres: string;
+  euro: string;
+  horsePower: string;
 };
 
 type InteriorExteriorState = {
@@ -44,6 +47,10 @@ type description = {
   desc: string;
 };
 
+type phoneNumber = {
+  num: string | null;
+};
+
 type ListingState = {
   generalData: GeneralDataState;
   interiorExterior: InteriorExteriorState;
@@ -52,6 +59,7 @@ type ListingState = {
   multimediaExtras: multimediaExtrasState;
   additionalExtras: additionalExtras;
   description: description;
+  phoneNumber: phoneNumber;
 };
 
 const initialState: ListingState = {
@@ -71,6 +79,9 @@ const initialState: ListingState = {
     price: "",
     currency: "",
     location: "",
+    litres: "",
+    euro: "",
+    horsePower: "",
   },
   interiorExterior: {
     exteriorColor: "",
@@ -91,6 +102,9 @@ const initialState: ListingState = {
   },
   description: {
     desc: "",
+  },
+  phoneNumber: {
+    num: null,
   },
 };
 
@@ -125,6 +139,9 @@ const listingSlice = createSlice({
     updateDescription: (state, action: PayloadAction<string>) => {
       state.description.desc = action.payload;
     },
+    updatePhoneNumber: (state, action: PayloadAction<string | null>) => {
+      state.phoneNumber.num = action.payload;
+    },
   },
 });
 
@@ -136,6 +153,7 @@ export const {
   updateMediaExtras,
   updateAdditionalExtras,
   updateDescription,
+  updatePhoneNumber,
 } = listingSlice.actions;
 
 const store = configureStore({

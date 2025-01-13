@@ -22,7 +22,7 @@ const GeneralData = () => {
     brand: "",
     model: "",
     modification: "",
-    tuning: "",
+    litres: "",
     engine: "",
     gearbox: "",
     dateYear: "",
@@ -31,8 +31,10 @@ const GeneralData = () => {
     mileage: "",
     price: "",
     currency: "",
-    vin: "",
+    horsePower: "",
     location: "",
+    euro: "",
+    tuning: "",
   });
 
   const handleChange = (field: string, value: string) => {
@@ -124,9 +126,9 @@ const GeneralData = () => {
                 onChange={(value) => handleChange("brand", value)}
               />
               <Input
-                label="Тунинг"
-                onChange={(value) => handleChange("tuning", value)}
-                value={formData.tuning}
+                label="Кубатура (куб.см)"
+                onChange={(value) => handleChange("litres", value)}
+                value={formData.litres}
               />
               <Dropdown
                 label="Модел"
@@ -170,20 +172,10 @@ const GeneralData = () => {
                 value={formData.mileage}
                 onChange={(value) => handleChange("mileage", value)}
               />
-              {/* VIN Input */}
-              <Dropdown
-                label="Купе"
-                options={[
-                  "Хечбек",
-                  "Седан",
-                  "Комби",
-                  "Джип",
-                  "Кабриолет",
-                  "Лимузина",
-                  "Стреч-лимузина",
-                ]}
-                value={formData.coupe}
-                onChange={(value) => handleChange("coupe", value)}
+              <Input
+                label="Мощност (к.с.)"
+                value={formData.horsePower}
+                onChange={(value) => handleChange("horsePower", value)}
               />
               <Input
                 label="Цена"
@@ -192,7 +184,7 @@ const GeneralData = () => {
               />
               <Dropdown
                 label="Валута"
-                options={["BGN", "EUR", "USD"]}
+                options={["лв", "€", "$"]}
                 value={formData.currency}
                 onChange={(value) => handleChange("currency", value)}
               />
@@ -210,10 +202,37 @@ const GeneralData = () => {
                 value={formData.location}
                 onChange={(value) => handleChange("location", value)}
               />
+              <Dropdown
+                label="Купе"
+                options={[
+                  "Хечбек",
+                  "Седан",
+                  "Комби",
+                  "Джип",
+                  "Кабриолет",
+                  "Лимузина",
+                  "Стреч-лимузина",
+                ]}
+                value={formData.coupe}
+                onChange={(value) => handleChange("coupe", value)}
+              />
+              <Dropdown
+                label="Евростандарт"
+                options={[
+                  "Евро 1",
+                  "Евро 2",
+                  "Евро 3",
+                  "Евро 4",
+                  "Евро 5",
+                  "Евро 6",
+                ]}
+                value={formData.euro}
+                onChange={(value) => handleChange("euro", value)}
+              />
               <Input
-                label="VIN номер"
-                value={formData.vin}
-                onChange={(value) => handleChange("vin", value)}
+                label="Тунинг"
+                value={formData.tuning}
+                onChange={(value) => handleChange("tuning", value)}
               />
             </div>
             <div></div>

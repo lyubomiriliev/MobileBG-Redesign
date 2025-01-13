@@ -23,6 +23,7 @@ export default async function createListing(
       additionalExtras,
       description,
       imageUrls,
+      phoneNumber,
     } = req.body;
 
     const { data, error } = await supabase
@@ -44,6 +45,9 @@ export default async function createListing(
         date_year: parseInt(generalData.dateYear),
         date_month: generalData.dateMonth,
         coupe: generalData.coupe,
+        litres: generalData.litres,
+        euro: generalData.euro,
+        horsePower: generalData.horsePower,
         exterior_color: interiorExterior.exteriorColor,
         interior_material: interiorExterior.interiorMaterial,
         interior_color: interiorExterior.interiorColor,
@@ -51,6 +55,7 @@ export default async function createListing(
         comfort_extras: comfortExtras,
         multimedia_extras: multimediaExtras,
         additional_extras: additionalExtras,
+        phoneNumber,
         description,
         imageUrls,
       })

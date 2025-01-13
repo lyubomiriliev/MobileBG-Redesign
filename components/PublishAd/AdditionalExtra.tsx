@@ -9,15 +9,23 @@ import {
   RootState,
   updateAdditionalExtras,
   updateDescription,
+  updatePhoneNumber,
 } from "@/app/store/redux";
+import { Input } from "../UI/Input";
 
 const AdditionalExtra = () => {
   const [extras, setExtras] = useState<string[]>([]);
   const [description, setDescription] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string | null>(null);
   const dispatch = useDispatch<AppDispatch>();
 
   const listingData = useSelector((state: RootState) => state.listing);
   console.log("Current Redux State:", listingData);
+
+  const handlePhoneNumber = (newPhoneNumber: string) => {
+    setPhoneNumber(newPhoneNumber);
+    dispatch(updatePhoneNumber(newPhoneNumber));
+  };
 
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -68,6 +76,14 @@ const AdditionalExtra = () => {
           ))}
         </div>
         <div className="w-full flex flex-col justify-center items-start py-8">
+          <div className="w-1/3 flex py-4">
+            <Input
+              type="text"
+              label="Телефонен номер"
+              value={phoneNumber || ""}
+              onChange={handlePhoneNumber}
+            />
+          </div>
           <h1 className="text-xl lg:text-2xl">Допълнителна информация</h1>
           <textarea
             onChange={handleDescriptionChange}

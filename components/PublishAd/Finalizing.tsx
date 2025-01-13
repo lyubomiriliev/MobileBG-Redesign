@@ -17,6 +17,10 @@ const Finalizing = () => {
   const listingDesc = useSelector(
     (state: RootState) => state.listing.description.desc
   );
+  const listingPhoneNumber = useSelector(
+    (state: RootState) => state.listing.phoneNumber.num
+  );
+
   const { images } = useListingContext();
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
@@ -61,6 +65,7 @@ const Finalizing = () => {
           description: listingDesc,
           userId: user?.id,
           imageUrls: uploadedUrls, // Pass the URLs of the uploaded images
+          phoneNumber: listingPhoneNumber,
         }),
       });
 

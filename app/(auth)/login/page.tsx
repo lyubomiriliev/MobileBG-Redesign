@@ -1,7 +1,6 @@
 "use client";
 
-import { ReactEventHandler, useState } from "react";
-import { supabase } from "@/app/lib/supabase";
+import { useState } from "react";
 import { Input } from "@/components/UI/Input";
 import Button from "@/components/Button";
 import Link from "next/link";
@@ -16,10 +15,9 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const searchParams = useSearchParams();
   const router = useRouter();
 
-  const { session, signInUser } = useAuth();
+  const { signInUser } = useAuth();
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,7 +26,10 @@ const SignIn = () => {
     try {
       const result = await signInUser(email, password);
       if (result.success) {
-        window.location.href = "/";
+        router.push("/");
+      } else {
+        setError("Invalid Credentials");
+        console.error(error);
       }
     } catch (error) {
       setError("Error logging in");

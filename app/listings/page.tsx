@@ -1,6 +1,7 @@
 "use client";
 import MyListingCard from "@/components/UI/MyListingCard";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 type Listing = {
@@ -36,8 +37,13 @@ type Listing = {
 const MyListingsPage = () => {
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
-
   const { user } = useAuth();
+
+  console.log(user);
+
+  if (!user?.id) {
+    window.location.href = "/login";
+  }
 
   useEffect(() => {
     const fetchUserListings = async () => {
