@@ -1,15 +1,14 @@
 "use client";
 
 import { additionalExtras } from "@/utils/constants";
-import React, { ReactEventHandler, useState } from "react";
+import React, { useState } from "react";
 import Checkbox from "../UI/Checkbox";
 import { useDispatch, useSelector } from "react-redux";
 import {
   AppDispatch,
   RootState,
   updateAdditionalExtras,
-  updateDescription,
-  updatePhoneNumber,
+  updateSellerInfo,
 } from "@/app/store/redux";
 import { Input } from "../UI/Input";
 
@@ -17,22 +16,24 @@ const AdditionalExtra = () => {
   const [extras, setExtras] = useState<string[]>([]);
   const [description, setDescription] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
   const dispatch = useDispatch<AppDispatch>();
 
   const listingData = useSelector((state: RootState) => state.listing);
   console.log("Current Redux State:", listingData);
 
-  const handlePhoneNumber = (newPhoneNumber: string) => {
-    setPhoneNumber(newPhoneNumber);
-    dispatch(updatePhoneNumber(newPhoneNumber));
-  };
-
-  const handleDescriptionChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
+  const handleInputChange = (
+    field: "phoneNumber" | "email" | "description",
+    value: string
   ) => {
-    const newDescription = event.target.value;
-    setDescription(newDescription);
-    dispatch(updateDescription(newDescription));
+    dispatch(
+      updateSellerInfo({
+        [field]: value,
+      })
+    );
+    if (field === "phoneNumber") setPhoneNumber(value);
+    if (field === "email") setEmail(value);
+    if (field === "description") setDescription(value);
   };
 
   const handleCarExtras = (ext: string) => {
@@ -45,6 +46,16 @@ const AdditionalExtra = () => {
     setExtras(updatedExtras);
     dispatch(updateAdditionalExtras(updatedExtras));
   };
+
+  const contactMail = useSelector((state: RootState) => state.listing.email);
+  const contactPhone = useSelector(
+    (state: RootState) => state.listing.phoneNumber
+  );
+  const contactDesc = useSelector(
+    (state: RootState) => state.listing.description
+  );
+
+  console.log("Mail", contactMail, "Phone", contactPhone, "Desc", contactDesc);
 
   return (
     <section className="mainSection">
@@ -81,12 +92,22 @@ const AdditionalExtra = () => {
               type="text"
               label="Телефонен номер"
               value={phoneNumber || ""}
-              onChange={handlePhoneNumber}
+              onChange={(value) => handleInputChange("phoneNumber", value)}
+            />
+          </div>
+          <div className="w-1/3 flex py-4">
+            <Input
+              type="text"
+              label="E-mail"
+              value={email || ""}
+              onChange={(value) => handleInputChange("email", value)}
             />
           </div>
           <h1 className="text-xl lg:text-2xl">Допълнителна информация</h1>
           <textarea
-            onChange={handleDescriptionChange}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+              handleInputChange("description", e.target.value)
+            }
             className="border-[1px] border-gray-300 resize-none rounded-lg w-full h-80 p-2"
             placeholder="Попълнете информацията за автомобила ви. Максимален размер до 1000 символа."
             name="description"

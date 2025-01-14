@@ -51,6 +51,10 @@ type phoneNumber = {
   num: string | null;
 };
 
+type email = {
+  email: string | null;
+};
+
 type ListingState = {
   generalData: GeneralDataState;
   interiorExterior: InteriorExteriorState;
@@ -60,6 +64,7 @@ type ListingState = {
   additionalExtras: additionalExtras;
   description: description;
   phoneNumber: phoneNumber;
+  email: email;
 };
 
 const initialState: ListingState = {
@@ -106,6 +111,9 @@ const initialState: ListingState = {
   phoneNumber: {
     num: null,
   },
+  email: {
+    email: null,
+  },
 };
 
 const listingSlice = createSlice({
@@ -136,11 +144,18 @@ const listingSlice = createSlice({
     updateAdditionalExtras: (state, action: PayloadAction<string[]>) => {
       state.additionalExtras.add = action.payload;
     },
-    updateDescription: (state, action: PayloadAction<string>) => {
-      state.description.desc = action.payload;
-    },
-    updatePhoneNumber: (state, action: PayloadAction<string | null>) => {
-      state.phoneNumber.num = action.payload;
+    updateSellerInfo: (
+      state,
+      action: PayloadAction<{
+        phoneNumber?: string | null;
+        email?: string | null;
+        description?: string;
+      }>
+    ) => {
+      const { phoneNumber, email, description } = action.payload;
+      if (phoneNumber !== undefined) state.phoneNumber.num = phoneNumber;
+      if (email !== undefined) state.email.email = email;
+      if (description !== undefined) state.description.desc = description;
     },
   },
 });
@@ -152,8 +167,7 @@ export const {
   updateComfortExtras,
   updateMediaExtras,
   updateAdditionalExtras,
-  updateDescription,
-  updatePhoneNumber,
+  updateSellerInfo,
 } = listingSlice.actions;
 
 const store = configureStore({
