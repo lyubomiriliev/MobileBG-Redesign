@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Button from "./Button";
 import { Dropdown } from "./UI/Dropdown";
 import { brandsModelMapping, categoriesModelMapping } from "@/utils/constants";
+import { useRouter } from "next/navigation";
 
 const SearchForm = ({
   category,
@@ -16,6 +17,8 @@ const SearchForm = ({
     setFormData((prev) => ({ ...prev, category }));
   }, [category]);
 
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     category: category || "Автомобили и Джипове",
     brand: "",
@@ -25,7 +28,7 @@ const SearchForm = ({
     year: "",
     engine: "",
     gearbox: "",
-    sortBy: "Марка/Модел/Цена",
+    sortBy: "",
   });
 
   const handleChange = (field: string, value: string) => {
@@ -40,15 +43,19 @@ const SearchForm = ({
   };
 
   const handleSubmit = () => {
-    // Build query string based on formData
     const query = new URLSearchParams(
-      Object.entries(formData).filter(
-        ([_, value]) => value !== "Всички" && value !== ""
-      )
+      Object.entries(formData).reduce((acc, [key, value]) => {
+        if (Array.isArray(value) && value.length > 0) {
+          acc[key] = value.join(",");
+        } else if (typeof value === "string" && value.trim() !== "") {
+          // Only include non-empty string values
+          acc[key] = value;
+        }
+        return acc;
+      }, {} as Record<string, string>)
     ).toString();
 
-    // Redirect to search results page
-    window.location.href = `/search?${query}`;
+    router.push(`/browse/listings?${query}`);
   };
 
   const brandOptions = formData.category
