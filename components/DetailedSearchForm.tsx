@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dropdown } from "./UI/Dropdown";
 import Button from "./Button";
 import { Input } from "./UI/Input";
@@ -16,6 +16,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/app/store";
+import { updateCriteria } from "@/app/store/searchSlice";
 
 type FormData = {
   category: string;
@@ -53,61 +54,28 @@ const DetailedSearchForm = () => {
   const dispatch = useDispatch<AppDispatch>();
   const searchCriteria = useSelector((state: RootState) => state.search);
   const router = useRouter();
-  const [formData, setFormData] = useState<FormData>({
-    category: "Автомобили и Джипове",
-    brand: "",
-    model: "",
-    region: "",
-    priceMin: "",
-    priceMax: "",
-    yearMin: "",
-    yearMax: "",
-    hpMin: "",
-    hpMax: "",
-    euro: "",
-    engine: "",
-    gearbox: "",
-    location: "",
-    color: "",
-    maxMileage: "",
-    sort: "",
-    coupe: "",
-    materials: "",
-    intColor: "",
-    safety: [],
-    comfort: [],
-    multimedia: [],
-    additional: [],
-    exterior: [],
-    interior: [],
-    security: [],
-    others: [],
-    filter: "",
-  });
+  const [formData, setFormData] = useState(searchCriteria);
 
   console.log(formData);
 
-  const handleChange = (field: keyof FormData, value: string) => {
-    if (Array.isArray(formData[field])) {
-      throw new Error(`Invalid update for array field: ${field}`);
-    }
-    setFormData({ ...formData, [field]: value });
+  const handleChange = (field: keyof typeof formData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    dispatch(updateCriteria({ [field]: value }));
   };
 
-  const handleArrayChange = (field: keyof FormData, value: string) => {
+  const handleArrayChange = (field: keyof typeof formData, value: string) => {
     if (!Array.isArray(formData[field])) {
-      throw new Error(`Invalid update for non-array field: ${field}`);
+      throw new Error(
+        `Field ${field} is not an array and cannot be updated as one.`
+      );
     }
-    setFormData((prev) => {
-      const updatedField = prev[field] as string[];
-      if (updatedField.includes(value)) {
-        return {
-          ...prev,
-          [field]: updatedField.filter((item) => item !== value),
-        };
-      }
-      return { ...prev, [field]: [...updatedField, value] };
-    });
+
+    const updatedArray = formData[field].includes(value)
+      ? formData[field].filter((item) => item !== value) // Safe to call filter since it's an array
+      : [...formData[field], value];
+
+    setFormData((prev) => ({ ...prev, [field]: updatedArray }));
+    dispatch(updateCriteria({ [field]: updatedArray } as Partial<FormData>));
   };
 
   const handleSingleSelection = (field: keyof FormData, value: string) => {
@@ -118,24 +86,20 @@ const DetailedSearchForm = () => {
   };
 
   const handleSubmit = () => {
-    const filteredFormData = Object.entries(formData).reduce(
-      (acc, [key, value]) => {
-        if (Array.isArray(value)) {
-          if (value.length > 0) acc[key] = value.join(","); // Include non-empty arrays as comma-separated values
-        } else if (value) {
-          acc[key] = value; // Include non-empty strings
-        }
+    const query = new URLSearchParams(
+      Object.entries(formData).reduce((acc, [key, value]) => {
+        if (Array.isArray(value) && value.length > 0)
+          acc[key] = value.join(",");
+        else if (value) acc[key] = value.toString();
         return acc;
-      },
-      {} as Record<string, string>
-    );
-
-    // Convert to query string
-    const query = new URLSearchParams(filteredFormData).toString();
-
-    console.log(filteredFormData);
+      }, {} as Record<string, string>)
+    ).toString();
     router.push(`/browse/listings?${query}`);
   };
+
+  useEffect(() => {
+    setFormData(searchCriteria);
+  }, [searchCriteria]);
 
   return (
     <div className="w-full max-w-5xl mx-auto bg-white p-6 rounded-lg">
