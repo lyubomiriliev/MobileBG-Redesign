@@ -19,24 +19,66 @@ const BrowseListingsPage = () => {
 
       try {
         let query = supabase.from("listings").select("*");
+
         if (searchParams) {
           searchParams.forEach((value, key) => {
-            if (key === "category") query = query.eq("category", value);
-            if (key === "brand") query = query.eq("brand", value);
-            if (key === "model") query = query.eq("model", value);
-            if (key === "priceMin") query = query.gte("price", parseInt(value));
-            if (key === "priceMax") query = query.lte("price", parseInt(value));
-            if (key === "region") query = query.eq("location", value);
-            if (key === "yearMin")
-              query = query.gte("dateYear", parseInt(value));
-            if (key === "yearMax")
-              query = query.lte("dateYear", parseInt(value));
-            if (key === "coupe") query = query.eq("coupe", value);
-            if (key === "euro") query = query.eq("euro", value);
-            if (key === "engine") query = query.eq("engine", value);
-            if (key === "gearbox") query = query.eq("gearbox", value);
-
-            // Add more filters as needed
+            if (value) {
+              switch (key) {
+                case "category":
+                  query = query.eq("category", value);
+                  break;
+                case "brand":
+                  query = query.eq("brand", value);
+                  break;
+                case "model":
+                  query = query.eq("model", value);
+                  break;
+                case "priceMin":
+                  query = query.gte("price", parseInt(value));
+                  break;
+                case "priceMax":
+                  query = query.lte("price", parseInt(value));
+                  break;
+                case "region":
+                  query = query.eq("location", value);
+                  break;
+                case "yearMin":
+                  query = query.gte("dateYear", parseInt(value));
+                  break;
+                case "yearMax":
+                  query = query.lte("dateYear", parseInt(value));
+                  break;
+                case "coupe":
+                  query = query.eq("coupe", value);
+                  break;
+                case "euro":
+                  query = query.eq("euro", value);
+                  break;
+                case "engine":
+                  query = query.eq("engine", value);
+                  break;
+                case "gearbox":
+                  query = query.eq("gearbox", value);
+                  break;
+                case "color":
+                  query = query.eq("exterior_color", value);
+                  break;
+                case "maxMileage":
+                  query = query.lte("mileage", parseInt(value));
+                  break;
+                case "materials":
+                  query = query.eq("interior_material", value);
+                  break;
+                case "intColor":
+                  query = query.eq("interior_color", value);
+                  break;
+                case "safety":
+                  query = query.contains("safety_extras", [value]); // Adjust for arrays
+                  break;
+                default:
+                  break;
+              }
+            }
           });
         }
 
@@ -70,11 +112,10 @@ const BrowseListingsPage = () => {
           </h1>
           <div className="flex items-center gap-10">
             <h1 className="text-lg">
-              Категория:{" "}
-              <span className="font-semibold">{listings[0].category}</span>{" "}
+              Категория: <span className="font-semibold">Категория</span>{" "}
             </h1>
             <h1 className="text-lg">
-              Марка: <span className="font-semibold">{listings[0].brand}</span>{" "}
+              Марка: <span className="font-semibold">Марка</span>{" "}
             </h1>
           </div>
         </div>

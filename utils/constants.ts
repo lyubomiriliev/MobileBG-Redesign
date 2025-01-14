@@ -1187,3 +1187,34 @@ export type Listing = {
   userId: string;
   imageUrls: string;
 };
+
+export type SearchCriteria = {
+  category: string;
+  brand: string;
+  model: string;
+  priceMin: string;
+  priceMax: string;
+  region: string;
+  yearMin: string;
+  yearMax: string;
+  hpMin: string;
+  hpMax: string;
+  coupe: string;
+  euro: string;
+  engine: string;
+  gearbox: string;
+  color: string;
+  maxMileage: string;
+  materials: string;
+  intColor: string;
+  sort: string;
+  safety: string[];
+  location: string;
+  comfort: string[];
+  multimedia: string[];
+  additional: string[];
+  exterior: string[];
+  interior: string[];
+  security: string[];
+  others: string[];
+};

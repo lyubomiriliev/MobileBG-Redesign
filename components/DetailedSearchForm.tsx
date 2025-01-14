@@ -8,13 +8,14 @@ import {
   additionalExtras,
   comfortExtras,
   formFields,
-  interiorColors,
   interiorColorsArr,
   interiorMaterials,
   multimediaExtras,
   safetyExtras,
 } from "@/utils/constants";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/app/store";
 
 type FormData = {
   category: string;
@@ -33,8 +34,8 @@ type FormData = {
   gearbox: string;
   color: string;
   maxMileage: string;
-  materials: string[];
-  colors: string[];
+  materials: string;
+  intColor: string;
   sort: string;
   safety: string[];
   location: string;
@@ -49,6 +50,9 @@ type FormData = {
 };
 
 const DetailedSearchForm = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const searchCriteria = useSelector((state: RootState) => state.search);
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     category: "Автомобили и Джипове",
     brand: "",
@@ -68,8 +72,8 @@ const DetailedSearchForm = () => {
     maxMileage: "",
     sort: "",
     coupe: "",
-    materials: [],
-    colors: [],
+    materials: "",
+    intColor: "",
     safety: [],
     comfort: [],
     multimedia: [],
@@ -80,6 +84,8 @@ const DetailedSearchForm = () => {
     others: [],
     filter: "",
   });
+
+  console.log(formData);
 
   const handleChange = (field: keyof FormData, value: string) => {
     if (Array.isArray(formData[field])) {
@@ -103,7 +109,13 @@ const DetailedSearchForm = () => {
       return { ...prev, [field]: [...updatedField, value] };
     });
   };
-  const router = useRouter();
+
+  const handleSingleSelection = (field: keyof FormData, value: string) => {
+    if (Array.isArray(formData[field])) {
+      throw new Error(`Invalid update for array field ${field}`);
+    }
+    setFormData({ ...formData, [field]: value });
+  };
 
   const handleSubmit = () => {
     const filteredFormData = Object.entries(formData).reduce(
@@ -121,6 +133,7 @@ const DetailedSearchForm = () => {
     // Convert to query string
     const query = new URLSearchParams(filteredFormData).toString();
 
+    console.log(filteredFormData);
     router.push(`/browse/listings?${query}`);
   };
 
@@ -163,9 +176,10 @@ const DetailedSearchForm = () => {
               {int.materials.map((mat) => (
                 <label key={mat} className="flex items-center">
                   <input
-                    type="checkbox"
-                    checked={formData.materials.includes(mat)}
-                    onChange={() => handleArrayChange("materials", mat)}
+                    type="radio"
+                    name="materials"
+                    checked={formData.materials === mat}
+                    onChange={() => handleSingleSelection("materials", mat)}
                     className="w-5 h-5"
                   />
                   <span className="ml-2">{mat}</span>
@@ -184,9 +198,10 @@ const DetailedSearchForm = () => {
               {col.colors.map((color, index) => (
                 <label key={index} className="flex items-center">
                   <input
-                    type="checkbox"
-                    checked={formData.colors.includes(color)}
-                    onChange={() => handleArrayChange("colors", color)}
+                    type="radio"
+                    name="colors"
+                    checked={formData.intColor === color}
+                    onChange={() => handleSingleSelection("intColor", color)}
                     className="w-5 h-5"
                   />
                   <span className="ml-2">{color}</span>

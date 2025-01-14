@@ -1,4 +1,16 @@
-import { createSlice, PayloadAction, configureStore } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+type ListingState = {
+  generalData: GeneralDataState;
+  interiorExterior: InteriorExteriorState;
+  safetyExtras: safetyExtrasState;
+  comfortExtras: comfortExtrasState;
+  multimediaExtras: multimediaExtrasState;
+  additionalExtras: additionalExtras;
+  description: description;
+  phoneNumber: phoneNumber;
+  email: email;
+};
 
 type GeneralDataState = {
   category: string;
@@ -53,18 +65,6 @@ type phoneNumber = {
 
 type email = {
   email: string | null;
-};
-
-type ListingState = {
-  generalData: GeneralDataState;
-  interiorExterior: InteriorExteriorState;
-  safetyExtras: safetyExtrasState;
-  comfortExtras: comfortExtrasState;
-  multimediaExtras: multimediaExtrasState;
-  additionalExtras: additionalExtras;
-  description: description;
-  phoneNumber: phoneNumber;
-  email: email;
 };
 
 const initialState: ListingState = {
@@ -170,13 +170,4 @@ export const {
   updateSellerInfo,
 } = listingSlice.actions;
 
-const store = configureStore({
-  reducer: {
-    listing: listingSlice.reducer,
-  },
-});
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-
-export default store;
+export default listingSlice.reducer;
