@@ -10,18 +10,12 @@ const MyListingsPage = () => {
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
 
-  console.log(user);
-
-  if (!user?.id) {
-    window.location.href = "/login";
-  }
-
   useEffect(() => {
     const fetchUserListings = async () => {
       if (!user?.id) {
         return;
       }
-
+      setLoading(true);
       try {
         const response = await fetch(
           `/api/listings/getUserListingById?userId=${user.id}`
@@ -31,7 +25,7 @@ const MyListingsPage = () => {
         if (response.ok) {
           setListings(data);
         } else {
-          console.error("Error fetch user listings", data.error);
+          console.error("Error fetching user listings", data.error);
         }
       } catch (error) {
         if (error instanceof Error) {
@@ -45,10 +39,6 @@ const MyListingsPage = () => {
     fetchUserListings();
   }, [user?.id]);
 
-  if (loading) {
-    return <p>Зареждане на обявите...</p>;
-  }
-
   return (
     <section className="basicSection !max-w-4xl">
       <div className="w-full flex flex-col justify-center items-center">
@@ -59,12 +49,18 @@ const MyListingsPage = () => {
         <p>Имате {listings.length} активни обяви.</p>
       </div>
       <div className="w-full flex flex-col gap-4 items-center relative">
-        {listings.length > 0 ? (
+        {loading ? (
+          <p className="text-2xl text-mobileDarkGray">
+            Зареждане на обявите...
+          </p>
+        ) : listings.length > 0 ? (
           listings.map((listing) => (
             <MyListingCard key={listing.id} listing={listing} />
           ))
         ) : (
-          <p>Все още нямате публикувани обяви.</p>
+          <p className="text-2xl text-mobileDarkGray">
+            Нямате публикувани обяви.
+          </p>
         )}
         <div className="w-32 h-8 bg-mobilePrimary text-white flex justify-center items-center rounded-tr-2xl rounded-tl-2xl absolute -top-8 left-6">
           Активни обяви
