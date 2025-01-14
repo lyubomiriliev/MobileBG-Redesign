@@ -965,9 +965,6 @@ type FieldConfig = {
 };
 
 type FormData = {
-  category: string;
-  brand: string;
-  model: string;
   priceMin: string;
   priceMax: string;
   region: string;
@@ -993,24 +990,6 @@ type FormData = {
 };
 
 export const formFields: FieldConfig[] = [
-  {
-    type: "dropdown",
-    label: "Категория",
-    key: "category",
-    options: ["Автомобили и Джипове", "Бусове", "Мотори", "Камиони"],
-  },
-  {
-    type: "dropdown",
-    label: "Марка",
-    key: "brand",
-    options: ["Mercedes", "BMW", "Toyota"],
-  },
-  {
-    type: "dropdown",
-    label: "Модел",
-    key: "model",
-    options: ["A-Class", "C-Class", "E-Class"],
-  },
   {
     type: "dropdown",
     label: "Регион",
@@ -1217,4 +1196,5 @@ export type SearchCriteria = {
   interior: string[];
   security: string[];
   others: string[];
+  filter: string;
 };

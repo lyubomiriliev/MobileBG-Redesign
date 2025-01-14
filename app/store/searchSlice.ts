@@ -30,6 +30,7 @@ const initialState: SearchCriteria = {
   interior: [],
   security: [],
   others: [],
+  filter: "",
 };
 
 const searchSlice = createSlice({

@@ -43,10 +43,10 @@ const BrowseListingsPage = () => {
                   query = query.eq("location", value);
                   break;
                 case "yearMin":
-                  query = query.gte("dateYear", parseInt(value));
+                  query = query.gte("date_year", parseInt(value));
                   break;
                 case "yearMax":
-                  query = query.lte("dateYear", parseInt(value));
+                  query = query.lte("date_year", parseInt(value));
                   break;
                 case "coupe":
                   query = query.eq("coupe", value);
@@ -73,8 +73,18 @@ const BrowseListingsPage = () => {
                   query = query.eq("interior_color", value);
                   break;
                 case "safety":
-                  query = query.contains("safety_extras", [value]); // Adjust for arrays
+                  query = query.contains("safety_extras", { ext: [value] });
                   break;
+                case "comfort":
+                  query = query.contains("comfort_extras", { safe: [value] });
+                  break;
+                case "multimedia":
+                  query = query.contains("multimedia_extras", {
+                    media: [value],
+                  });
+                  break;
+                case "additional":
+                  query = query.contains("additional_extras", { add: [value] });
                 default:
                   break;
               }

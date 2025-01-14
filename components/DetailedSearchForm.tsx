@@ -6,6 +6,8 @@ import Button from "./Button";
 import { Input } from "./UI/Input";
 import {
   additionalExtras,
+  brandsModelMapping,
+  categoriesModelMapping,
   comfortExtras,
   formFields,
   interiorColorsArr,
@@ -56,10 +58,39 @@ const DetailedSearchForm = () => {
   const router = useRouter();
   const [formData, setFormData] = useState(searchCriteria);
 
-  console.log(formData);
+  const [brandOptions, setBrandOptions] = useState<string[]>([]);
+  const [modelOptions, setModelOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    setFormData(searchCriteria);
+  }, [searchCriteria]);
+
+  useEffect(() => {
+    // Update brand options based on the selected category
+    if (formData.category) {
+      setBrandOptions(categoriesModelMapping[formData.category] || []);
+    } else {
+      setBrandOptions([]);
+    }
+  }, [formData.category]);
+
+  useEffect(() => {
+    // Update model options based on the selected brand
+    if (formData.brand) {
+      setModelOptions(brandsModelMapping[formData.brand] || []);
+    } else {
+      setModelOptions([]);
+    }
+  }, [formData.brand]);
 
   const handleChange = (field: keyof typeof formData, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (field === "brand") {
+      setFormData({ ...formData, brand: value, model: "" });
+    } else if (field === "category") {
+      setFormData({ ...formData, category: value, brand: "", model: "" });
+    } else {
+      setFormData((prev) => ({ ...prev, [field]: value }));
+    }
     dispatch(updateCriteria({ [field]: value }));
   };
 
@@ -88,12 +119,16 @@ const DetailedSearchForm = () => {
   const handleSubmit = () => {
     const query = new URLSearchParams(
       Object.entries(formData).reduce((acc, [key, value]) => {
-        if (Array.isArray(value) && value.length > 0)
+        if (Array.isArray(value) && value.length > 0) {
           acc[key] = value.join(",");
-        else if (value) acc[key] = value.toString();
+        } else if (typeof value === "string" && value.trim() !== "") {
+          // Only include non-empty string values
+          acc[key] = value;
+        }
         return acc;
       }, {} as Record<string, string>)
     ).toString();
+
     router.push(`/browse/listings?${query}`);
   };
 
@@ -104,6 +139,29 @@ const DetailedSearchForm = () => {
   return (
     <div className="w-full max-w-5xl mx-auto bg-white p-6 rounded-lg">
       <div className="grid grid-cols-4 gap-4">
+        <Dropdown
+          label="Категория"
+          options={Object.keys(categoriesModelMapping)}
+          value={formData.category}
+          onChange={(value) => handleChange("category", value)}
+        />
+
+        {/* Brand Dropdown */}
+        <Dropdown
+          label="Марка"
+          options={brandOptions}
+          value={formData.brand}
+          onChange={(value) => handleChange("brand", value)}
+        />
+
+        {/* Model Dropdown */}
+        <Dropdown
+          label="Модел"
+          options={modelOptions}
+          value={formData.model}
+          onChange={(value) => handleChange("model", value)}
+        />
+
         {formFields.map((field) => {
           if (field.type === "dropdown") {
             return (
