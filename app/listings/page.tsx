@@ -6,8 +6,8 @@ import { Listing, UserInfoData } from "@/utils/constants";
 import React, { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import Button from "@/components/Button";
-import { handleSignOut } from "../utils/authFunctions";
 import { FiLogOut } from "react-icons/fi";
+import { useListingContext } from "@/context/ListingContext";
 
 const MyListingsPage = () => {
   const [listings, setListings] = useState<Listing[]>([]);
@@ -19,8 +19,22 @@ const MyListingsPage = () => {
     email: "",
   });
   const { user } = useAuth();
-
   const userEmail = user?.email;
+
+  const { session, signOut } = useAuth();
+  const { clearImages } = useListingContext();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      clearImages();
+      localStorage.removeItem("previewUrls");
+      window.location.href = "/";
+      alert("Logged out successfully");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {

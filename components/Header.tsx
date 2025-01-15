@@ -17,17 +17,31 @@ import Button from "./Button";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/app/lib/supabase";
-import { handleSignOut } from "@/app/utils/authFunctions";
+import { useListingContext } from "@/context/ListingContext";
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userInfo, setUserInfo] = useState<UserInfoData>();
 
-  const { session } = useAuth();
+  const { clearImages } = useListingContext();
+
+  const { session, signOut } = useAuth();
   const userEmail = session?.user.email;
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      clearImages();
+      localStorage.removeItem("previewUrls");
+      window.location.href = "/";
+      alert("Logged out successfully");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
