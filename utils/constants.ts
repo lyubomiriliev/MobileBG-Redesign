@@ -1,10 +1,28 @@
 export const headerLinks = [
   {
+    id: 2,
+    name: "Търсене",
+    url: "/search",
+  },
+  {
+    id: 3,
+    name: "Средна цена",
+    url: "/average-price",
+  },
+  {
     id: 1,
     name: "",
     url: "/",
     src: "/mobileLogo.svg",
   },
+  {
+    id: 4,
+    name: "Дилъри",
+    url: "/dealers",
+  },
+];
+
+export const headerLinksMobile = [
   {
     id: 2,
     name: "Търсене",
@@ -22,7 +40,7 @@ export const headerLinks = [
   },
   {
     id: 5,
-    name: "Моите Обяви",
+    name: "Моят Профил",
     url: "/listings",
   },
 ];
@@ -1197,4 +1215,13 @@ export type SearchCriteria = {
   security: string[];
   others: string[];
   filter: string;
+};
+
+// USER INFO TYPE
+
+export type UserInfoData = {
+  first_name: string;
+  last_name: string;
+  username: string;
+  email: string;
 };

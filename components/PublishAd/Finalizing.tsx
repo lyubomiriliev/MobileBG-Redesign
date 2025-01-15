@@ -8,9 +8,9 @@ import { listings } from "@/utils/constants";
 import ListingCard from "../UI/ListingCard";
 import Button from "../Button";
 import { useSelector } from "react-redux";
-import { RootState } from "@/app/store/redux";
 import { useAuth } from "@/context/AuthContext";
 import { useListingContext } from "@/context/ListingContext";
+import { RootState } from "@/app/store";
 
 const Finalizing = () => {
   const listingData = useSelector((state: RootState) => state.listing);
