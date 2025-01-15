@@ -5,6 +5,8 @@ import Button from "./Button";
 import { Dropdown } from "./UI/Dropdown";
 import { brandsModelMapping, categoriesModelMapping } from "@/utils/constants";
 import { useRouter } from "next/navigation";
+import { Input } from "./UI/Input";
+import Link from "next/link";
 
 const SearchForm = ({
   category,
@@ -70,7 +72,6 @@ const SearchForm = ({
           <h2 className="text-mobilePrimary font-medium text-xl">
             Търсене в категория:
           </h2>
-          <h2>Вашите последни търсения(12)</h2>
         </div>
         <div className="mb-2">
           <Dropdown
@@ -130,12 +131,12 @@ const SearchForm = ({
 
         {/* Text Input for Max Price */}
         <div>
-          <label className="block font-medium text-gray-700 mb-1">
+          <label className="block font-medium text-mobileDarkGray mb-1">
             Максимална Цена
           </label>
           <input
             type="number"
-            className="w-full border border-gray-300 rounded-md p-2"
+            className="w-full border border-slate-400 rounded-md p-[2px] lg:p-2"
             value={formData.maxPrice}
             onChange={(e) => handleChange("maxPrice", e.target.value)}
             placeholder=""
@@ -159,8 +160,12 @@ const SearchForm = ({
           icon="/searchIconWhite.svg"
           text="ТЪРСЕНЕ НА ОБЯВИ"
         ></Button>
-        <span>ОЩЕ КРИТЕРИИ ЗА ТЪРСЕНЕ</span>
       </div>
+      <Link href="/search">
+        <div className="w-full flex flex-col justify-center items-center pt-2">
+          <span>ОЩЕ КРИТЕРИИ ЗА ТЪРСЕНЕ</span>
+        </div>
+      </Link>
     </div>
   );
 };

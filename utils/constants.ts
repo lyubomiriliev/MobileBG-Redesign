@@ -269,28 +269,6 @@ export const newestListings = [
     isVip: false,
     isTop: true,
   },
-  {
-    id: 7,
-    title: "BMW X3 3.0d xDrive M-Sport",
-    kilometers: "190.500km",
-    price: "58 000лв.",
-    listingImg: "/car1.png",
-    region: "обл. София-град",
-    datePosted: "16:30PM, 03.12",
-    isVip: false,
-    isTop: false,
-  },
-  {
-    id: 8,
-    title: "BMW X3 3.0d xDrive M-Sport",
-    kilometers: "190.500km",
-    price: "58 000лв.",
-    listingImg: "/car1.png",
-    region: "обл. София-град",
-    datePosted: "16:30PM, 03.12",
-    isVip: false,
-    isTop: false,
-  },
 ];
 
 export const perks = [

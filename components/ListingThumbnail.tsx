@@ -33,7 +33,7 @@ const ListingThumbnail: React.FC<ListingThumbnailProps> = ({
             : ""
         }`}
       >
-        <div className="w-48 h-36 relative rounded-md overflow-hidden">
+        <div className="w-48 lg:w-80 h-36 lg:h-48 relative rounded-md overflow-hidden">
           <Image
             src={listingImg}
             alt={title}
@@ -54,8 +54,8 @@ const ListingThumbnail: React.FC<ListingThumbnailProps> = ({
         </div>
       </div>
 
-      <div className="flex flex-col items-start justify-start">
-        <h3 className="text-lg max-w-48 font-medium">{title}</h3>
+      <div className="w-full lg:w-[78%] flex flex-col items-start justify-start">
+        <h3 className="text-lg max-w-80 w-full font-medium">{title}</h3>
         <div className="flex items-center gap-2">
           <h4 className="text-mobilePrimary font-bold">{price}</h4>
           <h4>({kilometers})</h4>

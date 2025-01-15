@@ -3,20 +3,22 @@ import React from "react";
 
 const NewUsed = () => {
   return (
-    <section className="w-full flex flex-col max-w-screen-xl justify-center items-center mx-auto py-8">
+    <section className="w-full flex flex-col justify-center items-center mx-auto py-8">
       <div className="w-full flex flex-col max-w-screen-lg justify-center items-center">
         <div className="py-6 w-[80%] text-center lg:w-full">
-          <h1 className="text-3xl lg:text-4xl">
-            Открийте вашия следващ автомобил
+          <h1 className="text-4xl lg:text-4xl">
+            Открийте вашия следващ{" "}
+            <span className="text-mobilePrimary font-semibold">автомобил</span>
           </h1>
         </div>
-        <div className="rounded-md">
+        <div className="w-full flex justify-center items-center">
           <Image
             src="/newUsedPNG2.png"
             alt="NewUsedCoverImg"
-            width={1600}
+            width={800}
             height={400}
-            className="w-full lg:rounded-lg"
+            unoptimized
+            className="w-full lg:rounded-xl"
           />
         </div>
         <div className="w-full lg:w-2/3 text-center flex justify-center mt-10 items-center mx-auto px-6 lg:px-0">

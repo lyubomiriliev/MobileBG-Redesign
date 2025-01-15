@@ -11,11 +11,14 @@ export const Dropdown = ({
 }) => {
   return (
     <div>
-      <label htmlFor={label} className="block font-medium text-gray-700 mb-1">
+      <label
+        htmlFor={label}
+        className="block font-medium text-mobileDarkGray mb-1"
+      >
         {label}
       </label>
       <select
-        className="w-full border border-gray-300 rounded-md p-2 pr-8"
+        className="w-full border border-slate-400 bg-white rounded-md p-2 pr-8"
         value={value}
         id={label}
         onChange={(e) => onChange(e.target.value)}

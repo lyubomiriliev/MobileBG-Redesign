@@ -10,14 +10,16 @@ const SellCarStep = ({
   id: number;
 }) => {
   return (
-    <div className="flex flex-col items-start justify-center py-2">
-      <div className="flex items-center gap-4">
-        <div className="w-10 h-10 rounded-full flex justify-center items-center text-4xl text-white font-extrabold bg-mobilePrimary">
+    <div className="w-full flex flex-col items-start justify-center p-4">
+      <div className="flex items-center gap-3">
+        <div className="w-12 h-12 rounded-full flex justify-center items-center text-4xl text-white font-extrabold bg-mobilePrimary">
           {id}
         </div>
-        <h1 className="text-xl font-medium lg:text-2xl">{title}</h1>
+        <h1 className="text-xl font-semibold uppercase lg:text-2xl">{title}</h1>
       </div>
-      <p className="text-mobileDarkGray">{subTitle}</p>
+      <div className="w-full pl-14">
+        <p className="text-mobileDarkGray">{subTitle}</p>
+      </div>
     </div>
   );
 };

@@ -30,7 +30,7 @@ const Button: React.FC<ButtonProps> = ({
     default:
       "bg-mobilePrimary text-white uppercase hover:bg-mobilePrimaryDark duration-300 transition-all ease-in-out cursor-pointer",
     outline:
-      "border border-black text-black hidden lg:flex bg-transparent hover:border-mobilePrimary hover:text-mobilePrimary uppercase cursor-pointer",
+      "border border-black text-black bg-transparent hover:border-mobilePrimary hover:text-mobilePrimary uppercase cursor-pointer",
     outlineHero:
       "border border-black text-black hidden lg:flex bg-transparent hover:border-mobilePrimary hover:text-mobilePrimary uppercase cursor-pointer",
     outlineWhite:
