@@ -2,10 +2,23 @@
 
 import Button from "@/components/Button";
 import { Dropdown } from "@/components/UI/Dropdown";
-import { brandsModelMapping, months, years } from "@/utils/constants";
+import { brandsModelMapping, years } from "@/utils/constants";
 import React, { useState } from "react";
 
-const page = () => {
+const AveragePricePage = () => {
+  const [formData, setFormData] = useState({
+    brand: "",
+    model: "",
+    year: "",
+    engine: "",
+    gearbox: "",
+  });
+
+  const [averagePrice, setAveragePrice] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const modelOptions = formData.brand ? brandsModelMapping[formData.brand] : [];
+
   const handleChange = (field: string, value: string) => {
     if (field === "brand") {
       setFormData({ ...formData, brand: value, model: "" });
@@ -14,23 +27,30 @@ const page = () => {
     }
   };
 
-  const [checkPrice, setCheckPrice] = useState(false);
+  const handleCheckPrice = async () => {
+    setLoading(true);
+    setAveragePrice(null); // Reset the previous result
 
-  const handleCheckPrice = () => {
-    setCheckPrice(!checkPrice);
+    try {
+      const response = await fetch("/api/average/getAveragePrice", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setAveragePrice(data.averagePrice);
+      } else {
+        console.error("Error:", data.error);
+      }
+    } catch (error) {
+      console.error("Error fetching average price:", error);
+    } finally {
+      setLoading(false);
+    }
   };
-
-  const [formData, setFormData] = useState({
-    brand: "",
-    model: "",
-    year: "",
-    month: "",
-    engine: "",
-    gearbox: "",
-    coupe: "",
-  });
-
-  const modelOptions = formData.brand ? brandsModelMapping[formData.brand] : [];
 
   return (
     <section className="basicSection">
@@ -50,7 +70,7 @@ const page = () => {
           />
           <Dropdown
             label="Двигател"
-            options={["Всички", "Бензин", "Дизел", "Електрически"]}
+            options={["Бензинов", "Дизелов", "Електрически", "Хибрид"]}
             value={formData.engine}
             onChange={(value) => handleChange("engine", value)}
           />
@@ -62,22 +82,16 @@ const page = () => {
           />
           <Dropdown
             label="Скоростна кутия"
-            options={["Всички", "Автоматична", "Ръчна"]}
+            options={["Автоматична", "Ръчна"]}
             value={formData.gearbox}
             onChange={(value) => handleChange("gearbox", value)}
           />
           <div className="flex items-center justify-between">
             <Dropdown
-              label="Година"
+              label="Година на производство"
               options={years}
               value={formData.year}
               onChange={(value) => handleChange("year", value)}
-            />
-            <Dropdown
-              label="Месец"
-              options={months}
-              value={formData.month}
-              onChange={(value) => handleChange("month", value)}
             />
           </div>
         </div>
@@ -86,10 +100,15 @@ const page = () => {
           className="py-4 gap-4 flex items-center"
         >
           <Button text="Провери цена" />
-          {checkPrice && (
+          {averagePrice == 0 ? (
+            <p className="text-lg text-red-600">
+              Няма достатъчно обяви отговраящи на вашите критерии за да бъде
+              направена средна цена.
+            </p>
+          ) : (
             <h3 className="text-xl lg:text-2xl">
-              Вашата цена е:{" "}
-              <span className="text-mobilePrimary">24 600лв.</span>
+              Средната цена за вашия автомобил е:{" "}
+              <span className="text-mobilePrimary">{averagePrice}лв.</span>
             </h3>
           )}
         </div>
@@ -111,4 +130,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default AveragePricePage;
