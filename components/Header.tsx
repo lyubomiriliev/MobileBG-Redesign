@@ -16,32 +16,18 @@ import { FiMenu, FiX } from "react-icons/fi";
 import Button from "./Button";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import { useListingContext } from "@/context/ListingContext";
 import { supabase } from "@/app/lib/supabase";
+import { handleSignOut } from "@/app/utils/authFunctions";
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userInfo, setUserInfo] = useState<UserInfoData>();
 
-  const { session, signOut } = useAuth();
+  const { session } = useAuth();
   const userEmail = session?.user.email;
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
-  };
-
-  const { clearImages } = useListingContext();
-
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-      clearImages();
-      localStorage.removeItem("previewUrls");
-      window.location.href = "/";
-      alert("Logged out successfully");
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   useEffect(() => {
@@ -188,6 +174,17 @@ const Header: React.FC = () => {
                 {link.name}
               </Link>
             ))}
+            {session?.user && (
+              <div
+                className="flex items-center uppercase text-xl gap-1 px-2"
+                onClick={handleSignOut}
+              >
+                <p className="font-bold text-mobilePrimary duration-300 transition-all ease-in cursor-pointer">
+                  Изход
+                </p>
+                <FiLogOut className="text-mobilePrimary" size={24} />
+              </div>
+            )}
           </div>
         </div>
       )}

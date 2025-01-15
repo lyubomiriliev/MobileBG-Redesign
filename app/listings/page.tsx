@@ -6,6 +6,8 @@ import { Listing, UserInfoData } from "@/utils/constants";
 import React, { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import Button from "@/components/Button";
+import { handleSignOut } from "../utils/authFunctions";
+import { FiLogOut } from "react-icons/fi";
 
 const MyListingsPage = () => {
   const [listings, setListings] = useState<Listing[]>([]);
@@ -107,7 +109,7 @@ const MyListingsPage = () => {
 
   return (
     <section className="basicSection !max-w-4xl">
-      <div className="w-full flex flex-col rounded-xl justify-center items-start p-2 lg:p-4 shadow-md bg-gradient-to-r from-slate-50 via-slate-100 to-slate-50 border-[1px] border-slate-200">
+      <div className="w-full flex flex-col rounded-xl relative justify-center items-start p-2 lg:p-4 shadow-md bg-gradient-to-r from-slate-50 via-slate-100 to-slate-50 border-[1px] border-slate-200">
         <div className="w-full flex justify-center items-center gap-4 pb-6">
           <h1 className="text-xl lg:text-3xl">Потребителски данни</h1>
         </div>
@@ -151,6 +153,15 @@ const MyListingsPage = () => {
         </div>
         <div className="w-full flex justify-center items-center pt-4">
           <Button text="Запази промените" onClick={handleSaveChanges} />
+        </div>
+        <div
+          className="flex items-center gap-1 absolute top-2 right-2"
+          onClick={handleSignOut}
+        >
+          <p className="font-bold text-mobileDarkGray hover:text-mobilePrimary duration-300 transition-all ease-in cursor-pointer">
+            Изход
+          </p>
+          <FiLogOut size={24} />
         </div>
       </div>
       <div className="w-full flex flex-col justify-center items-center pt-6">

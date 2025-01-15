@@ -10,6 +10,9 @@ import Image from "next/image";
 import ListingExtraCard from "@/components/UI/ListingExtraCard";
 import { Input } from "@/components/UI/Input";
 import Button from "@/components/Button";
+import { useSwipeable } from "react-swipeable";
+
+import { IoMdClose } from "react-icons/io";
 
 type Listing = {
   id: string | number;
@@ -64,6 +67,46 @@ const ListingDetailsPage = () => {
   const handleChange = (field: string, value: string) => {
     setFormData({ ...formData, [field]: value });
   };
+
+  // SWIPE PHOTOS:
+
+  const handleSwipe = (direction: "left" | "right") => {
+    if (direction === "left") {
+      setCurrentMainImageIndex((prev) =>
+        prev === parsedImageUrls.length - 1 ? 0 : prev + 1
+      );
+    } else if (direction === "right") {
+      setCurrentMainImageIndex((prev) =>
+        prev === 0 ? parsedImageUrls.length - 1 : prev - 1
+      );
+    }
+  };
+
+  const handleSwipeModal = (direction: "left" | "right") => {
+    if (direction === "left") {
+      setCurrentImageIndex((prev) =>
+        prev === parsedImageUrls.length - 1 ? 0 : prev + 1
+      );
+    } else if (direction === "right") {
+      setCurrentImageIndex((prev) =>
+        prev === 0 ? parsedImageUrls.length - 1 : prev - 1
+      );
+    }
+  };
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => handleSwipe("left"),
+    onSwipedRight: () => handleSwipe("right"),
+    trackTouch: true,
+    preventScrollOnSwipe: true,
+  });
+
+  const swipeHandlersModal = useSwipeable({
+    onSwipedLeft: () => handleSwipeModal("left"),
+    onSwipedRight: () => handleSwipeModal("right"),
+    trackTouch: true,
+    preventScrollOnSwipe: true,
+  });
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -181,7 +224,10 @@ const ListingDetailsPage = () => {
         </div>
         <div className="w-full flex flex-col lg:flex-row items-start">
           {/* MAIN IMAGES START */}
-          <div className="w-full lg:w-2/3 rounded-xl relative">
+          <div
+            {...swipeHandlers}
+            className="w-full lg:w-2/3 rounded-xl relative"
+          >
             <Image
               width={500}
               height={500}
@@ -259,40 +305,41 @@ const ListingDetailsPage = () => {
         </div>
         {modalOpen && (
           <div
-            onClick={closeModal}
+            onClick={closeModal} // Close the modal on backdrop click
             className="fixed inset-0 bg-black/80 flex justify-center items-center z-50"
           >
             <div
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full h-full flex justify-center items-center"
+              {...swipeHandlersModal} // Bind swipe handlers to modal container
+              className="relative w-full max-w-4xl flex flex-col items-center"
+              onClick={(e) => e.stopPropagation()} // Prevent closing modal on image click
             >
               <Image
                 src={parsedImageUrls[currentImageIndex]}
-                alt="Fullscreen Image"
+                alt={`Image ${currentImageIndex}`}
                 width={1200}
                 height={800}
                 className="object-contain max-w-full max-h-full"
               />
+              {/* Navigation Arrows */}
               <div
                 onClick={goToNextImage}
-                className="absolute right-10 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full cursor-pointer"
+                className="absolute right-10 hidden lg:flex top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full cursor-pointer z-20"
               >
                 <FaChevronRight size={32} />
               </div>
               <div
                 onClick={goToPreviousImage}
-                className="absolute left-10 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full cursor-pointer"
+                className="absolute left-10 hidden lg:flex top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full cursor-pointer z-20"
               >
                 <FaChevronLeft size={32} />
               </div>
-              <button
+              {/* Close Icon */}
+              <IoMdClose
                 onClick={closeModal}
-                className="absolute top-5 right-5 text-white text-3xl font-bold"
-              >
-                ✕
-              </button>
-              {/* Dots for Navigation */}
-              <div className="absolute bottom-5 flex gap-2">
+                className="absolute top-5 right-5 text-white text-3xl cursor-pointer z-50"
+              />
+              {/* Dots Navigation */}
+              <div className="absolute bottom-5 flex gap-2 z-20">
                 {parsedImageUrls.map((_: any, index: number) => (
                   <div
                     key={index}
@@ -307,6 +354,7 @@ const ListingDetailsPage = () => {
             </div>
           </div>
         )}
+
         <div className="w-full flex flex-col lg:flex-row justify-start items-start p-2">
           <div className="w-full lg:w-1/2 flex flex-col items-start justify-start">
             <div className="flex items-center justify-center py-4">
