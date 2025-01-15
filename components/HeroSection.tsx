@@ -12,7 +12,7 @@ const HeroSection = () => {
         width={1200}
         height={600}
         unoptimized
-        className="w-full h-[80vh] lg:h-[60vh] object-cover object-right"
+        className="w-full h-[72vh] lg:h-[60vh] object-cover object-right"
       />
       <div className="w-full flex flex-col items-center justify-center absolute">
         <div className="w-full flex flex-col text-center justify-start lg:justify-center items-center mt-24">

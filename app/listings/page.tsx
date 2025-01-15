@@ -107,11 +107,11 @@ const MyListingsPage = () => {
 
   return (
     <section className="basicSection !max-w-4xl">
-      <div className="w-full flex flex-col rounded-xl justify-center items-start p-6 shadow-md bg-gradient-to-r from-slate-50 via-slate-100 to-slate-50 border-[1px] border-slate-200">
+      <div className="w-full flex flex-col rounded-xl justify-center items-start p-2 lg:p-4 shadow-md bg-gradient-to-r from-slate-50 via-slate-100 to-slate-50 border-[1px] border-slate-200">
         <div className="w-full flex justify-center items-center gap-4 pb-6">
           <h1 className="text-xl lg:text-3xl">Потребителски данни</h1>
         </div>
-        <div className="w-full flex justify-center items-center gap-6 ">
+        <div className="w-full grid grid-cols-2 lg:grid-cols-4 justify-center items-center gap-4 ">
           <div className="w-full flex flex-col">
             <label htmlFor="">Вашето име</label>
             <input

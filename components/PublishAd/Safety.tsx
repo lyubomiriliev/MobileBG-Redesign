@@ -4,7 +4,8 @@ import { safetyExtras } from "@/utils/constants";
 import React, { useState } from "react";
 import Checkbox from "../UI/Checkbox";
 import { useDispatch } from "react-redux";
-import { AppDispatch, updateSafetyExtras } from "@/app/store/redux";
+import { updateSafetyExtras } from "@/app/store/listingSlice";
+import { AppDispatch } from "@/app/store";
 
 const Safety = () => {
   const [extras, setExtras] = useState<string[]>([]);

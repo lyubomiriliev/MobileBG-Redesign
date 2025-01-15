@@ -11,7 +11,7 @@ const SellYourCar = () => {
           Бързо и лесно!
         </span>
         <div className="w-full flex justify-start text-center px-6 py-4">
-          <p className="max-w-3xl text-lg lg:text-xl">
+          <p className="max-w-3xl text-xl">
             Ако искате да продадете своя автомобил, mobile.bg е идеалното място
             за вас. Публикувайте обявата си лесно и достигнете до хиляди
             потенциални купувачи. Нашата платформа ви предоставя всичко

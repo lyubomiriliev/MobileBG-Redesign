@@ -17,7 +17,7 @@ export const Input = ({
       <input
         type={type}
         placeholder={placeholder}
-        className="w-full border border-gray-300 rounded-md p-1.5"
+        className="w-full h-10 border border-gray-300 rounded-md p-2"
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />

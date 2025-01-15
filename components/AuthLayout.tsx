@@ -14,11 +14,13 @@ const AuthLayout = ({
 }) => {
   return (
     <section className="basicSection">
-      <div className="innerSection">
-        <div className="w-full flex flex-col justify-center items-center gap-4">
-          <div className="flex flex-col justify-center items-center gap-2">
-            <h1 className="text-xl lg:text-2xl">{title}</h1>
-            <p className="text-lg text-mobileDarkGray">{subTitle}</p>
+      <div className="innerSection !pt-6">
+        <div className="w-full  flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center pb-4">
+            <h1 className="text-4xl uppercase text-mobilePrimary font-semibold lg:text-5xl">
+              {title}
+            </h1>
+            <p className="text-xl text-mobileDarkGray">{subTitle}</p>
           </div>
         </div>
         <div className="z-50 w-full">{children}</div>

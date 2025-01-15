@@ -10,8 +10,8 @@ import {
 import { Dropdown } from "../UI/Dropdown";
 import { Input } from "../UI/Input";
 import { useDispatch } from "react-redux";
-import { updateGeneralData } from "@/app/store/redux";
 import Image from "next/image";
+import { updateGeneralData } from "@/app/store/listingSlice";
 
 const GeneralData = () => {
   const dispatch = useDispatch();

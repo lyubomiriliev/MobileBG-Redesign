@@ -5,7 +5,8 @@ import React, { useState } from "react";
 import Checkbox from "../UI/Checkbox";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState, updateComfortExtras } from "@/app/store/redux";
+import { AppDispatch, RootState } from "@/app/store";
+import { updateComfortExtras } from "@/app/store/listingSlice";
 
 const Comfort = () => {
   const [extras, setExtras] = useState<string[]>([]);

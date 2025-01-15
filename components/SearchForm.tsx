@@ -66,7 +66,7 @@ const SearchForm = ({
   const modelOptions = formData.brand ? brandsModelMapping[formData.brand] : [];
 
   return (
-    <div className="w-full max-w-3xl mx-auto bg-white p-6 rounded-lg">
+    <div className="w-full max-w-3xl mx-auto bg-white lg:p-6 rounded-lg">
       <div className="flex flex-col">
         <div className="w-full flex justify-between items-center mb-2">
           <h2 className="text-mobilePrimary font-medium text-xl">
@@ -136,7 +136,7 @@ const SearchForm = ({
           </label>
           <input
             type="number"
-            className="w-full border border-slate-400 rounded-md p-[2px] lg:p-2"
+            className="w-full border h-10 border-slate-400 rounded-md p-[2px] lg:p-2"
             value={formData.maxPrice}
             onChange={(e) => handleChange("maxPrice", e.target.value)}
             placeholder=""

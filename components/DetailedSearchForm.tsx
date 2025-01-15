@@ -137,8 +137,8 @@ const DetailedSearchForm = () => {
   }, [searchCriteria]);
 
   return (
-    <div className="w-full max-w-5xl mx-auto bg-white p-6 rounded-lg">
-      <div className="grid grid-cols-4 gap-4">
+    <div className="w-full max-w-5xl mx-auto text-lg lg:p-4 rounded-lg">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <Dropdown
           label="Категория"
           options={Object.keys(categoriesModelMapping)}
@@ -327,7 +327,7 @@ const DetailedSearchForm = () => {
         ))}
       </div>
 
-      <div className="w-1/3 flex">
+      <div className="w-full lg:w-1/3 flex">
         <Button
           variant="longSearch"
           icon="/searchIconWhite.svg"

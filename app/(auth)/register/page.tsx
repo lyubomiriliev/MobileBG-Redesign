@@ -90,7 +90,7 @@ const RegisterPage = () => {
       >
         <form
           onSubmit={handleSignUp}
-          className="w-1/3 flex flex-col items-start justify-start"
+          className="lg:w-1/3 w-full h-[75vh] lg:h-[60vh] flex flex-col items-start justify-start"
         >
           <Input
             label="E-mail"
@@ -128,9 +128,9 @@ const RegisterPage = () => {
             <Button type="submit" text="Регистрация" />
           </div>
           <div className="flex items-center gap-1">
-            <p>Вече имате регистрация</p>
+            <p>Вече имате регистрация?</p>
             <Link href="/login">
-              <span className="font-bold cursor-pointer text-mobilePrimary">
+              <span className="font-bold cursor-pointer uppercase text-mobilePrimary">
                 Влезте тук
               </span>
             </Link>

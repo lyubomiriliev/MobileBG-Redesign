@@ -24,6 +24,11 @@ export const headerLinks = [
 
 export const headerLinksMobile = [
   {
+    id: 1,
+    name: "Добави обява",
+    url: "/listings/publish",
+  },
+  {
     id: 2,
     name: "Търсене",
     url: "/search",
@@ -37,11 +42,6 @@ export const headerLinksMobile = [
     id: 4,
     name: "Дилъри",
     url: "/dealers",
-  },
-  {
-    id: 5,
-    name: "Моят Профил",
-    url: "/listings",
   },
 ];
 

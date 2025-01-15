@@ -71,16 +71,19 @@ const Header: React.FC = () => {
   }, [userEmail]);
 
   return (
-    <header className="w-full bg-white/75 backdrop-blur-md flex flex-col gap-1 items-center justify-between fixed top-0 py-2 h-16 md:h-20 z-50 shadow-md">
+    <header className="w-full bg-white/75 backdrop-blur-md flex flex-col gap-1 items-center justify-between fixed top-0 py-2 h-16 md:h-20 z-[999] shadow-md">
       <nav className="justify-center items-center hidden lg:flex">
         <div className="flex flex-col h-20 items-center justify-center w-full top-0 fixed px-4">
           <div className="w-full max-w-screen-lg mx-auto justify-center items-center flex">
             <ul className="hidden w-full justify-around lg:flex items-center">
               {headerLinks.map((link, index) => (
                 <Link key={index} href={link.url}>
-                  <li className="text-lg cursor-pointer">{link.name}</li>
+                  <li className="text-xl font-medium hover:text-mobilePrimary duration-300 ease-in-out cursor-pointer">
+                    {link.name}
+                  </li>
                   {link.src && (
                     <Image
+                      className="hover:scale-110 duration-300 ease-in-out"
                       src="/mobileLogo.svg"
                       alt="MobileBG"
                       width={120}
@@ -97,13 +100,16 @@ const Header: React.FC = () => {
             </Link>
             {session?.user ? (
               <Link href="/listings">
-                <div className="px-4 flex items-center gap-2">
-                  <p>
-                    <span className="text-mobilePrimary text-sm whitespace-nowrap font-bold">
+                <div className="px-4 flex items-center gap-4">
+                  <div className="group flex flex-col items-center cursor-pointer">
+                    <FaUser
+                      className="text-mobilePrimary group-hover:text-mobileDarkGray duration-300 ease-in"
+                      size={20}
+                    />
+                    <span className="text-mobilePrimary group-hover:text-mobileDarkGray duration-300 ease-in text-sm whitespace-nowrap font-bold">
                       {userInfo?.first_name}
                     </span>
-                  </p>
-                  <FaUser className="text-mobilePrimary" size={20} />
+                  </div>
 
                   <p
                     onClick={handleSignOut}
@@ -114,7 +120,10 @@ const Header: React.FC = () => {
                 </div>
               </Link>
             ) : (
-              <Link href="/login">
+              <Link
+                className="hover:text-mobilePrimary duration-300 ease-in-out"
+                href="/login"
+              >
                 <div className="flex items-center gap-2 px-4">
                   <FaRegUser size={20} />
                   <p className="font-bold cursor-pointer">Вход</p>
@@ -149,12 +158,19 @@ const Header: React.FC = () => {
           </Link>
         </div>
         <div className="absolute right-4 top-3">
-          <Link href="/login">
-            <div className="flex items-center gap-1">
-              <FaRegUser size={20} />
-              <p className="font-bold cursor-pointer">Вход</p>
-            </div>
-          </Link>
+          {session?.user ? (
+            <Link href="/listings">
+              <FaUser size={20} className="text-mobilePrimary" />
+              <div className="w-[20px] h-[3px] bg-mobilePrimary absolute right-0 top-6"></div>
+            </Link>
+          ) : (
+            <Link href="/login">
+              <div className="flex items-center gap-1">
+                <FaRegUser size={20} />
+                <p className="font-bold cursor-pointer">Вход</p>
+              </div>
+            </Link>
+          )}
         </div>
       </div>
 
@@ -166,7 +182,7 @@ const Header: React.FC = () => {
               <Link
                 key={index}
                 href={link.url}
-                className="text-black p-2 font-semibold text-2xl uppercase py-2"
+                className="text-black hover:text-mobilePrimary duration-300 ease-in p-2 font-semibold text-2xl uppercase py-2"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.name}

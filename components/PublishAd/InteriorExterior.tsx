@@ -8,12 +8,9 @@ import {
 import React, { useState } from "react";
 import Checkbox from "../UI/Checkbox";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  AppDispatch,
-  RootState,
-  updateInteriorExterior,
-} from "@/app/store/redux";
 import Image from "next/image";
+import { AppDispatch, RootState } from "@/app/store";
+import { updateInteriorExterior } from "@/app/store/listingSlice";
 
 const InteriorExterior = () => {
   const dispatch = useDispatch<AppDispatch>();

@@ -6,7 +6,6 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import AuthLayout from "@/components/AuthLayout";
 import { useAuth } from "@/context/AuthContext";
-import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 const SignIn = () => {
@@ -40,7 +39,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full b">
       <AuthLayout
         title="Вход"
         subTitle="Влезте във вашия акаунт"
@@ -48,7 +47,7 @@ const SignIn = () => {
       >
         <form
           onSubmit={handleSignIn}
-          className="w-1/3 flex flex-col items-start justify-center"
+          className="w-full lg:w-1/3 h-[50vh] flex flex-col items-start justify-start"
         >
           <Input
             label="E-mail"

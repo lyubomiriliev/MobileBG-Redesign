@@ -15,9 +15,11 @@ const SellCarStep = ({
         <div className="w-12 h-12 rounded-full flex justify-center items-center text-4xl text-white font-extrabold bg-mobilePrimary">
           {id}
         </div>
-        <h1 className="text-xl font-semibold uppercase lg:text-2xl">{title}</h1>
+        <h1 className="text-2xl font-semibold uppercase lg:text-2xl">
+          {title}
+        </h1>
       </div>
-      <div className="w-full pl-14">
+      <div className="w-full text-xl pl-14">
         <p className="text-mobileDarkGray">{subTitle}</p>
       </div>
     </div>

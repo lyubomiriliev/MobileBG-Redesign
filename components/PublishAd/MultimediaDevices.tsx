@@ -5,7 +5,8 @@ import React, { useState } from "react";
 import Checkbox from "../UI/Checkbox";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
-import { AppDispatch, updateMediaExtras } from "@/app/store/redux";
+import { AppDispatch } from "@/app/store";
+import { updateMediaExtras } from "@/app/store/listingSlice";
 
 const MultimediaDevices = () => {
   const [extras, setExtras] = useState<string[]>([]);

@@ -148,7 +148,13 @@ const ListingDetailsPage = () => {
   return (
     <section className="basicSection">
       <div className="innerSection min-h-screen !p-2">
-        <div className="w-full flex justify-between items-center p-2 rounded-md">
+        <div className="w-full flex flex-col justify-center lg:hidden text-center">
+          <h1 className="text-xl font-semibold">
+            {listing.brand} {listing.model} {listing.engine}{" "}
+            {listing.modification} {listing.tuning}
+          </h1>
+        </div>
+        <div className="w-full lg:flex flex-col lg:flex-row justify-between items-center p-2 rounded-md hidden">
           <div className="flex flex-col text-center">
             <h1 className="text-2xl text-mobilePrimary font-semibold">
               {listing.price} {listing.currency}
@@ -173,34 +179,35 @@ const ListingDetailsPage = () => {
             </h1>
           </div>
         </div>
-        <div className="w-full flex items-start">
-          <div className="w-2/3 rounded-xl relative">
+        <div className="w-full flex flex-col lg:flex-row items-start">
+          {/* MAIN IMAGES START */}
+          <div className="w-full lg:w-2/3 rounded-xl relative">
             <Image
               width={500}
               height={500}
               alt={listing.brand}
               src={parsedImageUrls[currentMainImageIndex]}
-              className="object-cover w-[700px] h-[700px] rounded-xl p-2 select-none cursor-pointer"
+              className="object-cover w-[700px] h-[300px] lg:h-[700px] rounded-xl lg:p-2 select-none cursor-pointer"
               onClick={() => openModal(currentMainImageIndex)}
             />
             <div
               onClick={goToNextMainImage}
-              className="bg-black/40 hover:bg-black/90 cursor-pointer duration-300 transition-all ease-in w-12 h-12 flex justify-center items-center rounded-tl-2xl rounded-bl-2xl text-white absolute bottom-1/2 right-2"
+              className="bg-black/40 hover:bg-black/90 cursor-pointer duration-300 transition-all ease-in w-10 h-10 lg:w-12 lg:h-12 flex justify-center items-center rounded-tl-2xl rounded-bl-2xl text-white absolute bottom-1/2 right-0 lg:right-2"
             >
-              <FaChevronRight size={32} />
+              <FaChevronRight size={24} />
             </div>
             <div
               onClick={goToPreviousMainImage}
-              className="bg-black/40 hover:bg-black/90 cursor-pointer duration-300 transition-all ease-in w-12 h-12 flex justify-center items-center rounded-tr-2xl rounded-br-2xl text-white absolute bottom-1/2 left-2"
+              className="bg-black/40 hover:bg-black/90 cursor-pointer duration-300 transition-all ease-in w-10 h-10 lg:w-12 lg:h-12 flex justify-center items-center rounded-tr-2xl rounded-br-2xl text-white absolute bottom-1/2 left-0 lg:left-2"
             >
-              <FaChevronLeft size={32} />
+              <FaChevronLeft size={24} />
             </div>
-            <div className="w-full justify-center absolute bottom-5 left-0 flex gap-2">
+            <div className="w-full justify-center absolute bottom-3 lg:bottom-5 left-0 flex gap-2">
               {parsedImageUrls.map((_: any, index: number) => (
                 <div
                   key={index}
                   onClick={() => openModal(currentMainImageIndex)}
-                  className={`w-3 h-3 rounded-full ${
+                  className={`w-2 h-2 lg:w-3 lg:h-3 rounded-full ${
                     index === currentMainImageIndex
                       ? "bg-mobilePrimary"
                       : "bg-white"
@@ -209,7 +216,21 @@ const ListingDetailsPage = () => {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-1 w-1/3 ">
+          {/* MAIN IMAGE END */}
+
+          <div className="flex justify-between w-full text-left p-2 lg:hidden">
+            <div className="flex flex-col">
+              <h1 className="text-2xl text-mobilePrimary font-semibold">
+                {listing.price} {listing.currency}
+              </h1>
+              <h1 className="text-mobilePrimary text-lg">
+                Цената е с включено ДДС
+              </h1>
+            </div>
+            <h1 className="text-base">Намира се в {listing.location}</h1>
+          </div>
+
+          <div className="lg:grid grid-cols-1 w-1/3 hidden">
             {parsedImageUrls.slice(1, 4).map((image: string, index: number) => (
               <div key={index} onClick={() => openModal(index + 1)}>
                 <Image
@@ -223,7 +244,7 @@ const ListingDetailsPage = () => {
             ))}
           </div>
         </div>
-        <div className="w-full grid grid-cols-4">
+        <div className="w-full lg:grid grid-cols-4 hidden">
           {parsedImageUrls.slice(4, 15).map((image: string, index: number) => (
             <div key={index} onClick={() => openModal(index + 4)}>
               <Image
@@ -286,8 +307,8 @@ const ListingDetailsPage = () => {
             </div>
           </div>
         )}
-        <div className="w-full flex justify-start items-start p-2">
-          <div className="w-1/2 flex flex-col items-center justify-start">
+        <div className="w-full flex flex-col lg:flex-row justify-start items-start p-2">
+          <div className="w-full lg:w-1/2 flex flex-col items-start justify-start">
             <div className="flex items-center justify-center py-4">
               <h1 className="text-mobilePrimary text-2xl font-bold uppercase">
                 Технически данни
@@ -326,7 +347,7 @@ const ListingDetailsPage = () => {
             ))}
           </ListingExtraCard>
         </div>
-        <div className="w-full flex justify-center items-start">
+        <div className="w-full flex flex-col lg:flex-row justify-center items-start">
           <ListingExtraCard title="Екстри и комфорт">
             {listing.comfort_extras.safe.map((comf, index) => (
               <div key={index}>
@@ -342,7 +363,7 @@ const ListingDetailsPage = () => {
             ))}
           </ListingExtraCard>
         </div>
-        <div className="w-full flex justify-center items-start">
+        <div className="w-full flex justify-start items-start">
           <ListingExtraCard title="Други екстри">
             {listing.additional_extras.add.map((addExtra, index) => (
               <div key={index}>
@@ -352,8 +373,8 @@ const ListingDetailsPage = () => {
           </ListingExtraCard>
         </div>
         <div className="w-full flex flex-col justify-center items-center py-10">
-          <h1 className="text-2xl mb-4">Допълнителна информация</h1>
-          <div className="w-2/3 min-h-80 flex justify-center items-start p-4 bg-gradient-to-r from-slate-100 via-slate-50 to-slate-100 border-[1px] border-slate-200 rounded-lg">
+          <h1 className="text-3xl mb-4">Допълнителна информация</h1>
+          <div className="w-full lg:w-2/3 min-h-80 flex justify-center items-start p-4 bg-gradient-to-r from-slate-100 via-slate-50 to-slate-100 border-[1px] border-slate-200 rounded-lg">
             {listing.description}
           </div>
         </div>
@@ -373,8 +394,8 @@ const ListingDetailsPage = () => {
           <h1 className="text-2xl uppercase text-mobilePrimary py-4 font-medium">
             ИЗПРАТИ ЗАПИТВАНЕ КЪМ ПРОДАВАЧА
           </h1>
-          <div className="w-full flex items-center gap-4 px-2">
-            <div className="w-1/4 flex flex-col">
+          <div className="lg:w-[80%] w-full flex items-center gap-4 px-2">
+            <div className="w-full lg:w-2/5 flex flex-col">
               <Input
                 label="Вашето Име"
                 placeholder="Име..."
@@ -394,7 +415,7 @@ const ListingDetailsPage = () => {
                 onChange={(value) => handleChange("email", value)}
               />
             </div>
-            <div className="w-full flex h-[195px] justify-start items-start flex-col flex-1 ">
+            <div className="w-full lg:flex h-[195px] justify-start items-start flex-col flex-1 hidden">
               <label htmlFor="">Запитване</label>
               <textarea
                 placeholder="Максимум до 500 символа"
@@ -404,7 +425,16 @@ const ListingDetailsPage = () => {
               ></textarea>
             </div>
           </div>
-          <div className="w-full flex justify-center items-center py-4">
+          <div className="w-full flex h-[195px] justify-start items-start flex-col flex-1 lg:hidden">
+            <label htmlFor="">Запитване</label>
+            <textarea
+              placeholder="Максимум до 500 символа"
+              className="w-full h-[195px] border-[1px] border-slate-300 resize-none p-2 rounded-lg"
+              name="contact"
+              id="contact"
+            ></textarea>
+          </div>
+          <div className="lg:w-1/3 flex justify-center items-center py-4">
             <Button text="ИЗПРАТИ ЗАПИТВАНЕТО" />
           </div>
         </div>

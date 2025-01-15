@@ -18,7 +18,7 @@ export const Dropdown = ({
         {label}
       </label>
       <select
-        className="w-full border border-slate-400 bg-white rounded-md p-2 pr-8"
+        className="w-full border border-slate-400 bg-white rounded-md h-10 p-2 pr-8"
         value={value}
         id={label}
         onChange={(e) => onChange(e.target.value)}

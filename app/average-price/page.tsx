@@ -61,7 +61,7 @@ const AveragePricePage = () => {
           </h1>
           <div className="w-full lg:w-2/3 h-[2px] bg-gradient-to-r from-slate-50 via-slate-200 to-slate-50 my-3"></div>
         </div>
-        <div className="w-2/3 grid grid-cols-2 items-center gap-4">
+        <div className="w-2/3 grid grid-cols-1 lg:grid-cols-2 items-center gap-4">
           <Dropdown
             label="Марка"
             options={Object.keys(brandsModelMapping)}
@@ -97,9 +97,11 @@ const AveragePricePage = () => {
         </div>
         <div
           onClick={handleCheckPrice}
-          className="py-4 gap-4 flex items-center"
+          className="py-4 gap-4 flex flex-col items-start"
         >
-          <Button text="Провери цена" />
+          <div className="w-2/3">
+            <Button text="Провери цена" />
+          </div>
           {averagePrice == 0 ? (
             <p className="text-lg text-red-600">
               Няма достатъчно обяви отговраящи на вашите критерии за да бъде

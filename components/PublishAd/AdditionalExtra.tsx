@@ -4,13 +4,12 @@ import { additionalExtras } from "@/utils/constants";
 import React, { useState } from "react";
 import Checkbox from "../UI/Checkbox";
 import { useDispatch, useSelector } from "react-redux";
+import { Input } from "../UI/Input";
+import { AppDispatch, RootState } from "@/app/store";
 import {
-  AppDispatch,
-  RootState,
   updateAdditionalExtras,
   updateSellerInfo,
-} from "@/app/store/redux";
-import { Input } from "../UI/Input";
+} from "@/app/store/listingSlice";
 
 const AdditionalExtra = () => {
   const [extras, setExtras] = useState<string[]>([]);

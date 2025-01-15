@@ -3,6 +3,7 @@ import clsx from "clsx";
 import Image from "next/image";
 
 import { IoIosSearch } from "react-icons/io";
+import { IoSearchSharp } from "react-icons/io5";
 
 interface ButtonProps {
   text: string;
@@ -24,13 +25,12 @@ const Button: React.FC<ButtonProps> = ({
   heroSection,
 }) => {
   const baseStyles =
-    "px-6 py-2 font-bold rounded-md transition-all flex items-center justify-center gap-2 whitespace-nowrap";
-
+    "w-full px-6 py-2 font-bold rounded-md transition-all flex items-center justify-center gap-2 whitespace-nowrap";
   const variantStyles = {
     default:
-      "bg-mobilePrimary text-white uppercase hover:bg-mobilePrimaryDark duration-300 transition-all ease-in-out cursor-pointer",
+      "bg-mobilePrimary text-xl text-white uppercase hover:bg-mobilePrimaryDark duration-300 transition-all ease-in-out cursor-pointer shadow-md",
     outline:
-      "border border-black text-black bg-transparent hover:border-mobilePrimary hover:text-mobilePrimary uppercase cursor-pointer",
+      "border-[1px] text-xl border-black text-black text-bold bg-transparent hover:border-mobilePrimary hover:text-mobilePrimary uppercase cursor-pointer",
     outlineHero:
       "border border-black text-black hidden lg:flex bg-transparent hover:border-mobilePrimary hover:text-mobilePrimary uppercase cursor-pointer",
     outlineWhite:
@@ -51,7 +51,7 @@ const Button: React.FC<ButtonProps> = ({
       )}
     >
       {heroSection ? (
-        <IoIosSearch size={24} />
+        <IoSearchSharp size={20} />
       ) : (
         icon && <Image width={20} height={20} alt={text} src={icon} />
       )}
