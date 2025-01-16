@@ -10,6 +10,7 @@ type ListingState = {
   description: description;
   phoneNumber: phoneNumber;
   email: email;
+  isPromoted: string;
 };
 
 type GeneralDataState = {
@@ -114,6 +115,7 @@ const initialState: ListingState = {
   email: {
     email: null,
   },
+  isPromoted: "BASIC",
 };
 
 const listingSlice = createSlice({
@@ -157,6 +159,9 @@ const listingSlice = createSlice({
       if (email !== undefined) state.email.email = email;
       if (description !== undefined) state.description.desc = description;
     },
+    updatePromotedType: (state, action: PayloadAction<string>) => {
+      state.isPromoted = action.payload;
+    },
   },
 });
 
@@ -168,6 +173,7 @@ export const {
   updateMediaExtras,
   updateAdditionalExtras,
   updateSellerInfo,
+  updatePromotedType,
 } = listingSlice.actions;
 
 export default listingSlice.reducer;

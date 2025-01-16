@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import { supabase } from "@/app/lib/supabase";
 import { useRouter } from "next/navigation";
 import ListingReview from "./ListingReview";
-import { listings } from "@/utils/constants";
+import { listingOptions } from "@/utils/constants";
 import ListingCard from "../UI/ListingCard";
 import Button from "../Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "@/context/AuthContext";
 import { useListingContext } from "@/context/ListingContext";
-import { RootState } from "@/app/store";
+import { AppDispatch, RootState } from "@/app/store";
+import { updatePromotedType } from "@/app/store/listingSlice";
 
 const Finalizing = () => {
   const listingData = useSelector((state: RootState) => state.listing);
@@ -20,6 +21,14 @@ const Finalizing = () => {
   const listingPhoneNumber = useSelector(
     (state: RootState) => state.listing.phoneNumber.num
   );
+
+  const dispatch = useDispatch<AppDispatch>();
+  const [selectedOption, setSelectedOption] = useState("BASIC");
+
+  const handleOptionSelect = (option: string) => {
+    setSelectedOption(option);
+    dispatch(updatePromotedType(option));
+  };
 
   const { images } = useListingContext();
   const [uploading, setUploading] = useState(false);
@@ -66,6 +75,7 @@ const Finalizing = () => {
           userId: user?.id,
           imageUrls: uploadedUrls, // Pass the URLs of the uploaded images
           phoneNumber: listingPhoneNumber,
+          isPromoted: selectedOption,
         }),
       });
 
@@ -101,19 +111,30 @@ const Finalizing = () => {
   };
 
   return (
-    <section className="w-full min-h-screen flex flex-col justify-start items-center max-w-screen-xl mx-auto px- pb-8 lg:px-0">
-      <div className="w-full flex flex-col justify-centeri items-center py-4 gap-4">
-        <h1 className="text-xl lg:text-3xl">
+    <section className="w-full flex flex-col justify-start items-center max-w-screen-xl mx-auto px-2 pb-8 lg:px-0">
+      <div className="w-full flex flex-col justify-center items-center py-4 gap-4">
+        <h1 className="text-2xl text-center lg:text-3xl">
           Публикуване - избор на тип обява и срок
         </h1>
-        <h3 className="text-lg lg:text-2xl">Преглед на обявата ви</h3>
       </div>
-      <ListingReview />
-      <div className="w-full flex flex-col items-center py-10">
-        <h1 className="text-xl lg:text-2xl">Избор на тип обява</h1>
-        <div className="w-full flex justify-center items-center gap-6 py-4">
-          {listings.map((item, index) => (
-            <div key={index}>
+      <div className="w-full flex flex-col justify-center items-center gap-2">
+        <h3 className="text-2xl lg:text-2xl mb-4">Преглед на обявата ви</h3>
+        <ListingReview />
+      </div>
+
+      <div className="w-full flex flex-col items-center py-6">
+        <h1 className="text-2xl lg:text-2xl mb-4">Избор на тип обява</h1>
+        <div className="w-full flex justify-center items-start gap-6 p-2 overflow-x-auto lg:overflow-x-visible scrollbar-hide">
+          {listingOptions.map((item, index) => (
+            <div
+              onClick={() => handleOptionSelect(item.name)}
+              className={`w-full h-full ${
+                selectedOption === item.name
+                  ? "border-2 rounded-xl border-mobilePrimary"
+                  : ""
+              }`}
+              key={index}
+            >
               <ListingCard
                 text={item.name + " " + item.price}
                 vip={item.name}

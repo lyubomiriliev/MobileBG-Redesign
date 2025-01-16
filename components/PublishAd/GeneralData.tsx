@@ -72,7 +72,7 @@ const GeneralData = () => {
           height={200}
           unoptimized
           src="/images/mbCar.webp"
-          className="w-full lg:w-2/4 2xl:w-2/3 opacity-75 absolute -right-24 top-24 select-none"
+          className="w-full lg:w-2/3 2xl:w-2/3 opacity-75 absolute -right-24 top-24 select-none hidden lg:flex"
         />
         <div className="w-full flex flex-col">
           <form className="flex flex-col">
@@ -93,8 +93,8 @@ const GeneralData = () => {
               />
             </div>
             <div className="py-6">
-              <h3>Популярни Марки</h3>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 w-[36%]">
+              <h3 className="text-xl mb-1">Популярни Марки</h3>
+              <div className="w-full grid grid-cols-3 gap-2 lg:w-[36%]">
                 {popularBrands.map((brand, index) => (
                   <div
                     onClick={() =>
@@ -118,17 +118,12 @@ const GeneralData = () => {
                 ))}
               </div>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-2/3 items-center">
+            <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 items-center">
               <Dropdown
                 label="Марка"
                 options={Object.keys(brandsModelMapping)}
                 value={formData.brand}
                 onChange={(value) => handleChange("brand", value)}
-              />
-              <Input
-                label="Кубатура (куб.см)"
-                onChange={(value) => handleChange("litres", value)}
-                value={formData.litres}
               />
               <Dropdown
                 label="Модел"
@@ -142,16 +137,21 @@ const GeneralData = () => {
                 value={formData.engine}
                 onChange={(value) => handleChange("engine", value)}
               />
-              <Input
-                label="Модификация"
-                onChange={(value) => handleChange("modification", value)}
-                value={formData.modification}
-              />
               <Dropdown
                 label="Скоростна кутия"
                 options={["Автоматична", "Ръчна"]}
                 value={formData.gearbox}
                 onChange={(value) => handleChange("gearbox", value)}
+              />
+              <Input
+                label="Кубатура (куб.см)"
+                onChange={(value) => handleChange("litres", value)}
+                value={formData.litres}
+              />
+              <Input
+                label="Модификация"
+                onChange={(value) => handleChange("modification", value)}
+                value={formData.modification}
               />
               {/* DATE DROPDOWN */}
               <Dropdown
@@ -191,13 +191,13 @@ const GeneralData = () => {
               <Dropdown
                 label="Местоположение"
                 options={[
-                  "София",
-                  "Варна",
-                  "Бургас",
-                  "Пловдив",
-                  "Плевен",
-                  "Стара Загора",
-                  "Хасково",
+                  "гр. София",
+                  "гр. Варна",
+                  "гр. Бургас",
+                  "гр. Пловдив",
+                  "гр. Плевен",
+                  "гр. Стара Загора",
+                  "гр. Хасково",
                 ]}
                 value={formData.location}
                 onChange={(value) => handleChange("location", value)}

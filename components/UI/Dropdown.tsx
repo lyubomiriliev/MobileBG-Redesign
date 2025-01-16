@@ -11,10 +11,7 @@ export const Dropdown = ({
 }) => {
   return (
     <div>
-      <label
-        htmlFor={label}
-        className="block font-medium text-mobileDarkGray mb-1"
-      >
+      <label htmlFor={label} className="block text-black mb-1 text-xl">
         {label}
       </label>
       <select

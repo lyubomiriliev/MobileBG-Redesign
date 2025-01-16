@@ -24,8 +24,8 @@ const MultimediaDevices = () => {
   };
 
   return (
-    <section className="mainSection">
-      <div className="w-full flex flex-col justify-center items-start relative">
+    <section className="mainSection relative">
+      <div className="w-full flex flex-col justify-center items-start">
         <div className="w-full flex flex-col justify-center items-center">
           <h1 className="text-xl lg:text-2xl">
             Оборудване, сигурност, екстри и функции
@@ -39,9 +39,9 @@ const MultimediaDevices = () => {
           unoptimized
           src="/carMultimedia.png"
           alt="SafetyBackground"
-          className="w-full opacity-75 lg:opacity-50 lg:w-full absolute -bottom-20 -right-24 lg:top-60 2xl:top-96 z-0"
+          className="w-[85%] lg:w-full opacity-50 absolute -bottom-20 -right-10 lg:top-64 2xl:top-96 z-0"
         />
-        <div className="flex flex-col justify-center gap-4 z-10">
+        <div className="grid grid-cols-2 lg:grid-cols-1 justify-center gap-4 z-10">
           {multimediaExtras.map((item, index) => (
             <div key={index}>
               <h1 className="text-xl lg:text-2xl font-bold text-mobilePrimary">

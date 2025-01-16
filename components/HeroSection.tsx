@@ -23,8 +23,15 @@ const HeroSection = () => {
             Намерете това, което ви подхожда в №1 сайт за автомобили в България!
           </h3>
           <div className="flex items-center gap-4 mt-5">
-            <Link href="/browse/listings/top">
+            <Link className="hidden lg:block" href="/browse/listings/top">
               <Button text="ТОП ОБЯВИ" variant="default" />
+            </Link>
+            <Link className="block lg:hidden" href="/listings/publish">
+              <Button
+                icon="/addIcon.svg"
+                text="ДОБАВИ ОБЯВА"
+                variant="default"
+              />
             </Link>
             <Link href="/search">
               <Button

@@ -4,7 +4,7 @@ import { newestListings } from "@/utils/constants";
 
 const NewestListings = () => {
   return (
-    <section className="w-full min-h-screen flex flex-col justify-start items-center max-w-screen-xl mx-auto px-4 pb-8 lg:px-0">
+    <section className="w-full min-h-screen flex flex-col justify-start items-center max-w-screen-lg mx-auto px-4 pb-8 lg:px-0">
       <div className="w-full flex flex-col items-center justify-center gap-10">
         <div className="w-[80%] lg:w-full flex flex-col justify-center items-center gap-1">
           <h1 className="text-4xl lg:text-4xl text-center">

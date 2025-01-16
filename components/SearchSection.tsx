@@ -18,7 +18,7 @@ const SearchSection: React.FC = () => {
         Търсене на превозни средства
       </h1>
       <div className="w-full flex-col lg:flex justify-center items-center px-4 md:px-0 py-6">
-        <div className="w-full justify-start flex gap-4 items-center overflow-x-auto lg:overflow-x-visible scrollbar-hide pb-4">
+        <div className="w-full justify-start lg:justify-center flex gap-4 items-center overflow-x-auto lg:overflow-x-visible scrollbar-hide pb-4">
           {searchIcons.map((icon, index) => (
             <div
               key={index}

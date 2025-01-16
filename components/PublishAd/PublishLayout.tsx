@@ -5,6 +5,8 @@ import { steps } from "@/utils/constants";
 import Link from "next/link";
 import Image from "next/image";
 
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+
 const PublishLayout = ({
   currentStep,
   children,
@@ -17,9 +19,9 @@ const PublishLayout = ({
   showBackButton?: boolean;
 }) => {
   return (
-    <section className="max-w-5xl mx-auto px-4 lg:px-0 mt-32">
+    <section className="max-w-5xl mx-auto mt-24">
       {/* Progress Bar */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="lg:flex items-center justify-between mb-8 hidden">
         {steps.map((step, index) => (
           <Link
             key={index}
@@ -46,25 +48,19 @@ const PublishLayout = ({
           </Link>
         ))}
       </div>
-      <h2 className="text-3xl uppercase text-mobilePrimary font-bold mb-4 text-center">
-        Добавяне на обява
-      </h2>
-      <div className="bg-white shadow-lg border-[1px] border-slate-200 mb-20 min-h-screen rounded-lg p-6 pt-10 flex flex-col justify-center items-center relative overflow-hidden">
+      <div className="w-full flex items-center justify-center relative">
+        <h2 className="text-3xl uppercase text-mobilePrimary font-bold mb-4 text-center">
+          Добавяне на обява
+        </h2>
         {showBackButton && onBackClick && (
-          <div
+          <IoArrowBackCircleOutline
+            size={30}
             onClick={onBackClick}
-            className="flex items-center gap-2 cursor-pointer absolute left-2 top-2 lg:left-6 lg:top-6"
-          >
-            <Image
-              width={20}
-              height={20}
-              src="/images/backArrow.svg"
-              className="w-6"
-              alt="Back"
-            />
-            <p>Назад</p>
-          </div>
+            className="hover:text-mobilePrimary duration-300 ease-in absolute left-2 cursor-pointer top-1 lg:left-0 lg:top-1"
+          />
         )}
+      </div>
+      <div className="w-[95%] mx-auto lg:w-full bg-white shadow-lg border-[1px] border-slate-200 mb-20 rounded-lg lg:p-6 lg:pt-10 flex flex-col justify-start items-start relative overflow-hidden">
         {children}
       </div>
     </section>

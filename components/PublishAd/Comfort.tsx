@@ -43,7 +43,7 @@ const Comfort = () => {
           unoptimized
           src="/images/mobileCar3.png"
           alt="SafetyBackground"
-          className="w-full opacity-75 lg:opacity-50 lg:w-full absolute -bottom-8 -right-20 lg:top-40 z-0"
+          className="w-full opacity-50 lg:opacity-50 lg:w-full absolute top-36 -right-20 lg:top-40 z-0"
         />
         <div className="flex flex-col justify-center gap-4 z-10">
           {comfortExtras.map((item, index) => (

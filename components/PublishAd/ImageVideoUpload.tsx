@@ -6,6 +6,8 @@ import Button from "../Button";
 import { useRouter } from "next/navigation";
 import { useListingContext } from "@/context/ListingContext";
 
+import { IoMdClose } from "react-icons/io";
+
 const ImageVideoUpload = () => {
   const router = useRouter();
 
@@ -102,19 +104,19 @@ const ImageVideoUpload = () => {
   return (
     <section className="imagesSection">
       <div className="w-full flex flex-col justify-centeri items-center py-8">
-        <h1 className="text-xl lg:text-2xl">Прикачване на снимки</h1>
-        <div className="w-2/4 flex">
-          <h2 className="text-center text-lg lg:text-lg text-mobileDarkGray py-2">
+        <h1 className="text-2xl lg:text-3xl">Прикачване на снимки</h1>
+        <div className="w-full lg:w-2/4 flex">
+          <h2 className="text-center text-lg text-mobileDarkGray pt-2">
             Добави до 15 снимки. За най-добър резултат препоръчваме снимките да
             са вертикални подходящи за мобилно устройство.
           </h2>
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-4 p-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 lg:p-4">
         {images.map((image, index) => (
           <div
             key={index}
-            className="w-32 h-32 border border-gray-300 rounded-md flex items-center justify-center relative"
+            className="w-44 h-44 border border-gray-300 rounded-md flex items-center justify-center relative"
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, index)}
           >
@@ -131,12 +133,11 @@ const ImageVideoUpload = () => {
                   alt={`Uploaded ${index}`}
                   className="w-full h-full object-cover rounded-md"
                 />
-                <button
+                <IoMdClose
+                  size={20}
                   onClick={() => deleteImage(index)}
-                  className="absolute top-1 right-1 bg-red-500 text-white rounded-xl w-6 h-6 flex items-center justify-center"
-                >
-                  &times;
-                </button>
+                  className="absolute top-1 right-1 bg-red-600 text-white rounded-xl w-6 h-6 flex items-center justify-center"
+                />
               </div>
             ) : (
               <>
@@ -159,7 +160,7 @@ const ImageVideoUpload = () => {
           </div>
         ))}
       </div>
-      <div onClick={handleNext} className="z-50">
+      <div onClick={handleNext} className="z-50 mt-6">
         <Button text="ПРОДЪЛЖИ" />
       </div>
     </section>

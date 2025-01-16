@@ -59,7 +59,7 @@ const AdditionalExtra = () => {
   return (
     <section className="mainSection">
       <div className="w-full flex flex-col justify-center items-start">
-        <div className="w-full flex flex-col justify-center items-center">
+        <div className="w-full flex flex-col justify-center items-center mb-5">
           <h1 className="text-xl lg:text-2xl">
             Оборудване, сигурност, екстри и функции
           </h1>
@@ -85,8 +85,8 @@ const AdditionalExtra = () => {
             </div>
           ))}
         </div>
-        <div className="w-full flex flex-col justify-center items-start py-8">
-          <div className="w-1/3 flex py-4">
+        <div className="w-full flex flex-col justify-center items-start py-6">
+          <div className="w-full lg:w-1/3 flex py-2">
             <Input
               type="text"
               label="Телефонен номер"
@@ -94,7 +94,7 @@ const AdditionalExtra = () => {
               onChange={(value) => handleInputChange("phoneNumber", value)}
             />
           </div>
-          <div className="w-1/3 flex py-4">
+          <div className="w-full lg:w-1/3 flex py-2">
             <Input
               type="text"
               label="E-mail"

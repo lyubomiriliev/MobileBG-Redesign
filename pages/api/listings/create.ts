@@ -24,6 +24,7 @@ export default async function createListing(
       description,
       imageUrls,
       phoneNumber,
+      isPromoted,
     } = req.body;
 
     const { data, error } = await supabase
@@ -58,6 +59,7 @@ export default async function createListing(
         phoneNumber,
         description,
         imageUrls,
+        isPromoted,
       })
       .select("*")
       .single();
