@@ -7,10 +7,8 @@ export default async function getAveragePrice(request: Request) {
   try {
     const body = await request.json();
 
-    // Extract filter criteria from the request body
     const { brand, model, year, engine, gearbox } = body;
 
-    // Build the query dynamically
     let query = supabase.from("listings").select("price");
 
     if (brand) query = query.eq("brand", brand);
@@ -19,7 +17,6 @@ export default async function getAveragePrice(request: Request) {
     if (engine) query = query.eq("engine", engine);
     if (gearbox) query = query.eq("gearbox", gearbox);
 
-    // Execute the query
     const { data, error } = await query;
 
     if (error) {
@@ -27,7 +24,6 @@ export default async function getAveragePrice(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    // Calculate the average price
     const prices = data.map((listing) => listing.price);
     const total = prices.reduce((sum, price) => sum + price, 0);
     const averagePrice = prices.length ? total / prices.length : 0;

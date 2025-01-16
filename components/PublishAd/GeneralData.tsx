@@ -9,33 +9,18 @@ import {
 } from "@/utils/constants";
 import { Dropdown } from "../UI/Dropdown";
 import { Input } from "../UI/Input";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { updateGeneralData } from "@/app/store/listingSlice";
+import { AppDispatch, RootState } from "@/app/store";
 
 const GeneralData = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const [activePopularBrand, setActivePopularBrand] = useState("");
-  const [formData, setFormData] = useState({
-    category: "",
-    brand: "",
-    model: "",
-    modification: "",
-    litres: "",
-    engine: "",
-    gearbox: "",
-    dateYear: "",
-    dateMonth: "",
-    coupe: "",
-    mileage: "",
-    price: "",
-    currency: "",
-    horsePower: "",
-    location: "",
-    euro: "",
-    tuning: "",
-  });
+  const genData = useSelector((state: RootState) => state.listing.generalData);
+
+  const [activePopularBrand, setActivePopularBrand] = useState<string>("");
+  const [formData, setFormData] = useState(genData);
 
   const handleChange = (field: string, value: string) => {
     if (field === "brand") {

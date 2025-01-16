@@ -20,12 +20,12 @@ const ListingCard = ({
       <div className="flex flex-col items-center gap-4">
         <div
           style={{ backgroundColor: color }}
-          className="w-[300px] flex justify-center items-center py-2 rounded-tl-[10px] rounded-tr-[10px] text-lg uppercase font-bold text-white"
+          className="w-full flex justify-center items-center py-2 rounded-tl-[10px] rounded-tr-[10px] text-lg uppercase font-bold text-white"
         >
           {vip}
         </div>
         <h1 className="font-semibold uppercase text-xl">{text}</h1>
-        <ul className="flex flex-col gap-4 justify-start items-start p-6 text-center">
+        <ul className="flex flex-col gap-4 justify-start items-start p-6 text-left">
           {perks.map((perk, index) => (
             <li key={index}>{perk}</li>
           ))}

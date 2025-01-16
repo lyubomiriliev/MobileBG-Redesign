@@ -442,7 +442,7 @@ const ListingDetailsPage = () => {
           <h1 className="text-2xl uppercase text-mobilePrimary py-4 font-medium">
             ИЗПРАТИ ЗАПИТВАНЕ КЪМ ПРОДАВАЧА
           </h1>
-          <div className="lg:w-[80%] w-full flex items-center gap-4 px-2">
+          <div className="lg:w-[80%] w-full flex items-center gap-4 lg:px-2">
             <div className="w-full lg:w-2/5 flex flex-col">
               <Input
                 label="Вашето Име"

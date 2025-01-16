@@ -11,6 +11,7 @@ type ListingState = {
   phoneNumber: phoneNumber;
   email: email;
   isPromoted: string;
+  created_at: string | null;
 };
 
 type GeneralDataState = {
@@ -116,6 +117,7 @@ const initialState: ListingState = {
     email: null,
   },
   isPromoted: "BASIC",
+  created_at: null,
 };
 
 const listingSlice = createSlice({
@@ -162,6 +164,7 @@ const listingSlice = createSlice({
     updatePromotedType: (state, action: PayloadAction<string>) => {
       state.isPromoted = action.payload;
     },
+    resetListing: () => initialState,
   },
 });
 
@@ -174,6 +177,7 @@ export const {
   updateAdditionalExtras,
   updateSellerInfo,
   updatePromotedType,
+  resetListing,
 } = listingSlice.actions;
 
 export default listingSlice.reducer;

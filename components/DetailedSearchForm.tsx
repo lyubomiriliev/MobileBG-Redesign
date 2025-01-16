@@ -49,7 +49,6 @@ type FormData = {
   interior: string[];
   security: string[];
   others: string[];
-  filter: string;
 };
 
 const DetailedSearchForm = () => {

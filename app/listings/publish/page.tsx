@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/Button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GeneralData from "@/components/PublishAd/GeneralData";
 import InteriorExterior from "@/components/PublishAd/InteriorExterior";
 import Safety from "@/components/PublishAd/Safety";
@@ -12,9 +12,18 @@ import { useRouter } from "next/navigation";
 import PublishLayout from "@/components/PublishAd/PublishLayout";
 
 const PublishCarPage = () => {
-  const [innerStep, setInnerStep] = useState(1);
+  const [innerStep, setInnerStep] = useState(() => {
+    if (typeof window !== "undefined") {
+      return parseInt(localStorage.getItem("innerStep") || "1", 10);
+    }
+    return 1;
+  });
 
   const router = useRouter();
+
+  useEffect(() => {
+    localStorage.setItem("innerStep", innerStep.toString());
+  }, [innerStep]);
 
   const handleNextInnerStep = () => {
     if (innerStep === 6) {

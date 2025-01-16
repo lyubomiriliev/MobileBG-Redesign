@@ -1,16 +1,24 @@
 "use client";
 
 import { multimediaExtras } from "@/utils/constants";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Checkbox from "../UI/Checkbox";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/app/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/app/store";
 import { updateMediaExtras } from "@/app/store/listingSlice";
 
 const MultimediaDevices = () => {
-  const [extras, setExtras] = useState<string[]>([]);
+  const mediaData = useSelector(
+    (state: RootState) => state.listing.multimediaExtras.media
+  );
+
+  const [extras, setExtras] = useState<string[]>(mediaData || []);
   const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    setExtras(mediaData);
+  }, [mediaData]);
 
   const handleCarExtras = (ext: string) => {
     let updatedExtras = [...extras];
@@ -51,6 +59,7 @@ const MultimediaDevices = () => {
                 {item.extras.map((extra, index) => (
                   <div key={`${extra}-${index}`}>
                     <Checkbox
+                      checked={extras.includes(extra)}
                       onChange={() => handleCarExtras(extra)}
                       label={extra}
                     />

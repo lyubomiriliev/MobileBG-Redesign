@@ -5,40 +5,64 @@ import {
   interiorColors,
   interiorMaterial,
 } from "@/utils/constants";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Checkbox from "../UI/Checkbox";
-import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
-import { AppDispatch, RootState } from "@/app/store";
-import { updateInteriorExterior } from "@/app/store/listingSlice";
+
+const LOCAL_STORAGE_KEY = "interiorExteriorData";
 
 const InteriorExterior = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const savedData =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "{}")
+      : {};
 
-  const listingData = useSelector((state: RootState) => state.listing);
-  console.log("Current Redux State:", listingData);
+  const [exteriorColor, setExteriorColor] = useState(
+    savedData.exteriorColor || ""
+  );
+  const [exteriorColorCar, setExteriorColorCar] = useState(
+    savedData.exteriorColorCar || "whiteCar"
+  );
+  const [interiorColor, setInteriorColor] = useState(
+    savedData.interiorColor || ""
+  );
+  const [interiorColorSeat, setInteriorColorSeat] = useState(
+    savedData.interiorColorSeat || "black"
+  );
+  const [selectedMaterial, setSelectedMaterial] = useState(
+    savedData.interiorMaterial || ""
+  );
 
-  const [exteriorColor, setExteriorColor] = useState("");
-  const [exteriorColorCar, setExteriorColorCar] = useState("whiteCar");
-  const [interiorColor, setInteriorColor] = useState("");
-  const [interiorColorSeat, setInteriorColorSeat] = useState("black");
-  const [selectedMaterial, setSelectedMaterial] = useState("");
+  // Save to localStorage when any state updates
+  useEffect(() => {
+    const dataToSave = {
+      exteriorColor,
+      exteriorColorCar,
+      interiorColor,
+      interiorColorSeat,
+      interiorMaterial: selectedMaterial,
+    };
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave));
+  }, [
+    exteriorColor,
+    exteriorColorCar,
+    interiorColor,
+    interiorColorSeat,
+    selectedMaterial,
+  ]);
 
   const handleColorUpdate = (field: string, value: string, title: string) => {
     if (field === "exteriorColor") {
       setExteriorColor(value);
       setExteriorColorCar(title);
-      dispatch(updateInteriorExterior({ exteriorColor: value }));
     } else if (field === "interiorColor") {
       setInteriorColor(value);
       setInteriorColorSeat(title);
-      dispatch(updateInteriorExterior({ interiorColor: value }));
     }
   };
 
   const handleMaterialUpdate = (material: string) => {
     setSelectedMaterial(material);
-    dispatch(updateInteriorExterior({ interiorMaterial: material }));
   };
 
   return (
@@ -52,6 +76,8 @@ const InteriorExterior = () => {
           <h3 className="text-xl lg:text-2xl">Интериор и екстериор (1/5)</h3>
         </div>
       </div>
+
+      {/* Exterior Image */}
       <Image
         width={400}
         height={400}
@@ -60,6 +86,8 @@ const InteriorExterior = () => {
         alt="ExteriorColor"
         className="w-[90%] lg:w-2/3 object-cover absolute -right-8 lg:-right-24 top-[28%] lg:top-24"
       />
+
+      {/* Interior Image */}
       <Image
         width={400}
         height={400}
@@ -68,6 +96,8 @@ const InteriorExterior = () => {
         alt="InteriorColor"
         className="w-[90%] lg:w-2/4 object-cover absolute -right-8 -bottom-8 lg:-right-0 lg:bottom-0"
       />
+
+      {/* Exterior Color Selection */}
       <div className="flex flex-col py-4">
         <h1 className="text-2xl lg-text-3xl font-semibold">
           Цвят на екстериор
@@ -94,10 +124,14 @@ const InteriorExterior = () => {
           ))}
         </div>
       </div>
+
+      {/* Interior Material & Color Selection */}
       <div className="flex flex-col mt-24 lg:mt-0 py-4">
         <div className="w-full flex justify-start items-center font-semibold">
           <h1 className="text-2xl lg-text-3xl">Материал и цвят на интериор</h1>
         </div>
+
+        {/* Material Selection */}
         <div className="grid grid-cols-2 lg:grid-cols-3 lg:mb-10 gap-4 py-4">
           {interiorMaterial.map((mat, index) => (
             <Checkbox
@@ -109,6 +143,8 @@ const InteriorExterior = () => {
             />
           ))}
         </div>
+
+        {/* Interior Color Selection */}
         <h1 className="text-2xl lg-text-3xl font-semibold">
           Цвят на интериор:
         </h1>

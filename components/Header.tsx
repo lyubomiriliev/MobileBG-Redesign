@@ -190,7 +190,7 @@ const Header: React.FC = () => {
             ))}
             {session?.user && (
               <div
-                className="flex items-center uppercase text-xl gap-1 px-2"
+                className="flex items-center uppercase text-2xl gap-1 px-2"
                 onClick={handleSignOut}
               >
                 <p className="font-bold text-mobilePrimary duration-300 transition-all ease-in cursor-pointer">

@@ -14,6 +14,7 @@ const Categories = () => {
         {featuredCategories.map((category, index) => (
           <div key={index}>
             <Category
+              src={category.src}
               url={category.url}
               name={category.name}
               offers={category.offers}
@@ -25,6 +26,7 @@ const Categories = () => {
         {popularCategories.map((category, index) => (
           <div key={index}>
             <Category
+              src={category.src}
               url={category.url}
               name={category.name}
               offers={category.offers}
@@ -33,9 +35,10 @@ const Categories = () => {
         ))}
       </CategoriesSlider>
       <CategoriesSlider title="Видове автомобили">
-        {vehicleTypes.slice(0, 5).map((category, index) => (
+        {vehicleTypes.slice(0, 4).map((category, index) => (
           <div key={index}>
             <Category
+              src={category.src}
               url={category.url}
               name={category.name}
               offers={category.offers}

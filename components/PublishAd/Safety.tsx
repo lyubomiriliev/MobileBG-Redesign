@@ -1,24 +1,38 @@
 "use client";
 
 import { safetyExtras } from "@/utils/constants";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Checkbox from "../UI/Checkbox";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateSafetyExtras } from "@/app/store/listingSlice";
-import { AppDispatch } from "@/app/store";
+import { AppDispatch, RootState } from "@/app/store";
 import Image from "next/image";
 
 const Safety = () => {
-  const [extras, setExtras] = useState<string[]>([]);
   const dispatch = useDispatch<AppDispatch>();
+
+  // Load from Redux store
+  const savedExtras = useSelector(
+    (state: RootState) => state.listing.safetyExtras.ext || []
+  );
+
+  // Initialize state from Redux store (ensuring persistence)
+  const [extras, setExtras] = useState<string[]>(savedExtras || []);
+
+  // Sync Redux state with local component state when it mounts
+  useEffect(() => {
+    setExtras(savedExtras);
+  }, [savedExtras]);
 
   const handleCarExtras = (ext: string) => {
     let updatedExtras = [...extras];
+
     if (updatedExtras.includes(ext)) {
       updatedExtras = updatedExtras.filter((item) => item !== ext);
     } else {
       updatedExtras.push(ext);
     }
+
     setExtras(updatedExtras);
     dispatch(updateSafetyExtras(updatedExtras));
   };
@@ -53,6 +67,7 @@ const Safety = () => {
                       type="checkbox"
                       label={extra}
                       name="safetyExtras"
+                      checked={extras.includes(extra)} // ✅ Keep checkbox checked
                       onChange={() => handleCarExtras(extra)}
                     />
                   </div>

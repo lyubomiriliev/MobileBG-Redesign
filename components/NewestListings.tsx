@@ -1,10 +1,41 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import ListingThumbnail from "./ListingThumbnail";
-import { newestListings } from "@/utils/constants";
+import { Listing } from "@/utils/constants";
 
 const NewestListings = () => {
+  const [loading, setLoading] = useState(false);
+  const [listings, setListings] = useState<Listing[]>([]);
+
+  useEffect(() => {
+    const fetchUserListings = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch("/api/listings/getAllListings");
+        const data = await response.json();
+
+        if (response.ok) {
+          setListings(data);
+        } else {
+          console.error("Error fetching listings", data.error);
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error("Error fetching listings:", error.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserListings();
+  }, []);
+
+  console.log(listings);
+
   return (
-    <section className="w-full min-h-screen flex flex-col justify-start items-center max-w-screen-lg mx-auto px-4 pb-8 lg:px-0">
+    <section className="w-full flex flex-col justify-start items-center max-w-screen-lg mx-auto px-4 pb-8 lg:px-0">
       <div className="w-full flex flex-col items-center justify-center gap-10">
         <div className="w-[80%] lg:w-full flex flex-col justify-center items-center gap-1">
           <h1 className="text-4xl lg:text-4xl text-center">
@@ -15,17 +46,17 @@ const NewestListings = () => {
           </span>
         </div>
         <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-4">
-          {newestListings.map((listing, index) => (
+          {listings.map((ad, index) => (
             <div key={index}>
               <ListingThumbnail
-                title={listing.title}
-                price={listing.price}
-                kilometers={listing.kilometers}
-                listingImg={listing.listingImg}
-                datePosted={listing.datePosted}
-                region={listing.region}
-                isTop={listing.isTop}
-                isVip={listing.isVip}
+                title={ad.brand + " " + ad.model + " " + ad.modification}
+                price={ad.price + ad.currency}
+                kilometers={ad.mileage}
+                listingImg={ad.imageUrls}
+                carDate={ad.date_year}
+                region={ad.location}
+                datePosted={ad.created_at}
+                isPromoted={ad.isPromoted}
               />
             </div>
           ))}

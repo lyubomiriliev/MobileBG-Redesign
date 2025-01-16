@@ -1,7 +1,7 @@
 "use client";
 
 import { additionalExtras } from "@/utils/constants";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Checkbox from "../UI/Checkbox";
 import { useDispatch, useSelector } from "react-redux";
 import { Input } from "../UI/Input";
@@ -12,24 +12,39 @@ import {
 } from "@/app/store/listingSlice";
 
 const AdditionalExtra = () => {
-  const [extras, setExtras] = useState<string[]>([]);
-  const [description, setDescription] = useState<string>("");
-  const [phoneNumber, setPhoneNumber] = useState<string | null>(null);
-  const [email, setEmail] = useState<string | null>(null);
   const dispatch = useDispatch<AppDispatch>();
 
-  const listingData = useSelector((state: RootState) => state.listing);
-  console.log("Current Redux State:", listingData);
+  const savedExtras = useSelector(
+    (state: RootState) => state.listing.additionalExtras.add || []
+  );
+  const savedPhone = useSelector(
+    (state: RootState) => state.listing.phoneNumber.num || ""
+  );
+  const savedEmail = useSelector(
+    (state: RootState) => state.listing.email.email || ""
+  );
+  const savedDescription = useSelector(
+    (state: RootState) => state.listing.description.desc || ""
+  );
+
+  const [extras, setExtras] = useState<string[]>(savedExtras);
+  const [phoneNumber, setPhoneNumber] = useState<string>(savedPhone);
+  const [email, setEmail] = useState<string>(savedEmail);
+  const [description, setDescription] = useState<string>(savedDescription);
+
+  useEffect(() => {
+    setExtras(savedExtras);
+    setPhoneNumber(savedPhone);
+    setEmail(savedEmail);
+    setDescription(savedDescription);
+  }, [savedExtras, savedPhone, savedEmail, savedDescription]);
 
   const handleInputChange = (
     field: "phoneNumber" | "email" | "description",
     value: string
   ) => {
-    dispatch(
-      updateSellerInfo({
-        [field]: value,
-      })
-    );
+    dispatch(updateSellerInfo({ [field]: value }));
+
     if (field === "phoneNumber") setPhoneNumber(value);
     if (field === "email") setEmail(value);
     if (field === "description") setDescription(value);
@@ -37,24 +52,16 @@ const AdditionalExtra = () => {
 
   const handleCarExtras = (ext: string) => {
     let updatedExtras = [...extras];
+
     if (updatedExtras.includes(ext)) {
       updatedExtras = updatedExtras.filter((item) => item !== ext);
     } else {
       updatedExtras.push(ext);
     }
+
     setExtras(updatedExtras);
     dispatch(updateAdditionalExtras(updatedExtras));
   };
-
-  const contactMail = useSelector((state: RootState) => state.listing.email);
-  const contactPhone = useSelector(
-    (state: RootState) => state.listing.phoneNumber
-  );
-  const contactDesc = useSelector(
-    (state: RootState) => state.listing.description
-  );
-
-  console.log("Mail", contactMail, "Phone", contactPhone, "Desc", contactDesc);
 
   return (
     <section className="mainSection">
@@ -78,6 +85,7 @@ const AdditionalExtra = () => {
                     <Checkbox
                       onChange={() => handleCarExtras(extra)}
                       label={extra}
+                      checked={extras.includes(extra)}
                     />
                   </div>
                 ))}
@@ -90,7 +98,7 @@ const AdditionalExtra = () => {
             <Input
               type="text"
               label="Телефонен номер"
-              value={phoneNumber || ""}
+              value={phoneNumber}
               onChange={(value) => handleInputChange("phoneNumber", value)}
             />
           </div>
@@ -98,7 +106,7 @@ const AdditionalExtra = () => {
             <Input
               type="text"
               label="E-mail"
-              value={email || ""}
+              value={email}
               onChange={(value) => handleInputChange("email", value)}
             />
           </div>
@@ -111,6 +119,7 @@ const AdditionalExtra = () => {
             placeholder="Попълнете информацията за автомобила ви. Максимален размер до 1000 символа."
             name="description"
             id="description"
+            value={description}
           ></textarea>
           <label className="text-mobilePrimary">
             Моля не пишете телефонни номера в това поле!

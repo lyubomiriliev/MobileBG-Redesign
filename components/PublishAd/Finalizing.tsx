@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "@/context/AuthContext";
 import { useListingContext } from "@/context/ListingContext";
 import { AppDispatch, RootState } from "@/app/store";
-import { updatePromotedType } from "@/app/store/listingSlice";
+import { resetListing, updatePromotedType } from "@/app/store/listingSlice";
 
 const Finalizing = () => {
   const listingData = useSelector((state: RootState) => state.listing);
@@ -21,6 +21,8 @@ const Finalizing = () => {
   const listingPhoneNumber = useSelector(
     (state: RootState) => state.listing.phoneNumber.num
   );
+
+  console.log(listingData);
 
   const dispatch = useDispatch<AppDispatch>();
   const [selectedOption, setSelectedOption] = useState("BASIC");
@@ -99,8 +101,11 @@ const Finalizing = () => {
       if (dbError) throw dbError;
 
       localStorage.removeItem("previewUrls");
-
+      localStorage.removeItem("interiorExteriorData");
+      localStorage.removeItem("innerStep");
       alert("Listing created and images uploaded successfully!");
+
+      dispatch(resetListing());
     } catch (error: any) {
       console.error("Error:", error.message);
       alert("Failed to create listing or upload images.");
@@ -130,7 +135,7 @@ const Finalizing = () => {
               onClick={() => handleOptionSelect(item.name)}
               className={`w-full h-full ${
                 selectedOption === item.name
-                  ? "border-2 rounded-xl border-mobilePrimary"
+                  ? "border-[4px] rounded-[14px] border-mobilePrimary"
                   : ""
               }`}
               key={index}

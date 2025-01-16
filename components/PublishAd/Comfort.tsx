@@ -1,7 +1,7 @@
 "use client";
 
 import { comfortExtras } from "@/utils/constants";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Checkbox from "../UI/Checkbox";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,8 +9,13 @@ import { AppDispatch, RootState } from "@/app/store";
 import { updateComfortExtras } from "@/app/store/listingSlice";
 
 const Comfort = () => {
-  const [extras, setExtras] = useState<string[]>([]);
   const dispatch = useDispatch<AppDispatch>();
+
+  const comfortData = useSelector(
+    (state: RootState) => state.listing.comfortExtras.safe
+  );
+
+  const [extras, setExtras] = useState<string[]>(comfortData || []);
 
   const handleCarExtras = (ext: string) => {
     let updatedExtras = [...extras];
@@ -23,9 +28,9 @@ const Comfort = () => {
     dispatch(updateComfortExtras(updatedExtras));
   };
 
-  const comfortData = useSelector(
-    (state: RootState) => state.listing.comfortExtras.safe
-  );
+  useEffect(() => {
+    setExtras(comfortData);
+  }, [comfortData]);
 
   return (
     <section className="mainSection">
@@ -57,6 +62,7 @@ const Comfort = () => {
                     <Checkbox
                       type="checkbox"
                       name="comfortExtras"
+                      checked={extras.includes(extra)}
                       onChange={() => handleCarExtras(extra)}
                       label={extra}
                     />

@@ -100,31 +100,29 @@ export const searchIcons = [
 export const featuredCategories = [
   {
     id: 1,
-    url: "/vehicles/newCars.png",
+    url: "/browse/listings?category=Автомобили+и+Джипове&yearMin=2022&yearMax=2025",
+    src: "/vehicles/newCars.png",
     name: "Нови Автомобили",
     offers: 11300,
   },
   {
     id: 2,
-    url: "/vehicles/electricCars.png",
+    url: "/browse/listings?category=Автомобили+и+Джипове&engine=Електрически",
+    src: "/vehicles/electricCars.png",
     name: "Е-Автомобили",
     offers: 68300,
   },
   {
     id: 3,
-    url: "/vehicles/eBikes.png",
-    name: "Е-Велосипеди",
-    offers: 44300,
-  },
-  {
-    id: 4,
-    url: "/vehicles/leasing.png",
+    url: "/browse/listings?category=Автомобили+и+Джипове&additional=Лизинг",
+    src: "/vehicles/leasing.png",
     name: "Лизингови",
     offers: 13300,
   },
   {
-    id: 5,
-    url: "/vehicles/usedCars.png",
+    id: 4,
+    url: "/browse/listings?category=Автомобили+и+Джипове&yearMin=2012&yearMax=2020",
+    src: "/vehicles/usedCars.png",
     name: "Втора Употреба",
     offers: 23300,
   },
@@ -133,72 +131,62 @@ export const featuredCategories = [
 export const popularCategories = [
   {
     id: 1,
-    url: "/vehicles/familyCars.png",
+    url: "/browse/listings?category=Автомобили+и+Джипове&coupe=Комби",
+    src: "/vehicles/familyCars.png",
     name: "Семейни",
     offers: 11300,
   },
   {
     id: 2,
-    url: "/vehicles/firstCars.png",
+    url: "/browse/listings?category=Автомобили+и+Джипове&priceMax=6000",
+    src: "/vehicles/firstCars.png",
     name: "Първа кола",
     offers: 68300,
   },
   {
     id: 3,
-    url: "/vehicles/luxuryCars.png",
+    url: "/browse/listings?category=Автомобили+и+Джипове&hpMin=400",
+    src: "/vehicles/luxuryCars.png",
     name: "Спортни",
     offers: 44300,
   },
   {
     id: 4,
-    url: "/vehicles/ecoFriendly.png",
+    url: "/browse/listings?category=Автомобили+и+Джипове&engine=Хибрид",
+    src: "/vehicles/ecoFriendly.png",
     name: "Екологични",
     offers: 13300,
-  },
-  {
-    id: 5,
-    url: "/vehicles/cityCars.png",
-    name: "Градски",
-    offers: 23300,
   },
 ];
 
 export const vehicleTypes = [
   {
     id: 1,
-    url: "/vehicleIcons/wagon.png",
+    url: "/browse/listings?category=Автомобили+и+Джипове&coupe=Комби",
+    src: "/vehicleIcons/wagon.png",
     name: "Комби",
     offers: 11300,
   },
   {
     id: 2,
-    url: "/vehicleIcons/saloon.png",
+    url: "/browse/listings?category=Автомобили+и+Джипове&coupe=Седан",
+    src: "/vehicleIcons/saloon.png",
     name: "Седан",
     offers: 68300,
   },
   {
     id: 3,
-    url: "/vehicleIcons/convertible.png",
-    name: "Кабрио",
+    url: "/browse/listings?category=Автомобили+и+Джипове&coupe=Кабриолет",
+    src: "/vehicleIcons/convertible.png",
+    name: "Кабриолет",
     offers: 44300,
   },
   {
     id: 4,
-    url: "/vehicleIcons/suv.png",
+    url: "/browse/listings?category=Автомобили+и+Джипове&coupe=Джип",
+    src: "/vehicleIcons/suv.png",
     name: "Джип",
     offers: 13300,
-  },
-  {
-    id: 5,
-    url: "/vehicleIcons/sportsCar.png",
-    name: "Спортни",
-    offers: 23300,
-  },
-  {
-    id: 6,
-    url: "/vehicleIcons/van.png",
-    name: "Ван/Минибус",
-    offers: 23300,
   },
 ];
 
@@ -816,7 +804,7 @@ export const additionalExtras = [
   {
     id: 3,
     name: "Други",
-    extras: ["Термопомпа", "Лебедка", "Брониран", "OFFROAD пакет"],
+    extras: ["Термопомпа", "Лебедка", "Брониран", "OFFROAD пакет", "Лизинг"],
   },
 ];
 
@@ -974,7 +962,6 @@ type FormData = {
   interior: string[];
   security: string[];
   others: string[];
-  sort: string;
   filter: string;
 };
 
@@ -1041,7 +1028,7 @@ export const formFields: FieldConfig[] = [
     type: "dropdown",
     label: "Двигател",
     key: "engine",
-    options: ["Бензинов", "Дизелов", "Електрически"],
+    options: ["Бензинов", "Дизелов", "Електрически", "Хибрид"],
   },
   {
     type: "dropdown",
@@ -1087,14 +1074,16 @@ export const formFields: FieldConfig[] = [
   },
   {
     type: "dropdown",
-    label: "Сортиране",
-    key: "sort",
+    label: "Купе",
+    key: "coupe",
     options: [
-      "Марка/Модел/Цена",
-      "Цена",
-      "Най-нови",
-      "Най-скъпи",
-      "Най-евтини",
+      "Хечбек",
+      "Седан",
+      "Комби",
+      "Джип",
+      "Кабриолет",
+      "Лимузина",
+      "Стреч-лимузина",
     ],
   },
 ];
@@ -1154,6 +1143,8 @@ export type Listing = {
   updated_at: Date;
   userId: string;
   imageUrls: string;
+  sellerEmail: string;
+  isPromoted: string;
 };
 
 export type SearchCriteria = {
