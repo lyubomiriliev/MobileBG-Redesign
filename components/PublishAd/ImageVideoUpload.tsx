@@ -26,6 +26,8 @@ const ImageVideoUpload = () => {
     }
   }, []);
 
+  console.log(images);
+
   const handleNext = () => {
     const uploadedImagesCount = images.filter((image) => image !== null);
 
@@ -126,7 +128,7 @@ const ImageVideoUpload = () => {
                   width={10}
                   height={10}
                   src={
-                    image
+                    image?.webkitRelativePath
                       ? URL.createObjectURL(image)
                       : previewUrls[index] || ""
                   }

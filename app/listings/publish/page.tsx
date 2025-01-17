@@ -28,8 +28,10 @@ const PublishCarPage = () => {
   const handleNextInnerStep = () => {
     if (innerStep === 6) {
       router.push("/listings/publish/upload");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (innerStep < 7) {
       setInnerStep(innerStep + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 

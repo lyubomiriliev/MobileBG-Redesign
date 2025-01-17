@@ -3,7 +3,6 @@
 import React from "react";
 import { steps } from "@/utils/constants";
 import Link from "next/link";
-import Image from "next/image";
 
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 
@@ -60,7 +59,7 @@ const PublishLayout = ({
           />
         )}
       </div>
-      <div className="w-[95%] mx-auto lg:w-full bg-white shadow-lg border-[1px] border-slate-200 mb-20 rounded-lg lg:p-6 lg:pt-10 flex flex-col justify-start items-start relative overflow-hidden">
+      <div className="w-[95%] mx-auto lg:w-full bg-white shadow-lg border-[1px] border-slate-200 mb-20 rounded-lg lg:p-6 flex flex-col justify-start items-start relative overflow-hidden">
         {children}
       </div>
     </section>

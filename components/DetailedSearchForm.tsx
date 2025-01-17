@@ -18,7 +18,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/app/store";
-import { updateCriteria } from "@/app/store/searchSlice";
+import { resetCriteria, updateCriteria } from "@/app/store/searchSlice";
 
 type FormData = {
   category: string;
@@ -49,23 +49,25 @@ type FormData = {
   interior: string[];
   security: string[];
   others: string[];
+  filter: string;
 };
 
 const DetailedSearchForm = () => {
   const dispatch = useDispatch<AppDispatch>();
   const searchCriteria = useSelector((state: RootState) => state.search);
   const router = useRouter();
-  const [formData, setFormData] = useState(searchCriteria);
+  const [formData, setFormData] = useState(() => searchCriteria);
 
   const [brandOptions, setBrandOptions] = useState<string[]>([]);
   const [modelOptions, setModelOptions] = useState<string[]>([]);
 
   useEffect(() => {
-    setFormData(searchCriteria);
-  }, [searchCriteria]);
+    if (!formData.category) {
+      setFormData(searchCriteria);
+    }
+  }, []);
 
   useEffect(() => {
-    // Update brand options based on the selected category
     if (formData.category) {
       setBrandOptions(categoriesModelMapping[formData.category] || []);
     } else {
@@ -74,7 +76,6 @@ const DetailedSearchForm = () => {
   }, [formData.category]);
 
   useEffect(() => {
-    // Update model options based on the selected brand
     if (formData.brand) {
       setModelOptions(brandsModelMapping[formData.brand] || []);
     } else {
@@ -82,52 +83,51 @@ const DetailedSearchForm = () => {
     }
   }, [formData.brand]);
 
-  const handleChange = (field: keyof typeof formData, value: string) => {
-    if (field === "brand") {
-      setFormData({ ...formData, brand: value, model: "" });
-    } else if (field === "category") {
-      setFormData({ ...formData, category: value, brand: "", model: "" });
-    } else {
-      setFormData((prev) => ({ ...prev, [field]: value }));
+  const handleChange = (field: keyof FormData, value: string) => {
+    const updatedData = { ...formData, [field]: value };
+
+    if (field === "brand") updatedData.model = ""; // Reset model when brand changes
+    if (field === "category") {
+      updatedData.brand = "";
+      updatedData.model = "";
     }
-    dispatch(updateCriteria({ [field]: value }));
+
+    setFormData(updatedData);
+    dispatch(updateCriteria(updatedData)); // 🔹 Only dispatch AFTER updating state
   };
 
-  const handleArrayChange = (field: keyof typeof formData, value: string) => {
-    if (!Array.isArray(formData[field])) {
-      throw new Error(
-        `Field ${field} is not an array and cannot be updated as one.`
-      );
-    }
+  const handleArrayChange = (field: keyof FormData, value: string) => {
+    if (!Array.isArray(formData[field])) return;
 
     const updatedArray = formData[field].includes(value)
-      ? formData[field].filter((item) => item !== value) // Safe to call filter since it's an array
+      ? formData[field].filter((item) => item !== value)
       : [...formData[field], value];
 
-    setFormData((prev) => ({ ...prev, [field]: updatedArray }));
-    dispatch(updateCriteria({ [field]: updatedArray } as Partial<FormData>));
+    const updatedData = { ...formData, [field]: updatedArray };
+    setFormData(updatedData);
+    dispatch(updateCriteria(updatedData)); // 🔹 Only dispatch AFTER updating state
   };
 
   const handleSingleSelection = (field: keyof FormData, value: string) => {
-    if (Array.isArray(formData[field])) {
-      throw new Error(`Invalid update for array field ${field}`);
-    }
-    setFormData({ ...formData, [field]: value });
+    if (Array.isArray(formData[field])) return;
+
+    const updatedData = { ...formData, [field]: value };
+    setFormData(updatedData);
+    dispatch(updateCriteria(updatedData)); // 🔹 Only dispatch AFTER updating state
   };
 
   const handleSubmit = () => {
     const query = new URLSearchParams(
       Object.entries(formData).reduce((acc, [key, value]) => {
-        if (Array.isArray(value) && value.length > 0) {
+        if (Array.isArray(value) && value.length > 0)
           acc[key] = value.join(",");
-        } else if (typeof value === "string" && value.trim() !== "") {
-          // Only include non-empty string values
+        else if (typeof value === "string" && value.trim() !== "")
           acc[key] = value;
-        }
         return acc;
       }, {} as Record<string, string>)
     ).toString();
 
+    dispatch(resetCriteria());
     router.push(`/browse/listings?${query}`);
   };
 

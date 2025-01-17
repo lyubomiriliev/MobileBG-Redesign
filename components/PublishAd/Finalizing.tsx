@@ -103,7 +103,9 @@ const Finalizing = () => {
       localStorage.removeItem("previewUrls");
       localStorage.removeItem("interiorExteriorData");
       localStorage.removeItem("innerStep");
+      localStorage.setItem("postedListingId", result.id);
       alert("Listing created and images uploaded successfully!");
+      router.push(`/listings/published`);
 
       dispatch(resetListing());
     } catch (error: any) {
@@ -111,7 +113,6 @@ const Finalizing = () => {
       alert("Failed to create listing or upload images.");
     } finally {
       setUploading(false);
-      router.push(`/listings/published`);
     }
   };
 
