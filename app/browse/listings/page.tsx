@@ -85,6 +85,7 @@ const BrowseListingsPage = () => {
                   break;
                 case "additional":
                   query = query.contains("additional_extras", { add: [value] });
+                  break;
                 default:
                   break;
               }
@@ -113,20 +114,44 @@ const BrowseListingsPage = () => {
     return <p>Зареждане на обявите...</p>;
   }
 
+  console.log(listings);
+
   return (
     <section className="basicSection">
       <div className="w-full flex flex-col items-center py-4">
-        <div className="max-w-5xl w-full h-24 flex flex-col p-4 rounded-lg bg-gradient-to-r from-slate-100 via-white to-slate-100 border-[1px] border-slate-200">
-          <h1 className="text-2xl text-mobileDarkGray">
-            Резултат от Вашето търсене на:
-          </h1>
-          <div className="flex items-center gap-10">
-            <h1 className="text-lg">
-              Категория: <span className="font-semibold">Категория</span>{" "}
-            </h1>
-            <h1 className="text-lg">
-              Марка: <span className="font-semibold">Марка</span>{" "}
-            </h1>
+        <div className="max-w-5xl w-full h-auto flex flex-col p-4 rounded-lg bg-gradient-to-r from-slate-100 via-white to-slate-100 border-[1px] border-slate-200">
+          <div className="w-full flex justify-between">
+            <div className="w-full flex flex-col">
+              <h1 className="text-xl lg:text-2xl text-mobileDarkGray pb-2">
+                Резултат от Вашето търсене на:
+              </h1>
+              <div className="w-full grid grid-cols-1 lg:grid-cols-3 justify-start items-start">
+                <div className="flex justify-start items-center gap-1">
+                  <h1 className="text-lg">Категория</h1>
+                  <span className="font-semibold text-mobilePrimary whitespace-nowrap">
+                    {listings[0].category}
+                  </span>{" "}
+                </div>
+                <div className="flex justify-start items-center gap-1">
+                  <h1 className="text-lg">Марка:</h1>
+                  <span className="font-semibold text-mobilePrimary">
+                    {listings[0].brand}
+                  </span>
+                </div>
+                <div className="flex justify-start items-center gap-1">
+                  <h1 className="text-lg">Модел:</h1>
+                  <span className="font-semibold text-mobilePrimary">
+                    {listings[0].model}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <Link
+              href="/search"
+              className="w-1/4 h-auto lg:flex flex-col justify-center items-center hidden"
+            >
+              <Button text="ОБРАТНО КЪМ ТЪРСЕНЕ" />
+            </Link>
           </div>
         </div>
       </div>

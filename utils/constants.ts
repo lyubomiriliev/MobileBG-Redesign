@@ -1091,6 +1091,14 @@ export const formFields: FieldConfig[] = [
   },
 ];
 
+export const promotedListings = [
+  {
+    id: 1,
+    name: "Избери вид обява",
+    options: ["BASIC", "VIP", "TOP"],
+  },
+];
+
 export type Listing = {
   id: string | number;
   category: string;
@@ -1157,6 +1165,7 @@ export type SearchCriteria = {
   security: string[];
   others: string[];
   filter: string;
+  isPromoted: string;
 };
 
 // USER INFO TYPE

@@ -13,6 +13,7 @@ import {
   interiorColorsArr,
   interiorMaterials,
   multimediaExtras,
+  promotedListings,
   safetyExtras,
 } from "@/utils/constants";
 import { useRouter } from "next/navigation";
@@ -50,6 +51,7 @@ type FormData = {
   security: string[];
   others: string[];
   filter: string;
+  isPromoted: string;
 };
 
 const DetailedSearchForm = () => {
@@ -187,6 +189,27 @@ const DetailedSearchForm = () => {
 
           return null;
         })}
+      </div>
+      <div className="w-full flex justify-end mt-5 gap-4">
+        {promotedListings.map((promo) => (
+          <div key={promo.id} className="mb-2">
+            <div className="w-full flex justify-end">
+              <h3 className="text-lg font-semibold">{promo.name}</h3>
+            </div>
+            <div className="grid grid-cols-3 justify-end text-center gap-10">
+              {promo.options.map((prom, index) => (
+                <div key={index}>
+                  <Input
+                    type="radio"
+                    label={prom}
+                    checked={formData.isPromoted === prom}
+                    onChange={() => handleSingleSelection("isPromoted", prom)}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
       <div className="w-full flex flex-col py-10">
         <h1 className="text-xl text-mobilePrimary font-bold pb-4">Интериор</h1>

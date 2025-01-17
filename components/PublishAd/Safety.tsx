@@ -54,7 +54,7 @@ const Safety = () => {
           alt="SafetyBackground"
           className="w-2/3 opacity-75 lg:opacity-50 lg:w-full absolute -bottom-8 -right-60 lg:-top-36 z-0"
         />
-        <div className="flex flex-col justify-center gap-4 z-10 px-4 lg:px-0">
+        <div className="flex flex-col justify-start gap-4 z-10">
           {safetyExtras.map((item, index) => (
             <div key={index}>
               <h1 className="text-xl lg:text-2xl font-bold text-mobilePrimary">

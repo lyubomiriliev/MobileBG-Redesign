@@ -73,7 +73,7 @@ const AdditionalExtra = () => {
           <div className="w-full lg:w-2/3 h-[2px] bg-gradient-to-r from-slate-50 via-slate-200 to-slate-50 my-3"></div>
           <h3 className="text-xl lg:text-2xl">Допълнителни екстри (5/5)</h3>
         </div>
-        <div className="flex flex-col justify-center gap-4 z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 justify-center lg:gap-20 gap-4 z-10">
           {additionalExtras.map((item, index) => (
             <div key={index}>
               <h1 className="text-xl lg:text-2xl font-bold text-mobilePrimary">

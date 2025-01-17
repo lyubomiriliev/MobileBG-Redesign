@@ -53,8 +53,13 @@ const PublishCarPage = () => {
       {innerStep === 4 && <Comfort />}
       {innerStep === 5 && <MultimediaDevices />}
       {innerStep === 6 && <AdditionalExtra />}
-      <div onClick={handleNextInnerStep} className="z-50">
-        <Button text="ПРОДЪЛЖИ" />
+      <div
+        onClick={handleNextInnerStep}
+        className="w-full flex justify-center items-center z-50"
+      >
+        <div className="w-2/4 lg:w-1/3 py-4">
+          <Button text="ПРОДЪЛЖИ" />
+        </div>
       </div>
     </PublishLayout>
   );

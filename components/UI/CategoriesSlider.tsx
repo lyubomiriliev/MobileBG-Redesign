@@ -12,7 +12,7 @@ const CategoriesSlider = ({
       <div className="py-4">
         <h1 className="text-4xl uppercase lg:text-4xl">{title}</h1>
       </div>
-      <div className="w-[95%] flex lg:justify-center items-start gap-4 overflow-x-auto lg:overflow-x-visible scrollbar-hide">
+      <div className="w-[92%] flex lg:justify-center items-start gap-4 overflow-x-auto lg:overflow-x-visible scrollbar-hide">
         {children}
       </div>
     </div>

@@ -27,8 +27,8 @@ const page = () => {
           <div className="w-full lg:w-2/3 h-[2px] bg-gradient-to-r from-slate-50 via-slate-200 to-slate-50 my-3"></div>
           <h3>Списък на регистрираните автодилъри в България</h3>
         </div>
-        <div className="w-full flex items-center gap-4 max-w-[810px] pt-10">
-          <div className="w-1/3">
+        <div className="w-full flex flex-col lg:flex-row items-center gap-4 pt-10">
+          <div className="w-full lg:w-1/3">
             <Dropdown
               label="Локация"
               options={["София", "Варна", "Бургас"]}
@@ -36,11 +36,11 @@ const page = () => {
               onChange={(value) => handleChange("place", value)}
             />
           </div>
-          <div className="w-2/3">
+          <div className="w-full lg:w-2/3">
             <Input label="Търси по име" value="Wincars" />
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-4 py-8">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 py-4">
           {authorizedDealers.map((dealer, index) => (
             <div key={index}>
               <DealerCard
