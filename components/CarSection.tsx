@@ -3,7 +3,7 @@ import React from "react";
 
 const CarSection = () => {
   return (
-    <section className="w-full h-[35vh] lg:h-[75vh] flex flex-col justify-start items-center mx-auto relative">
+    <section className="w-full h-[35vh] lg:h-[75vh] 2xl:h-[80vh] flex flex-col justify-start items-center mx-auto relative">
       <Image
         src="/images/mobileCar2.png"
         width={1920}
@@ -22,7 +22,7 @@ const CarSection = () => {
         width={1920}
         height={1000}
         alt="/"
-        className="w-full absolute -top-[10%] lg:-top-[270px] -z-20"
+        className="w-full absolute -top-[10%] lg:-top-[270px] 2xl:-top-[320px] -z-20"
       />
     </section>
   );

@@ -159,10 +159,10 @@ const SearchForm = ({
           onClick={handleSubmit}
           icon="/searchIconWhite.svg"
           text="ТЪРСЕНЕ НА ОБЯВИ"
-        ></Button>
+        />
       </div>
       <Link href="/search">
-        <div className="w-full flex flex-col justify-center items-center pt-2">
+        <div className="w-full flex flex-col justify-center hover:text-mobilePrimary text-xl items-center pt-2">
           <span>ОЩЕ КРИТЕРИИ ЗА ТЪРСЕНЕ</span>
         </div>
       </Link>

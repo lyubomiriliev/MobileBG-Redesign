@@ -12,9 +12,9 @@ const HeroSection = () => {
         width={1200}
         height={600}
         unoptimized
-        className="w-full h-[72vh] lg:h-[60vh] object-cover object-right"
+        className="w-full h-[72vh] lg:h-[60vh] 2xl:h-[70vh] object-cover object-right"
       />
-      <div className="w-full flex flex-col items-center justify-center absolute">
+      <div className="w-full flex flex-col items-center 2xl:h-[45vh] justify-center absolute">
         <div className="w-full flex flex-col text-center justify-start lg:justify-center items-center mt-24">
           <h1 className="text-7xl lg:text-[96px] font-bold uppercase">
             БЪДЕТЕ <span className="text-mobilePrimary">МОБИЛНИ</span>

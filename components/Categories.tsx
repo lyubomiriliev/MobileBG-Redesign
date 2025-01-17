@@ -9,7 +9,7 @@ import CategoriesSlider from "./UI/CategoriesSlider";
 
 const Categories = () => {
   return (
-    <section className="w-full flex min-h-screen items-center flex-col max-w-screen-xl mx-auto justify-start gap-6">
+    <section className="w-full flex items-center flex-col max-w-screen-xl mx-auto justify-start gap-6 py-10">
       <CategoriesSlider>
         {featuredCategories.map((category, index) => (
           <div key={index}>
