@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { supabase } from "@/app/lib/supabase";
 import { useRouter } from "next/navigation";
 import ListingReview from "./ListingReview";
 import { listingOptions } from "@/utils/constants";
@@ -12,6 +11,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useListingContext } from "@/context/ListingContext";
 import { AppDispatch, RootState } from "@/app/store";
 import { resetListing, updatePromotedType } from "@/app/store/listingSlice";
+import { supabase } from "@/lib/supabase";
 
 const Finalizing = () => {
   const listingData = useSelector((state: RootState) => state.listing);

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import ListingThumbnail from "./ListingThumbnail";
 import { Listing } from "@/utils/constants";
+import Link from "next/link";
 
 const NewestListings = () => {
   const [loading, setLoading] = useState(false);
@@ -47,7 +48,7 @@ const NewestListings = () => {
         </div>
         <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-4">
           {listings.slice(0, 6).map((ad, index) => (
-            <div key={index}>
+            <Link href={`/listing/${ad.id}`} key={index}>
               <ListingThumbnail
                 title={ad.brand + " " + ad.model + " " + ad.modification}
                 price={ad.price + ad.currency}
@@ -58,7 +59,7 @@ const NewestListings = () => {
                 datePosted={ad.created_at}
                 isPromoted={ad.isPromoted}
               />
-            </div>
+            </Link>
           ))}
         </div>
       </div>

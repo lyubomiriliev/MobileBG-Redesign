@@ -76,7 +76,7 @@ const MyListingCard = ({ listing }: { listing: Listing }) => {
             {listing.safety_extras.ext
               .slice(0, 10)
               .map((safe: string, index: number) => (
-                <p>{safe}</p>
+                <p key={index}>{safe}</p>
               ))}
           </div>
           <div className="w-full lg:w-2/3 flex flex-col text-mobileDarkGray text-sm">

@@ -367,7 +367,7 @@ export const footerLinks = [
       {
         id: 1,
         title: "Автомобили и джипове",
-        link: "/cars",
+        link: "/browse/listings?category=Автомобили+и+Джипове",
       },
       {
         id: 2,

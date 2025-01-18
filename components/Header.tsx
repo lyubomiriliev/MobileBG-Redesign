@@ -16,8 +16,8 @@ import { FiMenu, FiX } from "react-icons/fi";
 import Button from "./Button";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import { supabase } from "@/app/lib/supabase";
 import { useListingContext } from "@/context/ListingContext";
+import { supabase } from "@/lib/supabase";
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -37,6 +37,8 @@ const Header: React.FC = () => {
       await signOut();
       clearImages();
       localStorage.removeItem("previewUrls");
+      document.cookie =
+        "sb-access-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       window.location.href = "/";
       alert("Logged out successfully");
     } catch (error) {

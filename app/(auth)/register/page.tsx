@@ -1,10 +1,10 @@
 "use client";
 
-import { supabase } from "@/app/lib/supabase";
 import AuthLayout from "@/components/AuthLayout";
 import Button from "@/components/Button";
 import { Input } from "@/components/UI/Input";
 import { useAuth } from "@/context/AuthContext";
+import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";

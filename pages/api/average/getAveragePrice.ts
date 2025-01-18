@@ -1,5 +1,5 @@
+import { supabase } from "@/lib/supabase";
 import { NextResponse } from "next/server";
-import { supabase } from "@/app/lib/supabase";
 
 export const runtime = "edge"; // Use the edge runtime
 

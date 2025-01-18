@@ -1,4 +1,4 @@
-import { supabase } from "@/app/lib/supabase";
+import { supabase } from "@/lib/supabase";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function deleteListing(

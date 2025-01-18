@@ -1,6 +1,6 @@
 "use client";
 
-import { supabase } from "@/app/lib/supabase";
+import { supabase } from "@/lib/supabase";
 import { User, Session } from "@supabase/supabase-js";
 import {
   createContext,
@@ -41,7 +41,13 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         console.error("Sign-in error occurred", error);
         return { success: false, error: error.message };
       }
+
+      if (data.session) {
+        document.cookie = `sb-access-token=${data.session.access_token}; path=/; Secure; HttpOnly; SameSite=Lax`;
+      }
+
       console.log("Sign-in success", data);
+      console.log(document.cookie);
       return { success: true, data };
     } catch (error: any) {
       console.error("Unexpected error during sign-in", error);

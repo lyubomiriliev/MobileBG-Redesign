@@ -1,8 +1,8 @@
 "use client";
 
-import { supabase } from "@/app/lib/supabase";
 import Button from "@/components/Button";
 import MyListingCard from "@/components/UI/MyListingCard";
+import { supabase } from "@/lib/supabase";
 import { Listing } from "@/utils/constants";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -12,6 +12,13 @@ const BrowseListingsPage = () => {
   const searchParams = useSearchParams();
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
+
+  console.log(searchParams);
+
+  const category =
+    searchParams?.get("category")?.replace(/\+/g, " ") || "Всички категории";
+  const brand = searchParams?.get("brand") || "Всички марки";
+  const model = searchParams?.get("model") || "Всички модели";
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -86,6 +93,9 @@ const BrowseListingsPage = () => {
                 case "additional":
                   query = query.contains("additional_extras", { add: [value] });
                   break;
+                case "isPromoted":
+                  query = query.eq("isPromoted", value.toUpperCase());
+                  break;
                 default:
                   break;
               }
@@ -110,12 +120,6 @@ const BrowseListingsPage = () => {
     fetchListings();
   }, [searchParams]);
 
-  if (loading) {
-    return <p>Зареждане на обявите...</p>;
-  }
-
-  console.log(listings);
-
   return (
     <section className="basicSection">
       <div className="w-full flex flex-col items-center py-4">
@@ -125,23 +129,23 @@ const BrowseListingsPage = () => {
               <h1 className="text-xl lg:text-2xl text-mobileDarkGray pb-2">
                 Резултат от Вашето търсене на:
               </h1>
-              <div className="w-full grid grid-cols-1 lg:grid-cols-3 justify-start items-start">
+              <div className="w-full grid grid-cols-1 lg:flex justify-start items-center lg:gap-4">
                 <div className="flex justify-start items-center gap-1">
                   <h1 className="text-lg">Категория</h1>
                   <span className="font-semibold text-mobilePrimary whitespace-nowrap">
-                    {listings[0].category}
+                    {category}
                   </span>{" "}
                 </div>
                 <div className="flex justify-start items-center gap-1">
                   <h1 className="text-lg">Марка:</h1>
                   <span className="font-semibold text-mobilePrimary">
-                    {listings[0].brand}
+                    {brand}
                   </span>
                 </div>
                 <div className="flex justify-start items-center gap-1">
                   <h1 className="text-lg">Модел:</h1>
                   <span className="font-semibold text-mobilePrimary">
-                    {listings[0].model}
+                    {model}
                   </span>
                 </div>
               </div>

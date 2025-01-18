@@ -5,7 +5,6 @@ import { FaChevronLeft } from "react-icons/fa";
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { supabase } from "@/app/lib/supabase";
 import Image from "next/image";
 import ListingExtraCard from "@/components/UI/ListingExtraCard";
 import { Input } from "@/components/UI/Input";
@@ -13,6 +12,7 @@ import Button from "@/components/Button";
 import { useSwipeable } from "react-swipeable";
 
 import { IoMdClose } from "react-icons/io";
+import { supabase } from "@/lib/supabase";
 
 type Listing = {
   id: string | number;

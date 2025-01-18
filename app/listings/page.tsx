@@ -4,12 +4,12 @@ import MyListingCard from "@/components/UI/MyListingCard";
 import { useAuth } from "@/context/AuthContext";
 import { Listing, UserInfoData } from "@/utils/constants";
 import React, { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
 import Button from "@/components/Button";
 import { FiLogOut } from "react-icons/fi";
 import { useListingContext } from "@/context/ListingContext";
+import { supabase } from "@/lib/supabase";
 
-const MyListingsPage = () => {
+const MyListingsPage = async () => {
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState<UserInfoData>({
@@ -29,6 +29,8 @@ const MyListingsPage = () => {
       await signOut();
       clearImages();
       localStorage.removeItem("previewUrls");
+      document.cookie =
+        "sb-access-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       window.location.href = "/";
       alert("Logged out successfully");
     } catch (error) {
