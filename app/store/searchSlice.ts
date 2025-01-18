@@ -31,6 +31,7 @@ const initialState: SearchCriteria = {
   security: [],
   others: [],
   filter: "",
+  isPromoted: "",
 };
 
 const searchSlice = createSlice({

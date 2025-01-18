@@ -7,8 +7,14 @@ const Footer = () => {
   return (
     <footer className="w-full flex justify-center items-start text-center text-white bg-gradient-to-tr py-5 from-mobilePrimary to-mobilePrimaryDark">
       <nav className="flex flex-col w-full max-w-screen-xl items-center">
-        <div className="bg-white relative rounded-md">
-          <Image src="/mobileLogo.svg" alt="MobileBG" width={120} height={60} />
+        <div>
+          <Image
+            src="/mobileLogoWhite.svg"
+            alt="MobileBG"
+            width={120}
+            height={60}
+            className="w-full"
+          />
         </div>
         <div className="mb-10">
           <h3 className="text-lg lg:text-2xl whitespace-nowrap w-full px-10 md:px-0">

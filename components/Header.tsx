@@ -88,8 +88,8 @@ const Header: React.FC = () => {
                       className="hover:scale-110 duration-300 ease-in-out"
                       src="/mobileLogo.svg"
                       alt="MobileBG"
-                      width={120}
-                      height={60}
+                      width={160}
+                      height={160}
                     />
                   )}
                 </Link>
@@ -153,7 +153,7 @@ const Header: React.FC = () => {
             <Image
               src="/mobileLogo.svg"
               alt="MobileBG"
-              width={120}
+              width={150}
               height={60}
               className="cursor-pointer"
             />
