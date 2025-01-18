@@ -33,8 +33,6 @@ const NewestListings = () => {
     fetchUserListings();
   }, []);
 
-  console.log(listings);
-
   return (
     <section className="w-full flex flex-col justify-start items-center max-w-screen-lg mx-auto px-4 pb-8 lg:px-0">
       <div className="w-full flex flex-col items-center justify-center gap-10">

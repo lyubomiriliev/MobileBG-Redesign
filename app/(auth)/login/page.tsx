@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import AuthLayout from "@/components/AuthLayout";
 import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");

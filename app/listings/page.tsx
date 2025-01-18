@@ -9,7 +9,7 @@ import { FiLogOut } from "react-icons/fi";
 import { useListingContext } from "@/context/ListingContext";
 import { supabase } from "@/lib/supabase";
 
-const MyListingsPage = async () => {
+const MyListingsPage = () => {
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState<UserInfoData>({
