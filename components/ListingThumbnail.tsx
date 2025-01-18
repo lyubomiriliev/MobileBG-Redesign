@@ -7,7 +7,6 @@ interface ListingThumbnailProps {
   kilometers: number;
   listingImg: string;
   region: string;
-  carDate: number;
   isPromoted: string;
   datePosted: Date;
 }
@@ -18,7 +17,6 @@ const ListingThumbnail: React.FC<ListingThumbnailProps> = ({
   kilometers,
   listingImg,
   region,
-  carDate,
   isPromoted,
   datePosted,
 }) => {

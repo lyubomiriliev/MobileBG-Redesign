@@ -21,7 +21,7 @@ const MyListingsPage = () => {
   const { user } = useAuth();
   const userEmail = user?.email;
 
-  const { session, signOut } = useAuth();
+  const { signOut } = useAuth();
   const { clearImages } = useListingContext();
 
   const handleSignOut = async () => {

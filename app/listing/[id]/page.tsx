@@ -249,7 +249,7 @@ const ListingDetailsPage = () => {
               <FaChevronLeft size={24} />
             </div>
             <div className="w-full justify-center absolute bottom-3 lg:bottom-5 left-0 flex gap-2">
-              {parsedImageUrls.map((_: any, index: number) => (
+              {parsedImageUrls.map((_: string, index: number) => (
                 <div
                   key={index}
                   onClick={() => openModal(currentMainImageIndex)}
@@ -340,7 +340,7 @@ const ListingDetailsPage = () => {
               />
               {/* Dots Navigation */}
               <div className="absolute bottom-5 flex gap-2 z-20">
-                {parsedImageUrls.map((_: any, index: number) => (
+                {parsedImageUrls.map((_: string, index: number) => (
                   <div
                     key={index}
                     className={`w-3 h-3 rounded-full ${

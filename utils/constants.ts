@@ -1123,7 +1123,7 @@ export type Listing = {
   interior_material: string;
   interior_color: string;
   multimedia_extras: [];
-  safety_extras: [];
+  safety_extras: { ext: string[] };
   comfort_extras: [];
   additionalExtras: [];
   description: string;

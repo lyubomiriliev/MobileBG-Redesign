@@ -5,7 +5,6 @@ import Button from "./Button";
 import { Dropdown } from "./UI/Dropdown";
 import { brandsModelMapping, categoriesModelMapping } from "@/utils/constants";
 import { useRouter } from "next/navigation";
-import { Input } from "./UI/Input";
 import Link from "next/link";
 
 const SearchForm = ({

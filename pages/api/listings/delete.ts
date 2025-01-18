@@ -20,7 +20,9 @@ export default async function deleteListing(
     if (error) throw error;
 
     return res.status(204).end();
-  } catch (error: any) {
-    return res.status(400).json({ error: error.message });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return res.status(400).json({ error: error.message });
+    }
   }
 }

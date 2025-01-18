@@ -70,8 +70,10 @@ export default async function createListing(
     }
 
     res.status(201).json(data);
-  } catch (error: any) {
-    console.error("API error:", error.message);
-    res.status(500).json({ error: error.message });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("API error:", error.message);
+      res.status(500).json({ error: error.message });
+    }
   }
 }

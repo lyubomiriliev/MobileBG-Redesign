@@ -2,11 +2,10 @@
 
 import DealerCard from "@/components/DealerCard";
 import { Dropdown } from "@/components/UI/Dropdown";
-import { Input } from "@/components/UI/Input";
 import { authorizedDealers } from "@/utils/constants";
 import React, { useState } from "react";
 
-const page = () => {
+const DealersPage = () => {
   const [formData, setFormData] = useState({
     place: "",
   });
@@ -37,7 +36,7 @@ const page = () => {
             />
           </div>
           <div className="w-full lg:w-2/3">
-            <Input label="Търси по име" value="Wincars" />
+            {/* <Input label="Търси по име" value="Wincars" /> */}
           </div>
         </div>
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 py-4">
@@ -46,7 +45,6 @@ const page = () => {
               <DealerCard
                 name={dealer.name}
                 phone={dealer.phone}
-                logo={dealer.location}
                 location={dealer.location}
                 date={dealer.dateJoined}
               />
@@ -58,4 +56,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default DealersPage;

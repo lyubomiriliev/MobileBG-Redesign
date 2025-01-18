@@ -20,8 +20,12 @@ export default async function handler(
 
     console.log("Fetched Data:", data);
     res.status(200).json(data);
-  } catch (err: any) {
-    console.error("Unexpected Error:", err.message);
-    res.status(500).json({ error: err.message });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Unexpected Error:", error.message);
+      res.status(500).json({ error: error.message });
+    } else {
+      console.error("Възникна неочаквана грешка", error);
+    }
   }
 }

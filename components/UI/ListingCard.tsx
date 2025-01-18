@@ -5,13 +5,11 @@ const ListingCard = ({
   vip,
   color,
   perks,
-  pricing,
 }: {
   text: string;
   vip: string;
   color: string;
   perks: string[];
-  pricing?: number;
 }) => {
   return (
     <div

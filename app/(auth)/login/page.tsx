@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import AuthLayout from "@/components/AuthLayout";
 import { useAuth } from "@/context/AuthContext";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -46,7 +46,7 @@ const SignIn = () => {
         imageSrc="/perk1.svg"
       >
         <form
-          onSubmit={handleSignIn}
+          onSubmit={!loading ? handleSignIn : undefined}
           className="w-full lg:w-1/3 h-[50vh] flex flex-col items-start justify-start"
         >
           <Input
@@ -68,7 +68,7 @@ const SignIn = () => {
             </Link>
           </div>
           <div className="w-full flex justify-start items-center py-4">
-            <Button type="submit" text="Влизане" />
+            <Button disabled={loading} type="submit" text="Влизане" />
           </div>
           <div className="flex items-center gap-1">
             <p>Все още нямате акаунт?</p>

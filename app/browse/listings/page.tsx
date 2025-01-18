@@ -160,7 +160,7 @@ const BrowseListingsPage = () => {
         </div>
       </div>
       <div className="w-full">
-        {listings.length > 0 ? (
+        {!loading && listings.length > 0 ? (
           <div className=" w-full flex flex-col gap-4 justify-center items-center">
             {listings.map((listing) => (
               <MyListingCard key={listing.id} listing={listing} />

@@ -108,9 +108,11 @@ const Finalizing = () => {
       router.push(`/listings/published`);
 
       dispatch(resetListing());
-    } catch (error: any) {
-      console.error("Error:", error.message);
-      alert("Failed to create listing or upload images.");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error:", error.message);
+        alert("Failed to create listing or upload images.");
+      }
     } finally {
       setUploading(false);
     }
@@ -146,14 +148,13 @@ const Finalizing = () => {
                 vip={item.name}
                 color={item.color}
                 perks={item.perks}
-                pricing={item.pricing}
               />
             </div>
           ))}
         </div>
       </div>
       <div onClick={handlePublishListing} className="z-50">
-        <Button text={`ПУБЛИКУВАЙ`} />
+        <Button disabled={uploading} text={`ПУБЛИКУВАЙ`} />
       </div>
     </section>
   );

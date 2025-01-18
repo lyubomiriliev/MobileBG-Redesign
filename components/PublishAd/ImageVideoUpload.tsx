@@ -1,12 +1,11 @@
 "use client";
 
+import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Button from "../Button";
 import { useRouter } from "next/navigation";
 import { useListingContext } from "@/context/ListingContext";
-
-import { IoMdClose } from "react-icons/io";
 
 const ImageVideoUpload = () => {
   const router = useRouter();
@@ -66,7 +65,7 @@ const ImageVideoUpload = () => {
     e.preventDefault();
   };
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
 
     if (e.dataTransfer.files) {
@@ -74,10 +73,7 @@ const ImageVideoUpload = () => {
     }
   };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       handleFileUpload(e.target.files);
     }
@@ -95,12 +91,12 @@ const ImageVideoUpload = () => {
     localStorage.setItem("previewUrls", JSON.stringify(updatedPreviews));
 
     // Update Redux after removing the image
-    const serializedImages = updatedImages
-      .filter((file) => file !== null)
-      .map((file, i) => ({
-        name: (file as File).name,
-        type: (file as File).type,
-      }));
+    // const serializedImages = updatedImages
+    //   .filter((file) => file !== null)
+    //   .map((file, i) => ({
+    //     name: (file as File).name,
+    //     type: (file as File).type,
+    //   }));
   };
 
   return (
@@ -120,7 +116,7 @@ const ImageVideoUpload = () => {
             key={index}
             className="w-44 h-44 border border-gray-300 rounded-md flex items-center justify-center relative"
             onDragOver={handleDragOver}
-            onDrop={(e) => handleDrop(e, index)}
+            onDrop={(e) => handleDrop(e)}
           >
             {image || previewUrls[index] ? (
               <div className="w-full h-full object-cover">
@@ -155,7 +151,7 @@ const ImageVideoUpload = () => {
                   className="hidden"
                   multiple
                   id={`file-input-${index}`}
-                  onChange={(e) => handleInputChange(e, index)}
+                  onChange={(e) => handleInputChange(e)}
                 />
               </>
             )}

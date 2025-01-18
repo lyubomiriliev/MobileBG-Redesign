@@ -67,7 +67,7 @@ const DetailedSearchForm = () => {
     if (!formData.category) {
       setFormData(searchCriteria);
     }
-  }, []);
+  }, [formData.category, searchCriteria]);
 
   useEffect(() => {
     if (formData.category) {

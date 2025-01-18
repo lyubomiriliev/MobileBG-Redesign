@@ -45,20 +45,20 @@ const NewestListings = () => {
           </span>
         </div>
         <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-4">
-          {listings.slice(0, 6).map((ad, index) => (
-            <Link href={`/listing/${ad.id}`} key={index}>
-              <ListingThumbnail
-                title={ad.brand + " " + ad.model + " " + ad.modification}
-                price={ad.price + ad.currency}
-                kilometers={ad.mileage}
-                listingImg={ad.imageUrls}
-                carDate={ad.date_year}
-                region={ad.location}
-                datePosted={ad.created_at}
-                isPromoted={ad.isPromoted}
-              />
-            </Link>
-          ))}
+          {!loading &&
+            listings.slice(0, 6).map((ad, index) => (
+              <Link href={`/listing/${ad.id}`} key={index}>
+                <ListingThumbnail
+                  title={ad.brand + " " + ad.model + " " + ad.modification}
+                  price={ad.price + ad.currency}
+                  kilometers={ad.mileage}
+                  listingImg={ad.imageUrls}
+                  region={ad.location}
+                  datePosted={ad.created_at}
+                  isPromoted={ad.isPromoted}
+                />
+              </Link>
+            ))}
         </div>
       </div>
     </section>

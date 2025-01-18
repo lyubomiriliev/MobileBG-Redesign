@@ -3,7 +3,6 @@
 import AuthLayout from "@/components/AuthLayout";
 import Button from "@/components/Button";
 import { Input } from "@/components/UI/Input";
-import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -31,7 +30,6 @@ const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { signUpNewUser } = useAuth();
   const router = useRouter();
 
   const handleInputChange = (field: keyof RegisterFormData, value: string) => {
@@ -73,9 +71,14 @@ const RegisterPage = () => {
 
       router.push("/");
       alert("Вашият акаунт беше създаден");
-    } catch (error: any) {
-      console.error("Error during sign-up:", error.message);
-      setError(error.message || "An error occurred during registration");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error during sign-up:", error.message);
+        setError(error.message || "Възникна грешка при регистрацията");
+      } else {
+        console.error("Unexpected error:", error);
+        setError("Възникна неочаквана грешка");
+      }
     } finally {
       setLoading(false);
     }
@@ -89,7 +92,7 @@ const RegisterPage = () => {
         imageSrc="/perk1.svg"
       >
         <form
-          onSubmit={handleSignUp}
+          onSubmit={!loading ? handleSignUp : undefined}
           className="lg:w-1/3 w-full h-[75vh] lg:h-[60vh] flex flex-col items-start justify-start"
         >
           <Input
@@ -126,6 +129,9 @@ const RegisterPage = () => {
           />
           <div className="w-full flex justify-start items-center py-4">
             <Button type="submit" text="Регистрация" />
+          </div>
+          <div>
+            <p className="text-red-600 text-lg">{error}</p>
           </div>
           <div className="flex items-center gap-1">
             <p>Вече имате регистрация?</p>

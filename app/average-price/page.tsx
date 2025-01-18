@@ -96,7 +96,7 @@ const AveragePricePage = () => {
           </div>
         </div>
         <div
-          onClick={handleCheckPrice}
+          onClick={!loading ? handleCheckPrice : undefined}
           className="py-4 gap-4 flex flex-col items-start"
         >
           <div className="w-2/3">

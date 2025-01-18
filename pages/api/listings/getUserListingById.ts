@@ -27,8 +27,10 @@ export default async function getUserListings(
     if (error) throw error;
 
     return res.status(200).json(data);
-  } catch (error: any) {
-    console.error("Error fetching listings:", error.message);
-    return res.status(500).json({ error: error.message });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error fetching listings:", error.message);
+      return res.status(500).json({ error: error.message });
+    }
   }
 }

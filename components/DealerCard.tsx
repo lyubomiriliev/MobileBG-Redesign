@@ -6,13 +6,11 @@ const DealerCard = ({
   name,
   date,
   phone,
-  logo,
   location,
 }: {
   name: string;
   date: string;
   phone: string;
-  logo: string;
   location: string;
 }) => {
   return (
